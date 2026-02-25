@@ -7,6 +7,11 @@
         width="1280" 
         height="720" 
         opacity="1.0" />
+        
+      <Label
+        id="titleLabel"
+        text=""
+        color="#ffffff" />
     </children>
 <!-- BrightScript Portion -->
 <script type="text/brightscript" >
@@ -17,6 +22,11 @@
 
   function init()
     m.top.setFocus(true)
+
+    appInfo = CreateObject("roAppInfo")
+        
+    m.titleLabel = m.top.findNode("titleLabel")
+    m.titleLabel.text = appInfo.GetTitle() + " v" + appInfo.GetVersion()
 
     '**
     '** The full list of editable attributes can be located at:
