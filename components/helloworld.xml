@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="HelloWorld" extends="Scene"> 
+	<children>
+      <Poster 
+        id="background" 
+        uri="pkg:/images/cat-bg.jpg" 
+        width="1280" 
+        height="720" 
+        opacity="1.0" />
+    </children>
+<!-- BrightScript Portion -->
+<script type="text/brightscript" >
+<![CDATA[
+  '** 
+  '** Example: Edit a Label size and color with BrightScript
+  '**
+
+  function init()
+    m.top.setFocus(true)
+
+    '**
+    '** The full list of editable attributes can be located at:
+    '** http://sdkdocs.roku.com/display/sdkdoc/Label#Label-Fields
+    '**
+  end function
+]]>
+</script>
+<!-- End of BrightScript Portion -->
+</component>
