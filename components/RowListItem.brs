@@ -4,5 +4,5 @@ end sub
 
 sub showContent(event)
     data = event.getData()
-    m.poster.uri = data.HDPosterUrl
+    m.poster.uri = data.url
 end sub
