@@ -27,10 +27,10 @@
         itemComponentName="RowListItem"
         itemSize="[880,0]"
         rowHeights="[200]"
-        rowItemSize = "[[200, 200]]"
-        rowItemSpacing = "[[20, 0]]"
-        rowFocusAnimationStyle = "fixedFocusWrap" />
+        rowItemSize="[[200, 200]]"
+        rowItemSpacing="[[20, 0]]"
+        rowFocusAnimationStyle="fixedFocusWrap" />
     </children>
-    
+
     <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
 </component>
