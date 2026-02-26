@@ -1,5 +1,4 @@
-function init()
-
+sub init()
     m.top.setFocus(true)
 
     appInfo = CreateObject("roAppInfo")
@@ -16,8 +15,7 @@ function init()
     m.button.observeField("buttonSelected", "onButtonSelected")
 
     m.button.setFocus(true)
-
-end function
+end sub
 
 sub createRowListContent()
     listRoot = CreateObject("roSGNode","ContentNode")
@@ -34,15 +32,15 @@ sub createRowListContent()
     m.list.content = listRoot
 end sub
 
-function onItemFocused()
+sub onItemFocused()
     focus = m.list.rowItemFocused
     item = m.list.content.getChild(focus[0]).getChild(focus[1])
     print "Item Id: "; item.id
-end function
+end sub
 
-function onButtonSelected()
+sub onButtonSelected()
     print "Button pressed."
-end function
+end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     if press = false then return false
