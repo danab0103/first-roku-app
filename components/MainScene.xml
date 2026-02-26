@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="HelloWorld" extends="Scene"> 
+	<children>
+      <Poster 
+        id="background" 
+        uri="pkg:/images/cat-bg.jpg" 
+        width="1280" 
+        height="720" 
+        opacity="1.0" />
+        
+      <Label
+        id="titleLabel"
+        text=""
+        color="#ffffff" 
+        translation="[0,300]" />
+
+      <Button
+          id="leftButton"
+          text="Press Me"
+          translation="[0,0]" />
+
+      <RowList
+        id="imageList"
+        translation="[200,300]"
+        numRows="1"
+        itemComponentName="RowListItem"
+        itemSize="[880,0]"
+        rowHeights="[200]"
+        rowItemSize = "[[200, 200]]"
+        rowItemSpacing = "[[20, 0]]"
+        rowFocusAnimationStyle = "fixedFocusWrap" />
+    </children>
+    
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+</component>
