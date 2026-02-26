@@ -9,33 +9,25 @@ sub init()
     m.button = m.top.findNode("leftButton")
     m.list = m.top.findNode("imageList")
 
-    createRowListContent()
-
     m.list.observeField("rowItemFocused", "onItemFocused")
     m.button.observeField("buttonSelected", "onButtonSelected")
+
+    m.photosTask = CreateObject("roSGNode", "GetRequestPhotosTask")
+    m.photosTask.observeField("photosContent", "onPhotosLoaded")
+    m.photosTask.control = "RUN"
 
     m.button.setFocus(true)
 end sub
 
-sub createRowListContent()
-    listRoot = CreateObject("roSGNode","ContentNode")
-    row = CreateObject("roSGNode","ContentNode")
-
-    for i = 0 to 4
-        item = CreateObject("roSGNode","ContentNode")
-        item.id = i.toStr()
-        item.HDPosterUrl = "pkg:/images/cat" + i.toStr() + ".jpeg"
-        row.appendChild(item)
-    end for
-
-    listRoot.appendChild(row)
-    m.list.content = listRoot
+sub onPhotosLoaded()
+    m.list.content = m.photosTask.photosContent
 end sub
 
 sub onItemFocused()
     focus = m.list.rowItemFocused
     item = m.list.content.getChild(focus[0]).getChild(focus[1])
-    print "Item Id: "; item.id
+
+    print "title="; item.title
 end sub
 
 sub onButtonSelected()
