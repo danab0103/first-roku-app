@@ -18,7 +18,14 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
 
     if press = true
         if key = "left" or key = "back"
-            m.top.back = true  
+            m.video.control = "stop"  
+            m.top.back = true   
+            return true
+        end if
+
+        if key = "OK"
+            if m.video.state = "playing" then m.video.control = "pause"   
+            if m.video.state = "paused" then m.video.control = "resume"
             handled = true
         end if
     end if
