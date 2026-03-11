@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="DetailsScreen" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="showDetails" />
+        <field id="back" type="boolean" value="false" />
+    </interface>
+
+    <children>
+        <Poster
+            id="backgroundPoster"
+            width="1280"
+            height="720" />
+    </children>
+
+    <script type="text/brightscript" uri="pkg:/components/DetailsScreen.brs" />
+</component>
