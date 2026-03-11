@@ -40,11 +40,11 @@ end sub
 
 sub populateContentVideo(dataJson as Object)
     item = CreateObject("roSGNode", "VideoNode")
-    item.videoId        = dataJson.id
-    item.title          = dataJson.title
-    item.posterUrl      = dataJson.poster
-    item.streamUrl      = dataJson.stream.url
-    item.streamFormat   = dataJson.stream.format
-    item.description    = dataJson.description
+    item.videoId = dataJson.id
+    item.title = dataJson.title
+    item.posterUrl = dataJson.poster
+    item.streamUrl = dataJson.stream.url
+    item.streamFormat = dataJson.stream.format
+    item.description = dataJson.description
     m.top.videoContent = item
 end sub

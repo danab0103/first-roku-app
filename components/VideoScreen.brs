@@ -1,5 +1,5 @@
 sub init()
-    m.video = m.top.findNode("videoId")
+    m.video = m.top.findNode("video")
 end sub
 
 sub showVideo()
