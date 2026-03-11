@@ -11,22 +11,17 @@ sub showVideo()
 
     m.video.content = videoContent
     m.video.control = "play"
+    m.video.setFocus(true)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false
 
     if press = true
-        if key = "left" or key = "back"
-            m.video.control = "stop"  
+        if key = "back"
+            m.video.control = "stop"
             m.top.back = true   
             return true
-        end if
-
-        if key = "OK"
-            if m.video.state = "playing" then m.video.control = "pause"   
-            if m.video.state = "paused" then m.video.control = "resume"
-            handled = true
         end if
     end if
 
