@@ -11,7 +11,6 @@ sub showVideo()
 
     m.video.content = videoContent
     m.video.control = "play"
-    m.video.setFocus(true)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
