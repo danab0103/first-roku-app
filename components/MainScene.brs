@@ -10,6 +10,7 @@ sub init()
     m.list = m.top.findNode("imageList")
 
     m.list.observeField("rowItemFocused", "onItemFocused")
+    m.list.observeField("rowItemSelected", "onItemSelected")
     m.button.observeField("buttonSelected", "onButtonSelected")
 
     m.photosTask = CreateObject("roSGNode", "GetRequestPhotosTask")
@@ -21,6 +22,29 @@ end sub
 
 sub onPhotosLoaded()
     m.list.content = m.photosTask.photosContent
+end sub
+
+sub onItemSelected()
+    selected = m.list.rowItemSelected
+    item = m.list.content.getChild(selected[0]).getChild(selected[1])
+    print "url="; item.image_1080_url
+    navigateToNewScreen(item)
+end sub
+
+sub navigateToNewScreen(item)
+    detailsScreen = CreateObject("roSGNode", "DetailsScreen")
+    detailsScreen.itemContent = item
+
+    m.top.appendChild(detailsScreen)
+    detailsScreen.setFocus(true)
+
+    detailsScreen.observeField("back", "onDetailsBack")
+    m.detailsScreen = detailsScreen
+end sub
+
+sub onDetailsBack()
+    m.top.removeChild(m.detailsScreen)
+    m.list.setFocus(true) 
 end sub
 
 sub onItemFocused()
