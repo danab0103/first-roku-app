@@ -56,6 +56,30 @@ end sub
 
 sub onButtonSelected()
     print "Button pressed."
+    m.videoTask = CreateObject("roSGNode", "GetVideoTask")
+    m.videoTask.observeField("videoContent", "onVideoLoaded")
+    m.videoTask.control = "RUN"
+end sub
+
+sub onVideoLoaded()
+    item = m.videoTask.videoContent  
+    navigateToVideoScreen(item)     
+end sub
+
+sub navigateToVideoScreen(item)
+    videoScreen = CreateObject("roSGNode", "VideoScreen")
+    videoScreen.itemContent = item
+
+    m.top.appendChild(videoScreen)
+    videoScreen.setFocus(true)
+
+    videoScreen.observeField("back", "onVideoBack")
+    m.videoScreen = videoScreen
+end sub
+
+sub onVideoBack()
+    m.top.removeChild(m.videoScreen) 
+    m.button.setFocus(true)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
