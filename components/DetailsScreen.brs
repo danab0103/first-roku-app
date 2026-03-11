@@ -11,18 +11,18 @@ sub showDetails()
 end sub
 
 sub onImageLoadStatus()
-    if m.backgroundPoster.loadStatus = "failed"
-        m.backgroundPoster.uri = "pkg:/images/default.jpg"
-    end if
+    if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = "pkg:/images/default.jpg"
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
-    if press = false then return false
+    handled = false
 
-    if key = "left" or key = "back"
-        m.top.back = true  
-        return true
+    if press = true
+        if key = "left" or key = "back"
+            m.top.back = true  
+            handled = true
+        end if
     end if
 
-    return false
+    return handled
 end function
