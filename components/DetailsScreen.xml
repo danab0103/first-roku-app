@@ -10,6 +10,13 @@
             id="backgroundPoster"
             width="1280"
             height="720" />
+
+        <Label 
+            id="descriptionLabel"
+            width="1200"
+            horizAlign="center"
+            translation="[40,500]"
+            wrap="true"/>
     </children>
 
     <script type="text/brightscript" uri="pkg:/components/DetailsScreen.brs" />
