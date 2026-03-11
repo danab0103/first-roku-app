@@ -28,23 +28,7 @@ sub onItemSelected()
     selected = m.list.rowItemSelected
     item = m.list.content.getChild(selected[0]).getChild(selected[1])
     print "url="; item.image_1080_url
-    navigateToNewScreen(item)
-end sub
-
-sub navigateToNewScreen(item)
-    detailsScreen = CreateObject("roSGNode", "DetailsScreen")
-    detailsScreen.itemContent = item
-
-    m.top.appendChild(detailsScreen)
-    detailsScreen.setFocus(true)
-
-    detailsScreen.observeField("back", "onDetailsBack")
-    m.detailsScreen = detailsScreen
-end sub
-
-sub onDetailsBack()
-    m.top.removeChild(m.detailsScreen)
-    m.list.setFocus(true) 
+    navigateToScreen("DetailsScreen", item)
 end sub
 
 sub onItemFocused()
@@ -63,23 +47,14 @@ end sub
 
 sub onVideoLoaded()
     item = m.videoTask.videoContent  
-    navigateToVideoScreen(item)     
+    navigateToScreen("VideoScreen", item)
 end sub
 
-sub navigateToVideoScreen(item)
-    videoScreen = CreateObject("roSGNode", "VideoScreen")
-    videoScreen.itemContent = item
-
-    m.top.appendChild(videoScreen)
-    videoScreen.setFocus(true)
-
-    videoScreen.observeField("back", "onVideoBack")
-    m.videoScreen = videoScreen
-end sub
-
-sub onVideoBack()
-    m.top.removeChild(m.videoScreen) 
-    m.button.setFocus(true)
+sub navigateToScreen(screenName, item)
+    screen = CreateObject("roSGNode", screenName)
+    screen.itemContent = item
+    m.top.appendChild(screen)
+    screen.setFocus(true)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean

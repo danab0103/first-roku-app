@@ -2,7 +2,6 @@
 <component name="VideoScreen" initialFocus="video" extends="Group">
     <interface>
         <field id="itemContent" type="node" onChange="showVideo" />
-        <field id="back" type="boolean" value="false" />
     </interface>
 
     <children>
@@ -13,4 +12,5 @@
     </children>
 
     <script type="text/brightscript" uri="pkg:/components/VideoScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
 </component>
