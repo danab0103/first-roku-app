@@ -1,23 +1,22 @@
 sub init()
-    m.top.setFocus(true)
-
     appInfo = CreateObject("roAppInfo")
 
     m.titleLabel = m.top.findNode("titleLabel")
     m.titleLabel.text = appInfo.GetTitle() + " v" + appInfo.GetVersion()
 
-    m.button = m.top.findNode("leftButton")
+    m.playVideoButton = m.top.findNode("playVideoButton")
+    m.searchButton = m.top.findNode("searchButton")
     m.list = m.top.findNode("imageList")
 
     m.list.observeField("rowItemFocused", "onItemFocused")
     m.list.observeField("rowItemSelected", "onItemSelected")
-    m.button.observeField("buttonSelected", "onButtonSelected")
+    m.playVideoButton.observeField("buttonSelected", "onButtonSelected")
 
     m.photosTask = CreateObject("roSGNode", "GetRequestPhotosTask")
     m.photosTask.observeField("photosContent", "onPhotosLoaded")
     m.photosTask.control = "RUN"
 
-    m.button.setFocus(true)
+    m.playVideoButton.setFocus(true)
 end sub
 
 sub onPhotosLoaded()
@@ -65,17 +64,22 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false
 
     if press = true
-        if key = "right" and m.button.hasFocus()
-            m.list.setFocus(true)
+        if key = "right" and m.playVideoButton.hasFocus()
+            m.searchButton.setFocus(true)
             handled = true
         end if
 
-        if key = "up" and m.list.hasFocus()
-            m.button.setFocus(true)
+        if key = "left" and m.searchButton.hasFocus()
+            m.playVideoButton.setFocus(true)
             handled = true
         end if
 
-        if key = "down" and m.button.hasFocus()
+        if key = "up"
+            m.playVideoButton.setFocus(true)
+            handled = true
+        end if
+
+        if key = "down"
             m.list.setFocus(true)
             handled = true
         end if

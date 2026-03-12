@@ -16,9 +16,14 @@
         translation="[0,300]" />
 
       <Button
-          id="leftButton"
+          id="playVideoButton"
           text="Play Video"
           translation="[0,0]" />
+
+      <Button
+          id="searchButton"
+          text="Search"
+          translation="[300,0]" />
 
       <RowList
         id="imageList"
