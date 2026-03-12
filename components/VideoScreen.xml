@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="VideoScreen" initialFocus="video" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="showVideo" />
+    </interface>
+
+    <children>
+        <Video
+            id="video"
+            width="1280"
+            height="720" />
+    </children>
+
+    <script type="text/brightscript" uri="pkg:/components/VideoScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
+</component>

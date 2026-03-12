@@ -19,7 +19,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
 
     if press = true
         if key = "left" or key = "back"
-            m.top.back = true  
+            navigateBack(m.top.getParent().findNode("imageList"))
             handled = true
         end if
     end if

@@ -28,23 +28,7 @@ sub onItemSelected()
     selected = m.list.rowItemSelected
     item = m.list.content.getChild(selected[0]).getChild(selected[1])
     print "url="; item.image_1080_url
-    navigateToNewScreen(item)
-end sub
-
-sub navigateToNewScreen(item)
-    detailsScreen = CreateObject("roSGNode", "DetailsScreen")
-    detailsScreen.itemContent = item
-
-    m.top.appendChild(detailsScreen)
-    detailsScreen.setFocus(true)
-
-    detailsScreen.observeField("back", "onDetailsBack")
-    m.detailsScreen = detailsScreen
-end sub
-
-sub onDetailsBack()
-    m.top.removeChild(m.detailsScreen)
-    m.list.setFocus(true) 
+    navigateToNewScreen("DetailsScreen", item)
 end sub
 
 sub onItemFocused()
@@ -56,25 +40,46 @@ end sub
 
 sub onButtonSelected()
     print "Button pressed."
+    loadVideoData()
+end sub
+
+sub loadVideoData()
+    m.videoTask = CreateObject("roSGNode", "GetVideoDataTask")
+    m.videoTask.observeField("videoData", "onVideoDataLoaded")
+    m.videoTask.control = "RUN"
+end sub
+
+sub onVideoDataLoaded()
+    videoItem = m.videoTask.videoData  
+    navigateToNewScreen("VideoScreen", videoItem)
+end sub
+
+sub navigateToNewScreen(screenName as String, item as Object)
+    screen = CreateObject("roSGNode", screenName)
+    screen.itemContent = item
+    m.top.appendChild(screen)
+    screen.setFocus(true)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
-    if press = false then return false
+    handled = false
 
-    if key = "right" and m.button.hasFocus()
-        m.list.setFocus(true)
-        return true
+    if press = true
+        if key = "right" and m.button.hasFocus()
+            m.list.setFocus(true)
+            handled = true
+        end if
+
+        if key = "up" and m.list.hasFocus()
+            m.button.setFocus(true)
+            handled = true
+        end if
+
+        if key = "down" and m.button.hasFocus()
+            m.list.setFocus(true)
+            handled = true
+        end if
     end if
 
-    if key = "up" and m.list.hasFocus()
-        m.button.setFocus(true)
-        return true
-    end if
-
-    if key = "down" and m.button.hasFocus()
-        m.list.setFocus(true)
-        return true
-    end if
-
-    return false
+    return handled
 end function

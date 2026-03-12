@@ -17,7 +17,7 @@
 
       <Button
           id="leftButton"
-          text="Press Me"
+          text="Play Video"
           translation="[0,0]" />
 
       <RowList
