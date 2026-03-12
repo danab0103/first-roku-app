@@ -3,15 +3,17 @@ sub init()
 end sub
 
 sub showVideo()
-    item = m.top.itemContent
-
-    videoContent = CreateObject("roSGNode", "ContentNode")
-    videoContent.url = item.streamUrl
-    videoContent.streamFormat = item.streamFormat
-
-    m.video.content = videoContent
+    videoItem = m.top.itemContent
+    m.video.content = createVideoContent(videoItem)
     m.video.control = "play"
 end sub
+
+function createVideoContent(videoItem)
+    videoContent = CreateObject("roSGNode", "ContentNode")
+    videoContent.url = videoItem.streamUrl
+    videoContent.streamFormat = videoItem.streamFormat
+    return videoContent
+end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false

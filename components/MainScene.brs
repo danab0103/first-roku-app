@@ -28,7 +28,7 @@ sub onItemSelected()
     selected = m.list.rowItemSelected
     item = m.list.content.getChild(selected[0]).getChild(selected[1])
     print "url="; item.image_1080_url
-    navigateToScreen("DetailsScreen", item)
+    navigateToNewScreen("DetailsScreen", item)
 end sub
 
 sub onItemFocused()
@@ -40,17 +40,21 @@ end sub
 
 sub onButtonSelected()
     print "Button pressed."
-    m.videoTask = CreateObject("roSGNode", "GetVideoTask")
-    m.videoTask.observeField("videoContent", "onVideoLoaded")
+    loadVideoData()
+end sub
+
+sub loadVideoData()
+    m.videoTask = CreateObject("roSGNode", "GetVideoDataTask")
+    m.videoTask.observeField("videoData", "onVideoDataLoaded")
     m.videoTask.control = "RUN"
 end sub
 
-sub onVideoLoaded()
-    item = m.videoTask.videoContent  
-    navigateToScreen("VideoScreen", item)
+sub onVideoDataLoaded()
+    videoItem = m.videoTask.videoData  
+    navigateToNewScreen("VideoScreen", videoItem)
 end sub
 
-sub navigateToScreen(screenName, item)
+sub navigateToNewScreen(screenName, item)
     screen = CreateObject("roSGNode", screenName)
     screen.itemContent = item
     m.top.appendChild(screen)
@@ -58,22 +62,22 @@ sub navigateToScreen(screenName, item)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
-    if press = false then return false
+    handled = false
 
     if key = "right" and m.button.hasFocus()
         m.list.setFocus(true)
-        return true
+        handled = true
     end if
 
     if key = "up" and m.list.hasFocus()
         m.button.setFocus(true)
-        return true
+        handled = true
     end if
 
     if key = "down" and m.button.hasFocus()
         m.list.setFocus(true)
-        return true
+        handled = true
     end if
 
-    return false
+    return handled
 end function
