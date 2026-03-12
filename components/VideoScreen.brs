@@ -8,7 +8,7 @@ sub showVideo()
     m.video.control = "play"
 end sub
 
-function createVideoContent(videoItem)
+function createVideoContent(videoItem as Object) as Object
     videoContent = CreateObject("roSGNode", "ContentNode")
     videoContent.url = videoItem.streamUrl
     videoContent.streamFormat = videoItem.streamFormat

@@ -54,7 +54,7 @@ sub onVideoDataLoaded()
     navigateToNewScreen("VideoScreen", videoItem)
 end sub
 
-sub navigateToNewScreen(screenName, item)
+sub navigateToNewScreen(screenName as String, item as Object)
     screen = CreateObject("roSGNode", screenName)
     screen.itemContent = item
     m.top.appendChild(screen)
@@ -64,19 +64,21 @@ end sub
 function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false
 
-    if key = "right" and m.button.hasFocus()
-        m.list.setFocus(true)
-        handled = true
-    end if
+    if press = true
+        if key = "right" and m.button.hasFocus()
+            m.list.setFocus(true)
+            handled = true
+        end if
 
-    if key = "up" and m.list.hasFocus()
-        m.button.setFocus(true)
-        handled = true
-    end if
+        if key = "up" and m.list.hasFocus()
+            m.button.setFocus(true)
+            handled = true
+        end if
 
-    if key = "down" and m.button.hasFocus()
-        m.list.setFocus(true)
-        handled = true
+        if key = "down" and m.button.hasFocus()
+            m.list.setFocus(true)
+            handled = true
+        end if
     end if
 
     return handled

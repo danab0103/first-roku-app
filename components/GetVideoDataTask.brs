@@ -9,35 +9,36 @@ sub run()
     populateVideoData(videoDataJson[0])
 end sub
 
-function fetchVideoData(endpoint as String)
+function fetchVideoData(endpoint as String) as Dynamic
     httpRequest = createHttpRequest(endpoint)
     return executeHttpRequest(httpRequest)
 end function
 
-function executeHttpRequest(httpRequest)
-    ok = httpRequest.AsyncGetToString()
-    if not ok then return invalid
+function executeHttpRequest(httpRequest as Object) as Dynamic
+    requestResult = invalid
 
-    event = wait(10000, httpRequest.getPort())
-    if event = invalid
-        print "Request timeout or no response"
-        return invalid
+    requestInitiated = httpRequest.AsyncGetToString()
+    if requestInitiated 
+        event = wait(10000, httpRequest.getPort())
+
+        if event = invalid
+            print "Request timeout or no response"
+        else if type(event) = "roUrlEvent" 
+            code = event.GetResponseCode()
+            responseBody = event.GetString()
+
+            if code <> 200 or responseBody = invalid or responseBody = ""
+                print "404 ERROR"
+            else 
+                requestResult = responseBody
+            end if
+        end if
     end if
 
-    if type(event) <> "roUrlEvent" then return invalid
-
-    code = event.GetResponseCode()
-    responseBody = event.GetString()
-
-    if code <> 200 or responseBody = invalid or responseBody = ""
-        print "404 ERROR"
-        return invalid
-    end if
-
-    return responseBody
+    return requestResult
 end function
 
-function createHttpRequest(endpoint as String)
+function createHttpRequest(endpoint as String) as Object
     httpRequest = CreateObject("roUrlTransfer")
     port = CreateObject("roMessagePort")
     httpRequest.SetUrl(endpoint)

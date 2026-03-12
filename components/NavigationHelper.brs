@@ -1,5 +1,5 @@
-sub navigateBack(focus)
+sub navigateBack(focusComponent as Object)
     parent = m.top.getParent()
     parent.removeChild(m.top)
-    focus.setFocus(true)
+    focusComponent.setFocus(true)
 end sub
