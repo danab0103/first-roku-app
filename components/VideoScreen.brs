@@ -22,7 +22,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
         if key = "back"
             m.video.control = "stop"
             navigateBack(m.top.getParent().findNode("leftButton"))
-            return true
+            handled = true
         end if
     end if
 
