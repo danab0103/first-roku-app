@@ -4,6 +4,7 @@ sub init()
     m.pokemonsGrid = m.top.findNode("pokemonsGrid")
 
     m.openKeyboardButton.observeField("buttonSelected", "onOpenKeyboardButtonSelected")
+    m.miniKeyboard.observeField("text", "onSearchTextChanged") 
 end sub
 
 sub onOpenKeyboardButtonSelected()
@@ -15,6 +16,7 @@ sub onItemContentChanged()
     gridContent = CreateObject("roSGNode", "ContentNode")
     pokemonsContentFirstRow = pokemonsContentList.getChild(0)
     m.pokemonsGrid.content = pokemonsContentFirstRow
+    m.allPokemons = pokemonsContentFirstRow
 end sub
 
 sub showKeyboardDialog()
@@ -35,6 +37,36 @@ sub createKeyboardDialog()
     m.keyboardDialog.text = m.miniKeyboard.text
     m.keyboardDialog.observeField("wasClosed", "onKeyboardDialogClosed")
 end sub
+
+sub onSearchTextChanged()
+    searchText = LCase(m.miniKeyboard.text)
+    m.pokemonsGrid.content = filterPokemons(searchText)
+end sub
+
+function filterPokemons(searchText as String) as Object
+    filteredPokemons = CreateObject("roSGNode", "ContentNode")  
+    
+    if searchText = "" then
+        filteredPokemons = m.allPokemons
+    else
+        for i = 0 to m.allPokemons.getChildCount() - 1
+            pokemon = m.allPokemons.getChild(i)     
+            if Instr(LCase(pokemon.title), searchText) > 0
+                clonedPokemon = clonePokemon(pokemon)
+                filteredPokemons.appendChild(clonedPokemon)
+            end if
+        end for
+    end if
+
+    return filteredPokemons
+end function
+
+function clonePokemon(pokemon as Object) as Object
+        clonedPokemon = CreateObject("roSGNode", "ContentNode")
+        clonedPokemon.title = pokemon.title
+        clonedPokemon.url = pokemon.url
+        return clonedPokemon
+end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false
