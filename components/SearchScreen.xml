@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="SearchScreen" initialFocus="openKeyboardButton" extends="Group">
     <interface>
-        <field id="itemContent" type="node"/>
+        <field id="itemContent" type="node" onChange="onItemContentChanged"/>
     </interface>
     <children>
         <Rectangle
@@ -12,14 +12,22 @@
 
         <MiniKeyboard
             id="miniKeyboard"
-            translation="[40, 120]" />
+            translation="[40, 100]" />
 
         <Button
             id="openKeyboardButton"
             text="Open Keyboard"
             maxWidth="280" 
-            height="80"
-            translation="[540, 600]" />
+            height="60"
+            translation="[100, 600]" />
+        <MarkupGrid
+            id="pokemonsGrid"
+            translation="[550, 100]"
+            itemSize="[200,220]"
+            itemSpacing="[10, 14]"
+            numColumns="3"
+            numRows="2"
+            itemComponentName="PokemonItem" />
     </children>
 
     <script type="text/brightscript" uri="pkg:/components/SearchScreen.brs" />
