@@ -10,7 +10,8 @@ sub init()
 
     m.list.observeField("rowItemFocused", "onItemFocused")
     m.list.observeField("rowItemSelected", "onItemSelected")
-    m.playVideoButton.observeField("buttonSelected", "onButtonSelected")
+    m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
+    m.searchButton.observeField("buttonSelected", "onSearchButtonSelected")
 
     m.photosTask = CreateObject("roSGNode", "GetRequestPhotosTask")
     m.photosTask.observeField("photosContent", "onPhotosLoaded")
@@ -37,9 +38,14 @@ sub onItemFocused()
     print "title="; item.title
 end sub
 
-sub onButtonSelected()
-    print "Button pressed."
+sub onPlayVideoButtonSelected()
+    print "Play video button pressed."
     loadVideoData()
+end sub
+
+sub onSearchButtonSelected()
+    print "Search button pressed."
+    navigateToNewScreen("SearchScreen", m.list.content)
 end sub
 
 sub loadVideoData()

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="SearchScreen" initialFocus="openKeyboardButton" extends="Group">
+    <interface>
+        <field id="itemContent" type="node"/>
+    </interface>
+    <children>
+        <Rectangle
+            id="background"
+            color="0x1E1E2F"
+            width="1280"
+            height="720" />
+
+        <MiniKeyboard
+            id="miniKeyboard"
+            translation="[40, 120]" />
+
+        <Button
+            id="openKeyboardButton"
+            text="Open Keyboard"
+            maxWidth="280" 
+            height="80"
+            translation="[540, 600]" />
+    </children>
+
+    <script type="text/brightscript" uri="pkg:/components/SearchScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
+</component>
