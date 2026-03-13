@@ -30,8 +30,9 @@ sub onKeyboardDialogClosed()
 end sub
 
 sub createKeyboardDialog()
-    m.keyboardDialog = CreateObject("roSGNode", "KeyboardDialog")
+    m.keyboardDialog = CreateObject("roSGNode", "StandardKeyboardDialog")
     m.keyboardDialog.title = "Search Pokemon"
+    m.keyboardDialog.text = m.miniKeyboard.text
     m.keyboardDialog.observeField("wasClosed", "onKeyboardDialogClosed")
 end sub
 
@@ -43,32 +44,22 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
             handled = true
         end if
 
-        if  key = "up" and m.openKeyboardButton.hasFocus()
+        if  key = "up"
             m.miniKeyboard.setFocus(true)
             handled = true
         end if
 
-        if key = "down" and not m.openKeyboardButton.hasFocus()
+        if key = "down" 
             m.openKeyboardButton.setFocus(true)
             handled = true
         end if
 
-        if key = "right" and not m.openKeyboardButton.hasFocus()
+        if key = "right" 
             m.pokemonsGrid.setFocus(true)
             handled = true
         end if
 
-        if key = "right" and m.openKeyboardButton.hasFocus()
-            m.pokemonsGrid.setFocus(true)
-            handled = true
-        end if
-
-        if key = "right" and not m.openKeyboardButton.hasFocus()
-            m.pokemonsGrid.setFocus(true)
-            handled = true
-        end if
-
-        if key = "left" and m.pokemonsGrid.hasFocus()
+        if key = "left" and not m.openKeyboardButton.hasFocus()
             m.miniKeyboard.setFocus(true)
             handled = true
         end if

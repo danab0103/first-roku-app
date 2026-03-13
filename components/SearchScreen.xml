@@ -10,7 +10,7 @@
             width="1280"
             height="720" />
 
-        <MiniKeyboard
+        <DynamicMiniKeyboard
             id="miniKeyboard"
             translation="[40, 100]" />
 
