@@ -13,7 +13,6 @@ end sub
 
 sub onItemContentChanged()
     pokemonsContentList = m.top.itemContent
-    gridContent = CreateObject("roSGNode", "ContentNode")
     pokemonsContentFirstRow = pokemonsContentList.getChild(0)
     m.pokemonsGrid.content = pokemonsContentFirstRow
     m.allPokemons = pokemonsContentFirstRow
