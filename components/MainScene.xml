@@ -15,16 +15,19 @@
         color="#ffffff" 
         translation="[0,300]" />
 
-      <Button
+      <LayoutGroup
+        id="buttonGroup"
+        layoutDirection="horiz"
+        itemSpacings="[20]"
+        translation="[400,5]">
+        <Button
           id="playVideoButton"
-          text="Play Video"
-          translation="[0,0]" />
-
-      <Button
+          text="Play Video" />
+        <Button
           id="searchButton"
           text="Search"
-          visible="false"
-          translation="[300,0]" />
+          visible="false" />
+      </LayoutGroup>
 
       <RowList
         id="imageList"

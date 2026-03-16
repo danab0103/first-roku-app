@@ -10,16 +10,20 @@
             width="1280"
             height="720" />
 
-        <DynamicMiniKeyboard
-            id="miniKeyboard"
-            translation="[40, 100]" />
-
-        <Button
-            id="openKeyboardButton"
-            text="Open Keyboard"
-            maxWidth="280" 
-            height="60"
-            translation="[100, 600]" />
+        <LayoutGroup
+            id="keyboardGroup"
+            layoutDirection="vert"
+            itemSpacings="[20]"
+            translation="[40, 100]">
+            <DynamicMiniKeyboard
+                id="miniKeyboard" />
+            <Button
+                id="openKeyboardButton"
+                text="Open Keyboard"
+                maxWidth="280"
+                height="60" />
+        </LayoutGroup>
+            
         <MarkupGrid
             id="pokemonsGrid"
             translation="[550, 100]"
