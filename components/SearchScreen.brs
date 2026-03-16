@@ -26,8 +26,7 @@ end sub
 
 sub onKeyboardDialogClosed()
     m.miniKeyboard.text = m.keyboardDialog.text
-    m.top.removeChild(m.keyboardDialog)
-    m.openKeyboardButton.setFocus(true)
+    closeComponent(m.keyboardDialog, m.openKeyboardButton)
 end sub
 
 sub createKeyboardDialog()
