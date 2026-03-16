@@ -1,8 +1,8 @@
 sub init()
-    m.top.functionName = "run"
+    m.top.functionName = "runTask"
 end sub
 
-sub run()
+sub runTask()
     endpoint = "https://my-json-server.typicode.com/bogdanterzea/pokemon-server/photos"
 
     httpReq = CreateObject("roUrlTransfer")

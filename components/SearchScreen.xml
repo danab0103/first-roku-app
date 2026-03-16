@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="SearchScreen" initialFocus="openKeyboardButton" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="onItemContentChanged"/>
+    </interface>
+    <children>
+        <Rectangle
+            id="background"
+            color="0x1E1E2F"
+            width="1280"
+            height="720" />
+
+        <LayoutGroup
+            id="keyboardGroup"
+            layoutDirection="vert"
+            itemSpacings="[20]"
+            translation="[40, 100]">
+            <DynamicMiniKeyboard
+                id="miniKeyboard" />
+            <Button
+                id="openKeyboardButton"
+                text="Open Keyboard"
+                maxWidth="280"
+                height="60" />
+        </LayoutGroup>
+            
+        <MarkupGrid
+            id="pokemonsGrid"
+            translation="[550, 100]"
+            itemSize="[200,225]"
+            itemSpacing="[10, 10]"
+            numColumns="3"
+            numRows="2"
+            drawFocusFeedback="false"
+            wrapDividerBitmapUri=""
+            wrapDividerHeight="0"
+            itemComponentName="PokemonItem" />
+    </children>
+
+    <script type="text/brightscript" uri="pkg:/components/SearchScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
+</component>
