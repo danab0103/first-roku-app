@@ -16,6 +16,16 @@
             horizAlign="center"
             translation="[40,500]"
             wrap="true"/>
+
+        <Button
+            id="playVideoButton"
+            focusable="false"
+            translation = "[0,0]" />
+
+        <Timer
+            id="timer"
+            repeat="false"
+            duration="5"/>
     </children>
 
     <script type="text/brightscript" uri="pkg:/components/DetailsScreen.brs" />
