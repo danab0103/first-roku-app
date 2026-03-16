@@ -56,18 +56,18 @@ sub loadVideoData()
 end sub
 
 sub onVideoDataLoaded()
-    videoItem = m.videoTask.videoData  
+    videoItem = m.videoTask.videoData
     navigateToNewScreen("VideoScreen", videoItem)
 end sub
 
-sub navigateToNewScreen(screenName as String, item as Object)
+sub navigateToNewScreen(screenName as string, item as object)
     screen = CreateObject("roSGNode", screenName)
     screen.itemContent = item
     m.top.appendChild(screen)
     screen.setFocus(true)
 end sub
 
-function onKeyEvent(key as String, press as Boolean) as Boolean
+function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true

@@ -1,4 +1,4 @@
-sub closeComponent(component as Object, focusComponent as Object)
+sub closeComponent(component as object, focusComponent as object)
     parent = component.getParent()
     parent.removeChild(component)
     focusComponent.setFocus(true)

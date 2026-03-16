@@ -8,14 +8,14 @@ sub showVideo()
     m.video.control = "play"
 end sub
 
-function createVideoContent(videoItem as Object) as Object
+function createVideoContent(videoItem as object) as object
     videoContent = CreateObject("roSGNode", "ContentNode")
     videoContent.url = videoItem.streamUrl
     videoContent.streamFormat = videoItem.streamFormat
     return videoContent
 end function
 
-function onKeyEvent(key as String, press as Boolean) as Boolean
+function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true

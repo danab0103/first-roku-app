@@ -4,7 +4,7 @@ sub init()
     m.pokemonsGrid = m.top.findNode("pokemonsGrid")
 
     m.openKeyboardButton.observeField("buttonSelected", "onOpenKeyboardButtonSelected")
-    m.miniKeyboard.observeField("text", "onSearchTextChanged") 
+    m.miniKeyboard.observeField("text", "onSearchTextChanged")
 end sub
 
 sub onOpenKeyboardButtonSelected()
@@ -43,14 +43,14 @@ sub onSearchTextChanged()
     m.pokemonsGrid.content = filterPokemons(searchText)
 end sub
 
-function filterPokemons(searchText as String) as Object
-    filteredPokemons = CreateObject("roSGNode", "ContentNode")  
-    
+function filterPokemons(searchText as string) as object
+    filteredPokemons = CreateObject("roSGNode", "ContentNode")
+
     if searchText = "" then
         filteredPokemons = m.allPokemons
     else
         for childIndex = 0 to m.allPokemons.getChildCount() - 1
-            pokemon = m.allPokemons.getChild(childIndex)     
+            pokemon = m.allPokemons.getChild(childIndex)
             if Instr(LCase(pokemon.title), searchText) > 0
                 clonedPokemon = clonePokemon(pokemon)
                 filteredPokemons.appendChild(clonedPokemon)
@@ -61,14 +61,14 @@ function filterPokemons(searchText as String) as Object
     return filteredPokemons
 end function
 
-function clonePokemon(pokemon as Object) as Object
-        clonedPokemon = CreateObject("roSGNode", "ContentNode")
-        clonedPokemon.title = pokemon.title
-        clonedPokemon.url = pokemon.url
-        return clonedPokemon
+function clonePokemon(pokemon as object) as object
+    clonedPokemon = CreateObject("roSGNode", "ContentNode")
+    clonedPokemon.title = pokemon.title
+    clonedPokemon.url = pokemon.url
+    return clonedPokemon
 end function
 
-function onKeyEvent(key as String, press as Boolean) as Boolean
+function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
     if press = true
         if key = "back"
@@ -76,17 +76,17 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
             handled = true
         end if
 
-        if  key = "up"
+        if key = "up"
             m.miniKeyboard.setFocus(true)
             handled = true
         end if
 
-        if key = "down" 
+        if key = "down"
             m.openKeyboardButton.setFocus(true)
             handled = true
         end if
 
-        if key = "right" 
+        if key = "right"
             m.pokemonsGrid.setFocus(true)
             handled = true
         end if
