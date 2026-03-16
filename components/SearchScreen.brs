@@ -47,8 +47,8 @@ function filterPokemons(searchText as String) as Object
     if searchText = "" then
         filteredPokemons = m.allPokemons
     else
-        for i = 0 to m.allPokemons.getChildCount() - 1
-            pokemon = m.allPokemons.getChild(i)     
+        for childIndex = 0 to m.allPokemons.getChildCount() - 1
+            pokemon = m.allPokemons.getChild(childIndex)     
             if Instr(LCase(pokemon.title), searchText) > 0
                 clonedPokemon = clonePokemon(pokemon)
                 filteredPokemons.appendChild(clonedPokemon)
