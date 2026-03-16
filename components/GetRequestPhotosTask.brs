@@ -25,7 +25,7 @@ sub runTask()
 
         if type(event) = "roUrlEvent" then
             code = event.GetResponseCode()
-            rsp  = event.GetString()
+            rsp = event.GetString()
 
             if code <> 200 or rsp = invalid or rsp = "" then
                 populateContentLocalPhotos()
@@ -38,17 +38,17 @@ sub runTask()
     end if
 end sub
 
-sub populateContentEndpointPhotos(dataJson as Object)
+sub populateContentEndpointPhotos(dataJson as object)
     root = CreateObject("roSGNode", "ContentNode")
-    row  = CreateObject("roSGNode", "ContentNode")
+    row = CreateObject("roSGNode", "ContentNode")
 
     for each p in dataJson
         item = CreateObject("roSGNode", "PhotoNode")
-        item.photoId        = p.id
-        item.title          = p.title
-        item.url            = p.url
+        item.photoId = p.id
+        item.title = p.title
+        item.url = p.url
         item.image_1080_url = p.image_1080_url
-        item.description    = p.description
+        item.description = p.description
         row.AppendChild(item)
     end for
 
@@ -58,16 +58,16 @@ end sub
 
 sub populateContentLocalPhotos()
     root = CreateObject("roSGNode", "ContentNode")
-    row  = CreateObject("roSGNode", "ContentNode")
+    row = CreateObject("roSGNode", "ContentNode")
 
     for i = 0 to 4
         path = "pkg:/images/cat" + i.ToStr() + ".jpeg"
         item = CreateObject("roSGNode", "PhotoNode")
-        item.photoId        = i
-        item.title          = "Local photo " + i.ToStr()
-        item.url            = path
+        item.photoId = i
+        item.title = "Local photo " + i.ToStr()
+        item.url = path
         item.image_1080_url = path
-        item.description    = "Loaded from local images folder"
+        item.description = "Loaded from local images folder"
         row.AppendChild(item)
     end for
     root.AppendChild(row)
