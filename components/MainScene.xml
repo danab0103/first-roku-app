@@ -23,6 +23,7 @@
       <Button
           id="searchButton"
           text="Search"
+          visible="false"
           translation="[300,0]" />
 
       <RowList

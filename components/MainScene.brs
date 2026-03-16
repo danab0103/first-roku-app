@@ -22,6 +22,7 @@ end sub
 
 sub onPhotosLoaded()
     m.list.content = m.photosTask.photosContent
+    m.searchButton.visible = true
 end sub
 
 sub onItemSelected()
