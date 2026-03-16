@@ -28,6 +28,7 @@
             numColumns="3"
             numRows="2"
             drawFocusFeedback="false"
+            wrapDividerBitmapUri=""
             wrapDividerHeight="0"
             itemComponentName="PokemonItem" />
     </children>
