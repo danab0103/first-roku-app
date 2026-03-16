@@ -33,7 +33,9 @@ sub createKeyboardDialog()
     m.keyboardDialog = CreateObject("roSGNode", "StandardKeyboardDialog")
     m.keyboardDialog.title = "Search Pokemon"
     m.keyboardDialog.text = m.miniKeyboard.text
+    m.keyboardDialog.buttons = ["OK"]
     m.keyboardDialog.observeField("wasClosed", "onKeyboardDialogClosed")
+    m.keyboardDialog.observeField("buttonSelected", "onKeyboardDialogClosed")
 end sub
 
 sub onSearchTextChanged()
