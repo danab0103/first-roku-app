@@ -29,7 +29,7 @@ sub onItemSelected()
     selected = m.list.rowItemSelected
     item = m.list.content.getChild(selected[0]).getChild(selected[1])
     print "url="; item.image_1080_url
-    navigateToNewScreen("DetailsScreen", item)
+    navigateToNewScreen(m.top, "DetailsScreen", item)
 end sub
 
 sub onItemFocused()
@@ -46,7 +46,7 @@ end sub
 
 sub onSearchButtonSelected()
     print "Search button pressed."
-    navigateToNewScreen("SearchScreen", m.list.content)
+    navigateToNewScreen(m.top, "SearchScreen", m.list.content)
 end sub
 
 sub loadVideoData()
@@ -57,14 +57,7 @@ end sub
 
 sub onVideoDataLoaded()
     videoItem = m.videoTask.videoData
-    navigateToNewScreen("VideoScreen", videoItem)
-end sub
-
-sub navigateToNewScreen(screenName as string, item as object)
-    screen = CreateObject("roSGNode", screenName)
-    screen.itemContent = item
-    m.top.appendChild(screen)
-    screen.setFocus(true)
+    navigateToNewScreen(m.top, "VideoScreen", videoItem)
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean

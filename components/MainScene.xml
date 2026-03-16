@@ -42,4 +42,5 @@
     </children>
 
     <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
 </component>
