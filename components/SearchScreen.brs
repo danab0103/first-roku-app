@@ -70,7 +70,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     handled = false
     if press = true
         if key = "back"
-            navigateBack(m.top.getParent().findNode("searchButton"))
+            closeComponent(m.top, m.top.getParent().findNode("searchButton"))
             handled = true
         end if
 
