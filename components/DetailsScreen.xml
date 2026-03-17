@@ -19,8 +19,6 @@
 
         <Button
             id="playVideoButton"
-            focusable="false"
-            width="300"
             translation="[490, 10]" />
 
         <Timer
