@@ -20,7 +20,8 @@
         <Button
             id="playVideoButton"
             focusable="false"
-            translation = "[0,0]" />
+            width="300"
+            translation="[490, 10]" />
 
         <Timer
             id="timer"
