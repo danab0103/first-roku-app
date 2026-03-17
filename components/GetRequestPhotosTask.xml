@@ -5,5 +5,5 @@
     <field id="photosContent" type="node" />
   </interface>
 
-  <script type="text/brightscript" uri="GetRequestPhotosTask.brs" />
+  <script type="text/brightscript" uri="GetRequestPhotosTask.bs" />
 </component>

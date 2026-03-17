@@ -37,6 +37,6 @@
             itemComponentName="PokemonItem" />
     </children>
 
-    <script type="text/brightscript" uri="pkg:/components/SearchScreen.brs" />
-    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
+    <script type="text/brightscript" uri="pkg:/components/SearchScreen.bs" />
+    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.bs" />
 </component>

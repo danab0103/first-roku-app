@@ -5,5 +5,5 @@
     <field id="videoData" type="node" />
   </interface>
 
-  <script type="text/brightscript" uri="GetVideoDataTask.brs" />
+  <script type="text/brightscript" uri="GetVideoDataTask.bs" />
 </component>

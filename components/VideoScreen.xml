@@ -11,6 +11,6 @@
             height="720" />
     </children>
 
-    <script type="text/brightscript" uri="pkg:/components/VideoScreen.brs" />
-    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
+    <script type="text/brightscript" uri="pkg:/components/VideoScreen.bs" />
+    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.bs" />
 </component>

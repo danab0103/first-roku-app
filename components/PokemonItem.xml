@@ -19,6 +19,6 @@
             translation="[0, 205]" />
     </children>
 
-    <script type="text/brightscript" uri="PokemonItem.brs" />
+    <script type="text/brightscript" uri="PokemonItem.bs" />
 
 </component>
