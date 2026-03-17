@@ -1,7 +1,7 @@
 sub init()
     initComponents()
     attachFieldsObservers()
-    m.countdown = 5
+    m.countdownInSeconds = 5
     m.playVideoButton.text = getCountdownText()
 end sub
 
@@ -29,9 +29,9 @@ sub onImageLoadStatus()
 end sub
 
 sub changetext()
-    m.countdown--
+    m.countdownInSeconds--
 
-    if m.countdown > 0
+    if m.countdownInSeconds > 0
         m.playVideoButton.text = getCountdownText()
     else
         m.timer.control = "stop"
@@ -41,7 +41,7 @@ sub changetext()
 end sub
 
 function getCountdownText() as string
-    return "Available in " + strI(m.countdown) + " ..."
+    return "Available in " + strI(m.countdownInSeconds) + " seconds ..."
 end function
 
 sub onPlayVideoButtonSelected()
@@ -57,7 +57,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
             handled = true
         end if
 
-        if m.countdown = 0
+        if m.countdownInSeconds = 0
             if key = "left" or key = "up" or key = "down"
                 m.playVideoButton.setFocus(true)
                 handled = true
