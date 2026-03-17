@@ -31,4 +31,5 @@
 
     <script type="text/brightscript" uri="pkg:/components/DetailsScreen.brs" />
     <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
+    <script type="text/brightscript" uri="pkg:/components/VideoHelper.brs" />
 </component>
