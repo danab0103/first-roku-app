@@ -23,6 +23,9 @@ function onKeyEvent(key as string, press as boolean) as boolean
             m.video.control = "stop"
             closeComponent(m.top, m.top.getParent().findNode("playVideoButton"))
             handled = true
+        else if key = "left" or key = "up" or key = "down" or key = "right"
+            m.top.setFocus(true)
+            handled = true
         end if
     end if
 
