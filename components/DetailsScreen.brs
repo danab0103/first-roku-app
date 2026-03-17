@@ -52,10 +52,17 @@ function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true
-        if key = "left" or key = "back"
+        if key = "back" 
             closeComponent(m.top, m.top.getParent().findNode("imageList"))
             handled = true
         end if
+
+        if m.countdown = 0
+            if key = "left" or key = "up" or key = "down"
+                m.playVideoButton.setFocus(true)
+                handled = true
+            end if
+        end if 
     end if
 
     return handled
