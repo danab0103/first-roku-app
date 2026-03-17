@@ -1,15 +1,21 @@
 sub init()
+    initComponents()
+    attachFieldsObservers()
+    m.countdown = 5
+    m.playVideoButton.text = getCountdownText()
+end sub
+
+sub initComponents()
     m.backgroundPoster = m.top.findNode("backgroundPoster")
     m.descriptionLabel = m.top.findNode("descriptionLabel")
     m.playVideoButton = m.top.FindNode("playVideoButton")
     m.timer = m.top.findNode("timer")
+end sub
 
-    m.playVideoButton.text = "Unavailable..."
-    m.timer.control = "start"
-
+sub attachFieldsObservers()
     m.backgroundPoster.observeField("loadStatus", "onImageLoadStatus")
     m.timer.observeField("fire", "changetext")
-    m.playVideoButton.observeField("buttonSelected", "onTimerButtonSelected")
+    m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
 end sub
 
 sub showDetails()
@@ -23,11 +29,22 @@ sub onImageLoadStatus()
 end sub
 
 sub changetext()
-    m.playVideoButton.text = "Available"
-    m.playVideoButton.setFocus(true)
+    m.countdown--
+
+    if m.countdown > 0
+        m.playVideoButton.text = getCountdownText()
+    else
+        m.timer.control = "stop"
+        m.playVideoButton.text = "Play Video"
+        m.playVideoButton.setFocus(true)
+    end if
 end sub
 
-sub onTimerButtonSelected()
+function getCountdownText() as string
+    return "Available in " + strI(m.countdown) + " ..."
+end function
+
+sub onPlayVideoButtonSelected()
     loadVideoData()
 end sub
 
