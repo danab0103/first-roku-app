@@ -1,0 +1,7 @@
+const POKEMON_PHOTOS_URL = "https://my-json-server.typicode.com/bogdanterzea/pokemon-server/photos"
+const VIDEO_URL = "https://my-json-server.typicode.com/bogdanterzea/pokemon-server/videos"
+const CERTIFICATES_FILE = "common:/certs/ca-bundle.crt"
+const HEADER = "X-Roku-Reserved-Dev-Id"
+const LOCAL_PHOTO_DESCRIPTION = "Loaded from local images folder"
+const COUNTDOWN_IN_SECONDS = 5
+const DEFAULT_BACKGROUND_POSTER_URL = "pkg:/images/default.jpg"

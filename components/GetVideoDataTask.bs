@@ -1,9 +1,11 @@
+import "pkg:/components/Constants.bs"
+
 sub init()
     m.top.functionName = "runTask"
 end sub
 
 sub runTask()
-    endpoint = "https://my-json-server.typicode.com/bogdanterzea/pokemon-server/videos"
+    endpoint = VIDEO_URL
     requestResponse = fetchVideoData(endpoint)
     videoDataJson = ParseJson(requestResponse)
     populateVideoData(videoDataJson[0])
@@ -43,8 +45,8 @@ function createHttpRequest(endpoint as string) as object
     port = CreateObject("roMessagePort")
     httpRequest.SetUrl(endpoint)
     httpRequest.SetPort(port)
-    httpRequest.SetCertificatesFile("common:/certs/ca-bundle.crt")
-    httpRequest.AddHeader("X-Roku-Reserved-Dev-Id", "")
+    httpRequest.SetCertificatesFile(CERTIFICATES_FILE)
+    httpRequest.AddHeader(HEADER, "")
     httpRequest.InitClientCertificates()
     return httpRequest
 end function

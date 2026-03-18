@@ -1,7 +1,9 @@
+import "pkg:/components/Constants.bs"
+
 sub init()
     initComponents()
     attachFieldsObservers()
-    m.countdownInSeconds = 5
+    m.countdownInSeconds = COUNTDOWN_IN_SECONDS
     m.playVideoButton.text = getCountdownText()
 end sub
 
@@ -25,7 +27,7 @@ sub showDetails()
 end sub
 
 sub onImageLoadStatus()
-    if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = "pkg:/images/default.jpg"
+    if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = DEFAULT_BACKGROUND_POSTER_URL
 end sub
 
 sub changetext()

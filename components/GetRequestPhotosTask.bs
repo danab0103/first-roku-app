@@ -1,17 +1,19 @@
+import "pkg:/components/Constants.bs"
+
 sub init()
     m.top.functionName = "runTask"
 end sub
 
 sub runTask()
-    endpoint = "https://my-json-server.typicode.com/bogdanterzea/pokemon-server/photos"
+    endpoint = POKEMON_PHOTOS_URL
 
     httpReq = CreateObject("roUrlTransfer")
     port = CreateObject("roMessagePort")
 
     httpReq.SetUrl(endpoint)
     httpReq.SetPort(port)
-    httpReq.SetCertificatesFile("common:/certs/ca-bundle.crt")
-    httpReq.AddHeader("X-Roku-Reserved-Dev-Id", "")
+    httpReq.SetCertificatesFile(CERTIFICATES_FILE)
+    httpReq.AddHeader(HEADER, "")
     httpReq.InitClientCertificates()
 
     ok = httpReq.AsyncGetToString()
@@ -67,7 +69,7 @@ sub populateContentLocalPhotos()
         item.title = "Local photo " + i.ToStr()
         item.url = path
         item.image_1080_url = path
-        item.description = "Loaded from local images folder"
+        item.description = LOCAL_PHOTO_DESCRIPTION
         row.AppendChild(item)
     end for
     root.AppendChild(row)
