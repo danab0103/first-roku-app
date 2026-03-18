@@ -17,7 +17,7 @@ sub init()
     m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
     m.searchButton.observeField("buttonSelected", "onSearchButtonSelected")
 
-    m.photosTask = CreateObject("roSGNode", "GetRequestPhotosTask")
+    m.photosTask = CreateObject("roSGNode", "GetPhotosDataTask")
     m.photosTask.observeField("photosContent", "onPhotosLoaded")
     m.photosTask.control = "RUN"
 

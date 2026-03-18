@@ -1,4 +1,4 @@
-<component name = "GetRequestPhotosTask" extends = "Task" >
+<component name = "GetPhotosDataTask" extends = "Task" >
   <interface>
     <field id="photosContent" type="node" />
   </interface>
