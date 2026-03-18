@@ -10,6 +10,4 @@
             width="1280"
             height="720" />
     </children>
-
-    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.bs" />
 </component>

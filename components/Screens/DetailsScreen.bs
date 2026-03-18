@@ -1,3 +1,5 @@
+import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/VideoHelper.bs"
 import "pkg:/components/Constants.bs"
 import "pkg:/components/Enums.bs"
 
@@ -17,7 +19,7 @@ end sub
 
 sub attachFieldsObservers()
     m.backgroundPoster.observeField("loadStatus", "onImageLoadStatus")
-    m.timer.observeField("fire", "changetext")
+    m.timer.observeField("fire", "changetext")   
     m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
 end sub
 

@@ -1,3 +1,5 @@
+import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/VideoHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
