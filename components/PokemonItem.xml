@@ -18,7 +18,4 @@
             height="20"
             translation="[0, 205]" />
     </children>
-
-    <script type="text/brightscript" uri="PokemonItem.bs" />
-
 </component>

@@ -4,5 +4,6 @@
     "username": "rokudev",
     "password": "rokudev",
     "deploy": true,
-    "stagingDir": "dist"
+    "stagingDir": "dist",
+    "autoImportComponentScript": true
 }

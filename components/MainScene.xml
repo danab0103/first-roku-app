@@ -41,7 +41,6 @@
         rowFocusAnimationStyle="fixedFocusWrap" />
     </children>
 
-    <script type="text/brightscript" uri="pkg:/components/MainScene.bs" />
     <script type="text/brightscript" uri="pkg:/components/NavigationHelper.bs" />
     <script type="text/brightscript" uri="pkg:/components/VideoHelper.bs" />
 </component>

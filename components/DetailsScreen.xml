@@ -28,7 +28,6 @@
             duration="1"/>
     </children>
 
-    <script type="text/brightscript" uri="pkg:/components/DetailsScreen.bs" />
     <script type="text/brightscript" uri="pkg:/components/NavigationHelper.bs" />
     <script type="text/brightscript" uri="pkg:/components/VideoHelper.bs" />
 </component>
