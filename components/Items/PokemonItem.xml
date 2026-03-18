@@ -1,13 +1,5 @@
-<component name="PokemonItem" extends="Group">
-    <interface>
-        <field id="itemContent" type="node" onChange="showContent"/>
-    </interface>
-
+<component name="PokemonItem" extends="BaseItem">
     <children>
-        <Poster
-            id="pokemonPoster"
-            width="200"
-            height="200" />
         <Label
             id="pokemonLabel"
             width="150"

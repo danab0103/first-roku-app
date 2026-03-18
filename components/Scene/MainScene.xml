@@ -31,7 +31,7 @@
         id="imageList"
         translation="[200,300]"
         numRows="1"
-        itemComponentName="RowListItem"
+        itemComponentName="BaseItem"
         itemSize="[880,0]"
         rowHeights="[200]"
         rowItemSize="[[200, 200]]"

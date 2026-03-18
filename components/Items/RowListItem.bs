@@ -1,8 +1,0 @@
-sub init()
-    m.poster = m.top.findNode("itemPoster")
-end sub
-
-sub showContent()
-    rowListContent = m.top.itemContent
-    m.poster.uri = rowListContent.url
-end sub
