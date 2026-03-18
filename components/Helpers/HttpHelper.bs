@@ -1,12 +1,13 @@
 function fetchData(endpoint as string) as dynamic
     httpRequest = createHttpRequest(endpoint)
+
     return executeHttpRequest(httpRequest)
 end function
 
 function executeHttpRequest(httpRequest as object) as dynamic
     requestResult = invalid
-
     requestInitiated = httpRequest.AsyncGetToString()
+
     if requestInitiated
         event = wait(10000, httpRequest.getPort())
 
@@ -31,5 +32,6 @@ function createHttpRequest(endpoint as string) as object
     httpRequest.SetCertificatesFile(CERTIFICATES_FILE)
     httpRequest.AddHeader(HEADER, "")
     httpRequest.InitClientCertificates()
+    
     return httpRequest
 end function
