@@ -1,3 +1,5 @@
+import "pkg:/components/Enums.bs"
+
 sub init()
     m.miniKeyboard = m.top.findNode("miniKeyboard")
     m.openKeyboardButton = m.top.findNode("openKeyboardButton")
@@ -71,27 +73,27 @@ end function
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
     if press = true
-        if key = "back"
+        if key = RemoteButton.back
             closeComponent(m.top, m.top.getParent().findNode("searchButton"))
             handled = true
         end if
 
-        if key = "up"
+        if key = RemoteButton.up
             m.miniKeyboard.setFocus(true)
             handled = true
         end if
 
-        if key = "down"
+        if key = RemoteButton.down
             m.openKeyboardButton.setFocus(true)
             handled = true
         end if
 
-        if key = "right"
+        if key = RemoteButton.right
             m.pokemonsGrid.setFocus(true)
             handled = true
         end if
 
-        if key = "left" and not m.openKeyboardButton.hasFocus()
+        if key = RemoteButton.left and not m.openKeyboardButton.hasFocus()
             m.miniKeyboard.setFocus(true)
             handled = true
         end if

@@ -1,3 +1,5 @@
+import "pkg:/components/Enums.bs"
+
 sub init()
     m.video = m.top.findNode("video")
 end sub
@@ -19,11 +21,11 @@ function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true
-        if key = "back"
+        if key =  RemoteButton.back
             m.video.control = "stop"
             closeComponent(m.top, m.top.getParent().findNode("playVideoButton"))
             handled = true
-        else if key = "left" or key = "up" or key = "down" or key = "right"
+        else if key = RemoteButton.left or key = RemoteButton.right or key = RemoteButton.down or key = RemoteButton.up
             m.top.setFocus(true)
             handled = true
         end if
