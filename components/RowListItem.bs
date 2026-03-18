@@ -2,7 +2,7 @@ sub init()
     m.poster = m.top.findNode("itemPoster")
 end sub
 
-sub showContent(event)
-    data = event.getData()
-    m.poster.uri = data.url
+sub showContent()
+    rowListContent = m.top.itemContent
+    m.poster.uri = rowListContent.url
 end sub
