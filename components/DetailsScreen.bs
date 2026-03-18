@@ -43,7 +43,7 @@ sub changetext()
 end sub
 
 function getCountdownText() as string
-    return "Available in " + strI(m.countdownInSeconds) + " seconds ..."
+    return `Available in ${m.countdownInSeconds} seconds ...`
 end function
 
 sub onPlayVideoButtonSelected()

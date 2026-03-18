@@ -63,10 +63,10 @@ sub populateContentLocalPhotos()
     row = CreateObject("roSGNode", "ContentNode")
 
     for i = 0 to 4
-        path = "pkg:/images/cat" + i.ToStr() + ".jpeg"
+        path = `pkg:/images/cat${i}.jpeg`
         item = CreateObject("roSGNode", "PhotoNode")
         item.photoId = i
-        item.title = "Local photo " + i.ToStr()
+        item.title = `Local photo ${i}`
         item.url = path
         item.image_1080_url = path
         item.description = LOCAL_PHOTO_DESCRIPTION
