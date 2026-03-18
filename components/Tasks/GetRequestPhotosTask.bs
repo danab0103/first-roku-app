@@ -1,3 +1,4 @@
+import "pkg:/components/Helpers/HttpHelper.bs"
 import "pkg:/components/Constants.bs"
 
 sub init()
@@ -6,37 +7,13 @@ end sub
 
 sub runTask()
     endpoint = POKEMON_PHOTOS_URL
+    requestResult = fetchData(endpoint)
 
-    httpReq = CreateObject("roUrlTransfer")
-    port = CreateObject("roMessagePort")
-
-    httpReq.SetUrl(endpoint)
-    httpReq.SetPort(port)
-    httpReq.SetCertificatesFile(CERTIFICATES_FILE)
-    httpReq.AddHeader(HEADER, "")
-    httpReq.InitClientCertificates()
-
-    ok = httpReq.AsyncGetToString()
-
-    if ok then
-        event = wait(10000, port)
-        if event = invalid then
-            print "Request timeout or no response"
-            return
-        end if
-
-        if type(event) = "roUrlEvent" then
-            code = event.GetResponseCode()
-            rsp = event.GetString()
-
-            if code <> 200 or rsp = invalid or rsp = "" then
-                populateContentLocalPhotos()
-                return
-            end if
-
-            dataJson = ParseJson(rsp)
-            populateContentEndpointPhotos(dataJson)
-        end if
+    if requestResult = invalid then
+        populateContentLocalPhotos()
+    else
+        photosDataJson = ParseJson(requestResult)
+        populateContentEndpointPhotos(photosDataJson)
     end if
 end sub
 

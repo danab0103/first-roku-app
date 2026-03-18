@@ -1,3 +1,4 @@
+import "pkg:/components/Helpers/HttpHelper.bs"
 import "pkg:/components/Constants.bs"
 
 sub init()
@@ -6,50 +7,10 @@ end sub
 
 sub runTask()
     endpoint = VIDEO_URL
-    requestResponse = fetchVideoData(endpoint)
+    requestResponse = fetchData(endpoint)
     videoDataJson = ParseJson(requestResponse)
     populateVideoData(videoDataJson[0])
 end sub
-
-function fetchVideoData(endpoint as string) as dynamic
-    httpRequest = createHttpRequest(endpoint)
-    return executeHttpRequest(httpRequest)
-end function
-
-function executeHttpRequest(httpRequest as object) as dynamic
-    requestResult = invalid
-
-    requestInitiated = httpRequest.AsyncGetToString()
-    if requestInitiated
-        event = wait(10000, httpRequest.getPort())
-
-        if event = invalid
-            print "Request timeout or no response"
-        else if type(event) = "roUrlEvent"
-            code = event.GetResponseCode()
-            responseBody = event.GetString()
-
-            if code <> 200 or responseBody = invalid or responseBody = ""
-                print "404 ERROR"
-            else
-                requestResult = responseBody
-            end if
-        end if
-    end if
-
-    return requestResult
-end function
-
-function createHttpRequest(endpoint as string) as object
-    httpRequest = CreateObject("roUrlTransfer")
-    port = CreateObject("roMessagePort")
-    httpRequest.SetUrl(endpoint)
-    httpRequest.SetPort(port)
-    httpRequest.SetCertificatesFile(CERTIFICATES_FILE)
-    httpRequest.AddHeader(HEADER, "")
-    httpRequest.InitClientCertificates()
-    return httpRequest
-end function
 
 sub populateVideoData(videoDataJson as object)
     videoNode = CreateObject("roSGNode", "VideoNode")
