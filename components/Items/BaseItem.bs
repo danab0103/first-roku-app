@@ -1,5 +1,5 @@
 sub init()
-    m.pokemonPoster = m.top.findNode("poster")
+    m.poster = m.top.findNode("poster")
 end sub
 
 sub showContent()

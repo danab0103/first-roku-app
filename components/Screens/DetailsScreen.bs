@@ -23,7 +23,7 @@ sub attachFieldsObservers()
     m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
 end sub
 
-sub showDetails()
+sub onItemContentChanged()
     item = m.top.itemContent
     m.backgroundPoster.uri = item.image_1080_url
     m.descriptionLabel.text = item.description

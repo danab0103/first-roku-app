@@ -1,8 +1,6 @@
-<component name="DetailsScreen" extends="Group">
+<component name="DetailsScreen" extends="BaseScreen">
     <interface>
-        <field id="itemContent" type="node" onChange="showDetails" />
     </interface>
-
     <children>
         <Poster
             id="backgroundPoster"

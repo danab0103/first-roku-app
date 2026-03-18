@@ -5,7 +5,7 @@ sub init()
     m.video = m.top.findNode("video")
 end sub
 
-sub showVideo()
+sub onItemContentChanged()
     videoItem = m.top.itemContent
     m.video.content = createVideoContent(videoItem)
     m.video.control = "play"

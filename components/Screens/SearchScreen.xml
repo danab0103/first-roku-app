@@ -1,6 +1,5 @@
-<component name="SearchScreen" initialFocus="openKeyboardButton" extends="Group">
+<component name="SearchScreen" initialFocus="openKeyboardButton" extends="BaseScreen">
     <interface>
-        <field id="itemContent" type="node" onChange="onItemContentChanged"/>
     </interface>
     <children>
         <Rectangle

@@ -1,8 +1,6 @@
-<component name="VideoScreen" initialFocus="video" extends="Group">
+<component name="VideoScreen" initialFocus="video" extends="BaseScreen">
     <interface>
-        <field id="itemContent" type="node" onChange="showVideo" />
     </interface>
-
     <children>
         <Video
             id="video"

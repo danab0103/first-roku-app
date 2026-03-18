@@ -1,0 +1,8 @@
+<component name="BaseScreen" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="onItemContentChanged" />
+    </interface>
+
+    <children>
+    </children>
+</component>
