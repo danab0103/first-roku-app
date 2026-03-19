@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "brighterscript": "^0.70.3"
+  },
+  "dependencies": {
+    "@rokucommunity/bslint": "^0.8.38"
   }
 }

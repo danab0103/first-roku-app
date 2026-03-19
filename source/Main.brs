@@ -13,10 +13,10 @@ sub Main()
     screen.setMessagePort(m.port)
 
     'Create a scene and load /components/helloworld.xml'
-    scene = screen.CreateScene("HelloWorld")
+    screen.CreateScene("HelloWorld")
     screen.show()
 
-    while(true)
+    while true
         msg = wait(0, m.port)
         msgType = type(msg)
         if msgType = "roSGScreenEvent"
