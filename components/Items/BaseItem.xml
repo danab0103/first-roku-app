@@ -1,6 +1,6 @@
 <component name="BaseItem" extends="Group">
     <interface>
-        <field id="itemContent" type="node" onChange="showContent"/>
+        <field id="itemContent" type="node" onChange="onItemContentChanged"/>
     </interface>
 
     <children>

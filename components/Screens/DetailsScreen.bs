@@ -19,21 +19,25 @@ end sub
 
 sub attachFieldsObservers()
     m.backgroundPoster.observeField("loadStatus", "onImageLoadStatus")
-    m.timer.observeField("fire", "changetext")   
+    m.timer.observeField("fire", "changeButtonText")
     m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
 end sub
 
 sub onItemContentChanged()
-    item = m.top.itemContent
-    m.backgroundPoster.uri = item.image_1080_url
-    m.descriptionLabel.text = item.description
+    pokemonItem = m.top.itemContent
+    setPokemonItemFields(pokemonItem)
+end sub
+
+sub setPokemonItemFields(pokemonItem as object)
+    m.backgroundPoster.uri = pokemonItem.image_1080_url
+    m.descriptionLabel.text = pokemonItem.description
 end sub
 
 sub onImageLoadStatus()
     if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = DEFAULT_BACKGROUND_POSTER_URL
 end sub
 
-sub changetext()
+sub changeButtonText()
     m.countdownInSeconds--
 
     if m.countdownInSeconds > 0

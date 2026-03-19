@@ -3,8 +3,12 @@ sub init()
     m.pokemonLabel = m.top.findNode("pokemonLabel")
 end sub
 
-sub showContent()
+sub onItemContentChanged()
     pokemonContent = m.top.itemContent
+    setPokemonItemFIelds(pokemonContent)
+end sub
+
+sub setPokemonItemFields(pokemonContent as object)
     m.pokemonPoster.uri = pokemonContent.url
     m.pokemonLabel.text = pokemonContent.title
 end sub
