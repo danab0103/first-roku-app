@@ -1,10 +1,10 @@
-function fetchData(endpoint as string) as dynamic
+function fetchData(endpoint as string) as object
     httpRequest = createHttpRequest(endpoint)
 
     return executeHttpRequest(httpRequest)
 end function
 
-function executeHttpRequest(httpRequest as object) as dynamic
+function executeHttpRequest(httpRequest as object) as object
     requestResult = invalid
     requestInitiated = httpRequest.AsyncGetToString()
 

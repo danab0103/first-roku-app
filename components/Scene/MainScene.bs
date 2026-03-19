@@ -57,7 +57,7 @@ end function
 sub onItemFocused()
     focusedPokemonPosition = m.pokemonList.rowItemFocused
     focusedPokemon = getPokemon(focusedPokemonPosition)
-    print ` Pokemon title = ${focusedPokemon.title}`
+    print `Pokemon title = ${focusedPokemon.title}`
 end sub
 
 sub onPlayVideoButtonSelected()
