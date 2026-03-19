@@ -1,10 +1,10 @@
 <component name="VideoNode" extends="ContentNode">
-  <interface>
-    <field id="videoId" type="integer" />
-    <field id="title" type="string" />
-    <field id="posterUrl" type="string" />
-    <field id="streamUrl" type="string" />
-    <field id="streamFormat" type="string" />
-    <field id="description" type="string" />
-  </interface>
+    <interface>
+        <field id="videoId" type="integer" />
+        <field id="title" type="string" />
+        <field id="posterUrl" type="string" />
+        <field id="streamUrl" type="string" />
+        <field id="streamFormat" type="string" />
+        <field id="description" type="string" />
+    </interface>
 </component>

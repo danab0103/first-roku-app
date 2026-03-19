@@ -11,8 +11,10 @@
             layoutDirection="vert"
             itemSpacings="[20]"
             translation="[40, 100]">
+
             <DynamicMiniKeyboard
                 id="miniKeyboard" />
+            
             <Button
                 id="openKeyboardButton"
                 text="Open Keyboard"
@@ -27,7 +29,6 @@
             itemSpacing="[10, 10]"
             numColumns="3"
             numRows="2"
-            drawFocusFeedback="false"
             wrapDividerBitmapUri=""
             wrapDividerHeight="0"
             itemComponentName="PokemonItem" />

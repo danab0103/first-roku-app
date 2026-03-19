@@ -1,5 +1,5 @@
 <component name="GetVideoDataTask" extends="Task" >
-  <interface>
-    <field id="videoData" type="node" />
-  </interface>
+    <interface>
+        <field id="videoData" type="node" />
+    </interface>
 </component>
