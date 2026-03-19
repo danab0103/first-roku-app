@@ -1,0 +1,99 @@
+import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/VideoHelper.bs"
+import "pkg:/components/Enums.bs"
+
+sub init()
+    initComponents()
+    attachFieldsObservers()
+
+    displayApplicationInfo()
+    m.playVideoButton.setFocus(true)
+
+    loadPhotosData()
+end sub
+
+sub initComponents()
+    m.titleLabel = m.top.findNode("titleLabel")
+    m.playVideoButton = m.top.findNode("playVideoButton")
+    m.searchButton = m.top.findNode("searchButton")
+    m.pokemonList = m.top.findNode("imageList")
+end sub
+
+sub attachFieldsObservers()
+    m.pokemonList.observeField("rowItemFocused", "onItemFocused")
+    m.pokemonList.observeField("rowItemSelected", "onItemSelected")
+    m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
+    m.searchButton.observeField("buttonSelected", "onSearchButtonSelected")
+end sub
+
+sub displayApplicationInfo()
+    appInfo = CreateObject("roAppInfo")
+    m.titleLabel.text = appInfo.GetTitle() + " v" + appInfo.GetVersion()
+end sub
+
+sub loadPhotosData()
+    m.photosTask = CreateObject("roSGNode", "GetPhotosDataTask")
+    m.photosTask.observeField("photosContent", "onPhotosLoaded")
+    m.photosTask.control = "RUN"
+end sub
+
+sub onPhotosLoaded()
+    m.pokemonList.content = m.photosTask.photosContent
+    m.searchButton.visible = true
+end sub
+
+sub onItemSelected()
+    selectedPokemonPosition = m.pokemonList.rowItemSelected
+    selectedPokemon = getPokemon(selectedPokemonPosition)
+    navigateToNewScreen(m.top, "DetailsScreen", selectedPokemon)
+end sub
+
+function getPokemon(pokemonPosition as object) as object
+    selectedPokemon = m.pokemonList.content.getChild(pokemonPosition[0]).getChild(pokemonPosition[1])
+
+    return selectedPokemon
+end function
+
+sub onItemFocused()
+    focusedPokemonPosition = m.pokemonList.rowItemFocused
+    focusedPokemon = getPokemon(focusedPokemonPosition)
+    print `Pokemon title = ${focusedPokemon.title}`
+end sub
+
+sub onPlayVideoButtonSelected()
+    print "Play video button pressed."
+    loadVideoData()
+end sub
+
+sub onSearchButtonSelected()
+    print "Search button pressed."
+    navigateToNewScreen(m.top, "SearchScreen", m.pokemonList.content)
+end sub
+
+function onKeyEvent(key as string, press as boolean) as boolean
+    handled = false
+
+    if press = true
+        if key = RemoteButton.right and m.playVideoButton.hasFocus()
+            m.searchButton.setFocus(true)
+            handled = true
+        end if
+
+        if key = RemoteButton.left and m.searchButton.hasFocus()
+            m.playVideoButton.setFocus(true)
+            handled = true
+        end if
+
+        if key = RemoteButton.up
+            m.playVideoButton.setFocus(true)
+            handled = true
+        end if
+
+        if key = RemoteButton.down
+            m.pokemonList.setFocus(true)
+            handled = true
+        end if
+    end if
+
+    return handled
+end function

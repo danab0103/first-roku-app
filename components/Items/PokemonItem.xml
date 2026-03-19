@@ -1,0 +1,11 @@
+<component name="PokemonItem" extends="BaseItem">
+    <children>
+        <Label
+            id="pokemonLabel"
+            width="150"
+            horizAlign="center"
+            color="0xFFFFFFFF" 
+            height="20"
+            translation="[0, 205]" />
+    </children>
+</component>

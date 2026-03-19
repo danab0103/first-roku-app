@@ -1,0 +1,24 @@
+import "pkg:/components/Helpers/HttpHelper.bs"
+import "pkg:/components/Constants.bs"
+
+sub init()
+    m.top.functionName = "runTask"
+end sub
+
+sub runTask()
+    endpoint = VIDEO_URL
+    requestResponse = fetchData(endpoint)
+    videoDataJson = ParseJson(requestResponse)
+    populateVideoData(videoDataJson[0])
+end sub
+
+sub populateVideoData(videoDataJson as object)
+    videoNode = CreateObject("roSGNode", "VideoNode")
+    videoNode.videoId = videoDataJson.id
+    videoNode.title = videoDataJson.title
+    videoNode.posterUrl = videoDataJson.poster
+    videoNode.streamUrl = videoDataJson.stream.url
+    videoNode.streamFormat = videoDataJson.stream.format
+    videoNode.description = videoDataJson.description
+    m.top.videoData = videoNode
+end sub

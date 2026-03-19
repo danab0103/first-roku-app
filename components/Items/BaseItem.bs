@@ -1,0 +1,8 @@
+sub init()
+    m.poster = m.top.findNode("poster")
+end sub
+
+sub onItemContentChanged()
+    baseItemContent = m.top.itemContent
+    m.poster.uri = baseItemContent.url
+end sub

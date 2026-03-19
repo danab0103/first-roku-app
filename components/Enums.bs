@@ -1,0 +1,7 @@
+enum RemoteButton
+    back = "back"
+    left = "left"
+    right = "right"
+    up = "up"
+    down = "down"
+end enum

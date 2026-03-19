@@ -1,8 +1,18 @@
+import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Enums.bs"
+
 sub init()
+    initComponents()
+    attachFieldsObservers()
+end sub
+
+sub initComponents()
     m.miniKeyboard = m.top.findNode("miniKeyboard")
     m.openKeyboardButton = m.top.findNode("openKeyboardButton")
     m.pokemonsGrid = m.top.findNode("pokemonsGrid")
+end sub
 
+sub attachFieldsObservers()
     m.openKeyboardButton.observeField("buttonSelected", "onOpenKeyboardButtonSelected")
     m.miniKeyboard.observeField("text", "onSearchTextChanged")
 end sub
@@ -31,9 +41,17 @@ end sub
 
 sub createKeyboardDialog()
     m.keyboardDialog = CreateObject("roSGNode", "StandardKeyboardDialog")
+    setKeyboardFields()
+    attachKeyboardFieldsObservers()
+end sub
+
+sub setKeyboardFields()
     m.keyboardDialog.title = "Search Pokemon"
     m.keyboardDialog.text = m.miniKeyboard.text
     m.keyboardDialog.buttons = ["OK"]
+end sub
+
+sub attachKeyboardFieldsObservers()
     m.keyboardDialog.observeField("wasClosed", "onKeyboardDialogClosed")
     m.keyboardDialog.observeField("buttonSelected", "onKeyboardDialogClosed")
 end sub
@@ -51,6 +69,7 @@ function filterPokemons(searchText as string) as object
     else
         for childIndex = 0 to m.allPokemons.getChildCount() - 1
             pokemon = m.allPokemons.getChild(childIndex)
+            
             if Instr(LCase(pokemon.title), searchText) > 0
                 clonedPokemon = clonePokemon(pokemon)
                 filteredPokemons.appendChild(clonedPokemon)
@@ -65,36 +84,39 @@ function clonePokemon(pokemon as object) as object
     clonedPokemon = CreateObject("roSGNode", "ContentNode")
     clonedPokemon.title = pokemon.title
     clonedPokemon.url = pokemon.url
+
     return clonedPokemon
 end function
 
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
+
     if press = true
-        if key = "back"
+        if key = RemoteButton.back
             closeComponent(m.top, m.top.getParent().findNode("searchButton"))
             handled = true
         end if
 
-        if key = "up"
+        if key = RemoteButton.up
             m.miniKeyboard.setFocus(true)
             handled = true
         end if
 
-        if key = "down"
+        if key = RemoteButton.down
             m.openKeyboardButton.setFocus(true)
             handled = true
         end if
 
-        if key = "right"
+        if key = RemoteButton.right
             m.pokemonsGrid.setFocus(true)
             handled = true
         end if
 
-        if key = "left" and not m.openKeyboardButton.hasFocus()
+        if key = RemoteButton.left and not m.openKeyboardButton.hasFocus()
             m.miniKeyboard.setFocus(true)
             handled = true
         end if
     end if
+
     return handled
 end function

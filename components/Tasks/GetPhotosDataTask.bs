@@ -1,0 +1,56 @@
+import "pkg:/components/Helpers/HttpHelper.bs"
+import "pkg:/components/Constants.bs"
+
+sub init()
+    m.top.functionName = "runTask"
+end sub
+
+sub runTask()
+    endpoint = POKEMON_PHOTOS_URL
+    requestResult = fetchData(endpoint)
+
+    photosData = requestResult <> "" ? parseJson(requestResult) : buildLocalPhotosData()
+
+    populatePhotosContent(photosData)
+end sub
+
+sub populatePhotosContent(photosData as object)
+    contentRoot = CreateObject("roSGNode", "ContentNode")
+    photoRow = CreateObject("roSGNode", "ContentNode")
+
+    for each photoData in photosData
+        photoNode = createPhotoNode(photoData)
+        photoRow.appendChild(photoNode)
+    end for
+
+    contentRoot.appendChild(photoRow)
+    m.top.photosContent = contentRoot
+end sub
+
+function buildLocalPhotosData() as object
+    photos = CreateObject("roArray", 0, true)
+
+    for photoIndex = 0 to 4
+        path = `pkg:/images/cat${photoIndex}.jpeg`
+        photos.push({
+            id: photoIndex,
+            title: `Local photo ${photoIndex}`,
+            url: path,
+            image_1080_url: path,
+            description: LOCAL_PHOTO_DESCRIPTION
+        })
+    end for
+
+    return photos
+end function
+
+function createPhotoNode(photoData as object)
+    photoNode = CreateObject("roSGNode", "PhotoNode")
+    photoNode.photoId = photoData.id
+    photoNode.title = photoData.title
+    photoNode.url = photoData.url
+    photoNode.image_1080_url = photoData.image_1080_url
+    photoNode.description = photoData.description
+
+    return photoNode
+end function

@@ -1,0 +1,43 @@
+<component name="HelloWorld" extends="Scene"> 
+    <children>
+        <Poster 
+            id="background" 
+            uri="pkg:/images/cat-bg.jpg" 
+            width="1280" 
+            height="720" 
+            opacity="1.0" />
+          
+        <Label
+            id="titleLabel"
+            text=""
+            color="#ffffff" 
+            translation="[0,300]" />
+
+        <LayoutGroup
+            id="buttonGroup"
+            layoutDirection="horiz"
+            itemSpacings="[20]"
+            translation="[400,5]">
+
+            <Button
+                id="playVideoButton"
+                text="Play Video" />
+                
+            <Button
+                id="searchButton"
+                text="Search"
+                visible="false" />
+        </LayoutGroup>
+
+        <RowList
+            id="imageList"
+            translation="[200,300]"
+            numRows="1"
+            itemComponentName="BaseItem"
+            itemSize="[880,0]"
+            rowHeights="[200]"
+            rowItemSize="[[200, 200]]"
+            rowItemSpacing="[[20, 0]]"
+            rowFocusAnimationStyle="fixedFocusWrap" />
+    </children>
+</component>

@@ -1,0 +1,8 @@
+<component name="VideoScreen" initialFocus="video" extends="BaseScreen">
+    <children>
+        <Video
+            id="video"
+            width="1280"
+            height="720" />
+    </children>
+</component>

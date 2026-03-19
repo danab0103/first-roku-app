@@ -1,0 +1,5 @@
+<component name = "GetPhotosDataTask" extends = "Task" >
+    <interface>
+        <field id="photosContent" type="node" />
+    </interface>
+</component>

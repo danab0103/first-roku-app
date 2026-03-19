@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<component name="SearchScreen" initialFocus="openKeyboardButton" extends="Group">
-    <interface>
-        <field id="itemContent" type="node" onChange="onItemContentChanged"/>
-    </interface>
+<component name="SearchScreen" initialFocus="openKeyboardButton" extends="BaseScreen">
     <children>
         <Rectangle
             id="background"
@@ -15,8 +11,10 @@
             layoutDirection="vert"
             itemSpacings="[20]"
             translation="[40, 100]">
+
             <DynamicMiniKeyboard
                 id="miniKeyboard" />
+            
             <Button
                 id="openKeyboardButton"
                 text="Open Keyboard"
@@ -31,12 +29,8 @@
             itemSpacing="[10, 10]"
             numColumns="3"
             numRows="2"
-            drawFocusFeedback="false"
             wrapDividerBitmapUri=""
             wrapDividerHeight="0"
             itemComponentName="PokemonItem" />
     </children>
-
-    <script type="text/brightscript" uri="pkg:/components/SearchScreen.brs" />
-    <script type="text/brightscript" uri="pkg:/components/NavigationHelper.brs" />
 </component>

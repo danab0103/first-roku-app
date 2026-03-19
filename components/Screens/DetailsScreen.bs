@@ -1,7 +1,12 @@
+import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/VideoHelper.bs"
+import "pkg:/components/Constants.bs"
+import "pkg:/components/Enums.bs"
+
 sub init()
     initComponents()
     attachFieldsObservers()
-    m.countdownInSeconds = 5
+    m.countdownInSeconds = COUNTDOWN_IN_SECONDS
     m.playVideoButton.text = getCountdownText()
 end sub
 
@@ -14,21 +19,25 @@ end sub
 
 sub attachFieldsObservers()
     m.backgroundPoster.observeField("loadStatus", "onImageLoadStatus")
-    m.timer.observeField("fire", "changetext")
+    m.timer.observeField("fire", "changeButtonText")
     m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
 end sub
 
-sub showDetails()
-    item = m.top.itemContent
-    m.backgroundPoster.uri = item.image_1080_url
-    m.descriptionLabel.text = item.description
+sub onItemContentChanged()
+    pokemonItem = m.top.itemContent
+    setPokemonItemFields(pokemonItem)
+end sub
+
+sub setPokemonItemFields(pokemonItem as object)
+    m.backgroundPoster.uri = pokemonItem.image_1080_url
+    m.descriptionLabel.text = pokemonItem.description
 end sub
 
 sub onImageLoadStatus()
-    if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = "pkg:/images/default.jpg"
+    if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = DEFAULT_BACKGROUND_POSTER_URL
 end sub
 
-sub changetext()
+sub changeButtonText()
     m.countdownInSeconds--
 
     if m.countdownInSeconds > 0
@@ -41,7 +50,7 @@ sub changetext()
 end sub
 
 function getCountdownText() as string
-    return "Available in " + strI(m.countdownInSeconds) + " seconds ..."
+    return `Available in ${m.countdownInSeconds} seconds ...`
 end function
 
 sub onPlayVideoButtonSelected()
@@ -52,12 +61,12 @@ function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true
-        if key = "back"
+        if key = RemoteButton.back
             closeComponent(m.top, m.top.getParent().findNode("imageList"))
             handled = true
         end if
 
-        if key = "left" or key = "up" or key = "down" or key = "right"
+        if key = RemoteButton.left or key = RemoteButton.right or key = RemoteButton.down or key = RemoteButton.up
             if m.countdownInSeconds = 0
                 m.playVideoButton.setFocus(true)
             else

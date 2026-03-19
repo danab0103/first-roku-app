@@ -1,0 +1,9 @@
+{
+    "rootDir": "",
+    "host": "192.168.30.210",
+    "username": "rokudev",
+    "password": "rokudev",
+    "deploy": true,
+    "stagingDir": "dist",
+    "autoImportComponentScript": true
+}
