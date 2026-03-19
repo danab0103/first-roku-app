@@ -1,6 +1,4 @@
 <component name="SearchScreen" initialFocus="openKeyboardButton" extends="BaseScreen">
-    <interface>
-    </interface>
     <children>
         <Rectangle
             id="background"

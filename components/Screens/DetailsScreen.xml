@@ -1,6 +1,4 @@
 <component name="DetailsScreen" extends="BaseScreen">
-    <interface>
-    </interface>
     <children>
         <Poster
             id="backgroundPoster"

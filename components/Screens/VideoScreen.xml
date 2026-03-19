@@ -1,6 +1,4 @@
 <component name="VideoScreen" initialFocus="video" extends="BaseScreen">
-    <interface>
-    </interface>
     <children>
         <Video
             id="video"
