@@ -4,24 +4,33 @@ import "pkg:/components/Enums.bs"
 
 sub init()
     appInfo = CreateObject("roAppInfo")
-
-    m.titleLabel = m.top.findNode("titleLabel")
     m.titleLabel.text = appInfo.GetTitle() + " v" + appInfo.GetVersion()
 
+    initComponents()
+    attachFieldsObservers()
+    m.playVideoButton.setFocus(true)
+
+    loadPhotosData()
+end sub
+
+sub initComponents()
+    m.titleLabel = m.top.findNode("titleLabel")
     m.playVideoButton = m.top.findNode("playVideoButton")
     m.searchButton = m.top.findNode("searchButton")
     m.list = m.top.findNode("imageList")
+end sub
 
+sub attachFieldsObservers()
     m.list.observeField("rowItemFocused", "onItemFocused")
     m.list.observeField("rowItemSelected", "onItemSelected")
     m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
     m.searchButton.observeField("buttonSelected", "onSearchButtonSelected")
+end sub
 
+sub loadPhotosData()
     m.photosTask = CreateObject("roSGNode", "GetPhotosDataTask")
     m.photosTask.observeField("photosContent", "onPhotosLoaded")
     m.photosTask.control = "RUN"
-
-    m.playVideoButton.setFocus(true)
 end sub
 
 sub onPhotosLoaded()

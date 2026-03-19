@@ -2,10 +2,17 @@ import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
+    initComponents()
+    attachFieldsObservers()
+end sub
+
+sub initComponents()
     m.miniKeyboard = m.top.findNode("miniKeyboard")
     m.openKeyboardButton = m.top.findNode("openKeyboardButton")
     m.pokemonsGrid = m.top.findNode("pokemonsGrid")
+end sub
 
+sub attachFieldsObservers()
     m.openKeyboardButton.observeField("buttonSelected", "onOpenKeyboardButtonSelected")
     m.miniKeyboard.observeField("text", "onSearchTextChanged")
 end sub
