@@ -4,8 +4,8 @@ function fetchData(endpoint as string) as object
     return executeHttpRequest(httpRequest)
 end function
 
-function executeHttpRequest(httpRequest as object) as object
-    requestResult = invalid
+function executeHttpRequest(httpRequest as object) as string
+    requestResult = ""
     requestInitiated = httpRequest.AsyncGetToString()
 
     if requestInitiated

@@ -9,7 +9,7 @@ sub runTask()
     endpoint = POKEMON_PHOTOS_URL
     requestResult = fetchData(endpoint)
 
-    photosData = requestResult <> invalid ? parseJson(requestResult) : buildLocalPhotosData()
+    photosData = requestResult <> "" ? parseJson(requestResult) : buildLocalPhotosData()
 
     populatePhotosContent(photosData)
 end sub
