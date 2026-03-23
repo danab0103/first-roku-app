@@ -1,4 +1,5 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/PokemonHelper.bs"
 import "pkg:/components/Helpers/VideoHelper.bs"
 import "pkg:/components/Enums.bs"
 
@@ -67,8 +68,21 @@ end sub
 
 sub onSearchButtonSelected()
     print "Search button pressed."
-    navigateToNewScreen(m.top, "SearchScreen", m.pokemonList.content)
+    navigateToNewScreen(m.top, "SearchScreen", clonePokemonsContentRow())
 end sub
+
+function clonePokemonsContentRow() as object
+    clonedPokemonsRow = CreateObject("roSGNode", "ContentNode")
+    pokemonsFirstRow = m.pokemonList.content.getChild(0)
+
+    for i = 0 to pokemonsFirstRow.getChildCount() - 1
+        pokemon = pokemonsFirstRow.getChild(i)
+        clonedPokemon = clonePokemon(pokemon)
+        clonedPokemonsRow.appendChild(clonedPokemon)
+    end for
+
+    return clonedPokemonsRow
+end function
 
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false

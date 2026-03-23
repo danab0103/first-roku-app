@@ -1,0 +1,7 @@
+function clonePokemon(pokemon as object) as object
+    clonedPokemon = CreateObject("roSGNode", "ContentNode")
+    clonedPokemon.title = pokemon.title
+    clonedPokemon.url = pokemon.url
+
+    return clonedPokemon
+end function

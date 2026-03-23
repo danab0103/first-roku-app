@@ -1,4 +1,5 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/PokemonHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
@@ -22,10 +23,9 @@ sub onOpenKeyboardButtonSelected()
 end sub
 
 sub onItemContentChanged()
-    pokemonsContentList = m.top.itemContent
-    pokemonsContentFirstRow = pokemonsContentList.getChild(0)
-    m.pokemonsGrid.content = pokemonsContentFirstRow
-    m.allPokemons = pokemonsContentFirstRow
+    pokemonsContentRow = m.top.itemContent
+    m.pokemonsGrid.content = pokemonsContentRow
+    m.allPokemons = pokemonsContentRow
 end sub
 
 sub showKeyboardDialog()
@@ -78,14 +78,6 @@ function filterPokemons(searchText as string) as object
     end if
 
     return filteredPokemons
-end function
-
-function clonePokemon(pokemon as object) as object
-    clonedPokemon = CreateObject("roSGNode", "ContentNode")
-    clonedPokemon.title = pokemon.title
-    clonedPokemon.url = pokemon.url
-
-    return clonedPokemon
 end function
 
 function onKeyEvent(key as string, press as boolean) as boolean
