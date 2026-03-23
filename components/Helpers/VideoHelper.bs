@@ -6,5 +6,6 @@ end sub
 
 sub onVideoDataLoaded()
     videoItem = m.videoTask.videoData
+    m.videoTask = invalid
     navigateToNewScreen(m.top, "VideoScreen", videoItem)
 end sub
