@@ -37,6 +37,7 @@ end sub
 sub onKeyboardDialogClosed()
     m.miniKeyboard.text = m.keyboardDialog.text
     closeComponent(m.keyboardDialog, m.openKeyboardButton)
+    m.keyboardDialog = invalid
 end sub
 
 sub createKeyboardDialog()
