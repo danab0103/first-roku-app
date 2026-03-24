@@ -1,5 +1,4 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
-import "pkg:/components/Helpers/PokemonHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
@@ -72,7 +71,7 @@ function filterPokemons(searchText as string) as object
             pokemon = m.allPokemons.getChild(childIndex)
 
             if Instr(LCase(pokemon.title), searchText) > 0
-                clonedPokemon = clonePokemon(pokemon)
+                clonedPokemon = pokemon.clone(false)
                 filteredPokemons.appendChild(clonedPokemon)
             end if
         end for
