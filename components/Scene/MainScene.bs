@@ -40,6 +40,11 @@ end sub
 sub onPhotosLoaded()
     m.pokemonList.content = m.photosTask.photosContent
     m.searchButton.visible = true
+
+    if m.shouldHandleDeeplink
+        pokemonPosition = [0, m.top.argsContent.contentId.toInt()]
+        navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
+    end if
 end sub
 
 sub onItemSelected()
@@ -82,6 +87,27 @@ function clonePokemonsContentRow() as object
 
     return clonedPokemonsRow
 end function
+
+sub onArgsContentChanged()
+    argsContent = m.top.argsContent
+
+    if argsContent.doesExist("mediaType")
+        mediaType = argsContent.mediaType
+
+        if mediaType = "movie"
+            loadVideoData()
+        else if mediaType = "episode" and argsContent.doesExist("contentId")
+            contentId = argsContent.contentId
+
+            if m.pokemonList.content <> invalid
+                pokemonPosition = [0, contentId.toInt()]
+                navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
+            else
+                m.shouldHandleDeeplink = true
+            end if
+        end if
+    end if
+end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
