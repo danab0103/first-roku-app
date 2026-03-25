@@ -27,13 +27,17 @@ end sub
 sub onItemContentChanged()
     pokemonItem = m.top.itemContent
     setPokemonItemFields(pokemonItem)
-    labelHeight = m.descriptionLabel.boundingRect().height
-    m.descriptionBackground.height = labelHeight
+    setDescriptionBackgroundHeight()
 end sub
 
 sub setPokemonItemFields(pokemonItem as object)
     m.backgroundPoster.uri = pokemonItem.image_1080_url
     m.descriptionLabel.text = pokemonItem.description
+end sub
+
+sub setDescriptionBackgroundHeight()
+    labelHeight = m.descriptionLabel.boundingRect().height
+    m.descriptionBackground.height = labelHeight
 end sub
 
 sub onImageLoadStatus()

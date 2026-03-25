@@ -7,7 +7,7 @@
 
         <Button
             id="playVideoButton"
-            translation="[15, 15]"
+            translation="[15, 480]"
             showFocusFootprint="true"
             focusFootprintBitmapUri="pkg:/images/not_focused.png" 
             focusBitmapUri="pkg:/images/focused.png"
