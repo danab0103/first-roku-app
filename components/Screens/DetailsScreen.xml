@@ -14,17 +14,20 @@
             iconUri=""
             minWidth="10"
             height="54"
+            visible="false"
             focusedIconUri="" />
 
         <Rectangle 
             id="descriptionBackground"
             width="1280"
             translation="[0,550]"
+            visible="false"
             color="0xFFFFFFFF" />
 
         <Label 
             id="descriptionLabel"
             width="1200"
+            visible="false"
             color="0x000000FF"
             horizAlign="center"
             translation="[40,550]"
@@ -33,7 +36,7 @@
         <Timer
             id="timer"
             repeat="true"
-            control="start"
+            control="stop"
             duration="1"/>
     </children>
 </component>

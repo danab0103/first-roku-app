@@ -38,6 +38,15 @@ end sub
 
 sub onImageLoadStatus()
     if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = DEFAULT_BACKGROUND_POSTER_URL
+
+    if m.backgroundPoster.loadStatus = "ready" then handleBackgroundReady()
+end sub
+
+sub handleBackgroundReady()
+    m.descriptionBackground.visible = true
+    m.descriptionLabel.visible = true
+    m.playVideoButton.visible = true
+    m.timer.control = "start"
 end sub
 
 sub changeButtonText()
