@@ -2,10 +2,10 @@ import "pkg:/components/Helpers/HttpHelper.bs"
 import "pkg:/components/Constants.bs"
 
 sub init()
-    m.top.functionName = "runTask"
+    m.top.functionName = "getVideoData"
 end sub
 
-sub runTask()
+sub getVideoData()
     endpoint = VIDEO_URL
     requestResponse = fetchData(endpoint)
     videoDataJson = ParseJson(requestResponse)

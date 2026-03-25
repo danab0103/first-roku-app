@@ -2,10 +2,10 @@ import "pkg:/components/Helpers/HttpHelper.bs"
 import "pkg:/components/Constants.bs"
 
 sub init()
-    m.top.functionName = "runTask"
+    m.top.functionName = "getPhotosData"
 end sub
 
-sub runTask()
+sub getPhotosData()
     endpoint = POKEMON_PHOTOS_URL
     requestResult = fetchData(endpoint)
 
