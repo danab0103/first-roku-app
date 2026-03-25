@@ -5,16 +5,30 @@
             width="1280"
             height="720" />
 
+        <Button
+            id="playVideoButton"
+            translation="[15, 15]"
+            showFocusFootprint="true"
+            focusFootprintBitmapUri="pkg:/images/not_focused.png" 
+            focusBitmapUri="pkg:/images/focused.png"
+            iconUri=""
+            minWidth="10"
+            height="54"
+            focusedIconUri="" />
+
+        <Rectangle 
+            id="descriptionBackground"
+            width="1280"
+            translation="[0,550]"
+            color="0xFFFFFFFF" />
+
         <Label 
             id="descriptionLabel"
             width="1200"
+            color="0x000000FF"
             horizAlign="center"
-            translation="[40,500]"
+            translation="[40,550]"
             wrap="true"/>
-
-        <Button
-            id="playVideoButton"
-            translation="[490, 10]" />
 
         <Timer
             id="timer"
