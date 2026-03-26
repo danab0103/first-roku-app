@@ -64,7 +64,7 @@ sub changeButtonText()
         m.timer.control = "stop"
         m.playVideoButton.text = "Play Video"
         m.playVideoButton.width = BUTTON_LABEL_WIDTH
-        
+
         setFocusOnPlayVideoButton()
     end if
 end sub
@@ -101,7 +101,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         end if
 
         if key = RemoteButton.ok and m.playVideoButton.hasFocus()
-            m.playVideoButton.isCustomButtonSelected = not m.playVideoButton.isCustomButtonSelected
+            m.playVideoButton.isCustomButtonSelected = true
             handled = true
         end if
     end if

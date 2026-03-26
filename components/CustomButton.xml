@@ -1,6 +1,6 @@
 <component name="CustomButton" extends="Group">
     <interface>
-        <field id="isCustomButtonSelected" type="bool" value="false" />
+        <field id="isCustomButtonSelected" type="bool" alwaysNotify="true" />
         <field id="isCustomButtonFocused" type="bool" value="false" onChange="onCustomButtonFocusChanged" />
         <field id="width" type="float" onChange="onWidthChanged" />
         <field id="height" type="float" onChange="onHeightChanged" />

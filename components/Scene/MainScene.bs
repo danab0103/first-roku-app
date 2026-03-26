@@ -120,9 +120,9 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.ok
             if m.playVideoButton.hasFocus()
-                m.playVideoButton.isCustomButtonSelected = not m.playVideoButton.isCustomButtonSelected
+                m.playVideoButton.isCustomButtonSelected = true
             else if m.searchButton.hasFocus()
-                m.searchButton.isCustomButtonSelected = not m.searchButton.isCustomButtonSelected
+                m.searchButton.isCustomButtonSelected = true
             end if
 
             handled = true

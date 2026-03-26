@@ -113,7 +113,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         end if
 
         if key = RemoteButton.ok and m.openKeyboardButton.hasFocus()
-            m.openKeyboardButton.isCustomButtonSelected = not m.openKeyboardButton.isCustomButtonSelected
+            m.openKeyboardButton.isCustomButtonSelected = true
             handled = true
         end if
     end if
