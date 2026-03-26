@@ -17,29 +17,13 @@
             id="buttonGroup"
             layoutDirection="horiz"
             itemSpacings="[20]"
-            translation="[220,400]">
+            translation="[200,400]">
 
-            <Button
-                id="playVideoButton"
-                text="Play Video" 
-                showFocusFootprint="true"
-                focusFootprintBitmapUri="pkg:/images/not_focused.png" 
-                focusBitmapUri="pkg:/images/focused.png"
-                iconUri=""
-                minWidth="10"
-                height="54"
-                focusedIconUri="" />
+            <CustomButton
+                id="playVideoButton" />
                 
-            <Button
+            <CustomButton
                 id="searchButton"
-                text="Search"
-                showFocusFootprint="true"
-                focusFootprintBitmapUri="pkg:/images/not_focused.png" 
-                focusBitmapUri="pkg:/images/focused.png"
-                iconUri=""
-                minWidth="10"
-                height="54"
-                focusedIconUri=""
                 visible="false" />
         </LayoutGroup>
 

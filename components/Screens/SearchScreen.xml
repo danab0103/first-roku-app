@@ -1,4 +1,4 @@
-<component name="SearchScreen" initialFocus="openKeyboardButton" extends="BaseScreen">
+<component name="SearchScreen" initialFocus="miniKeyboard" extends="BaseScreen">
     <children>
         <Rectangle
             id="background"
@@ -22,16 +22,8 @@
                 <DynamicMiniKeyboard
                     id="miniKeyboard" />
                 
-                <Button
-                    id="openKeyboardButton"
-                    text="Open Keyboard"
-                    showFocusFootprint="true"
-                    focusFootprintBitmapUri="pkg:/images/not_focused.png" 
-                    focusBitmapUri="pkg:/images/focused.png"
-                    iconUri=""
-                    minWidth="10"
-                    height="54"
-                    focusedIconUri="" />
+                <CustomButton
+                    id="openKeyboardButton" />
             </LayoutGroup>
 
             <MarkupGrid

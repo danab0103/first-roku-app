@@ -5,17 +5,10 @@
             width="1280"
             height="720" />
 
-        <Button
+        <CustomButton
             id="playVideoButton"
             translation="[15, 480]"
-            showFocusFootprint="true"
-            focusFootprintBitmapUri="pkg:/images/not_focused.png" 
-            focusBitmapUri="pkg:/images/focused.png"
-            iconUri=""
-            minWidth="10"
-            height="54"
-            visible="false"
-            focusedIconUri="" />
+            visible="false"/>
 
         <Rectangle 
             id="descriptionBackground"

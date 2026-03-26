@@ -1,0 +1,22 @@
+<component name="CustomButton" extends="Group">
+    <interface>
+        <field id="isCustomButtonSelected" type="bool" value="false" />
+    </interface>
+
+    <children>
+        <Poster
+            id="poster" 
+            uri="pkg:/images/white.png" 
+            blendColor="#A0724A"
+            opacity="0.7"
+            width="180" 
+            height="44" />
+        <Label
+            id="label" 
+            width="180" 
+            height="44" 
+            font="font:SmallerSystemFont"
+            horizAlign = "center"
+            vertAlign = "center" />
+    </children>
+</component>

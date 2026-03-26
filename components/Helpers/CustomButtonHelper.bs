@@ -1,0 +1,21 @@
+import "pkg:/components/Constants.bs"
+
+sub setCustomButtonFocus(button as object)
+    button.setFocus(true)
+    button.getChild(0).blendColor = BUTTON_FOCUSED_COLOR
+    button.getChild(0).opacity = BUTTON_FOCUSED_OPACITY
+    button.getChild(1).font = BUTTON_FOCUSED_FONT
+    button.getChild(1).color = BUTTON_FOCUSED_TEXT_COLOR
+end sub
+
+sub removeCustomButtonFocus(button as object)
+    button.getChild(0).blendColor = BUTTON_UNFOCUSED_COLOR
+    button.getChild(0).opacity = BUTTON_UNFOCUSED_OPACITY
+    button.getChild(1).font = BUTTON_UNFOCUSED_FONT
+    button.getChild(1).color = BUTTON_UNFOCUSED_TEXT_COLOR
+end sub
+
+sub updateCustomButtonWidth(button as object, width as integer)
+    button.getChild(0).width = width
+    button.getChild(1).width = width
+end sub

@@ -4,4 +4,5 @@ enum RemoteButton
     right = "right"
     up = "up"
     down = "down"
+    ok = "OK"
 end enum
