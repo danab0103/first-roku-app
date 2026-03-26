@@ -23,7 +23,10 @@
                     id="miniKeyboard" />
                 
                 <CustomButton
-                    id="openKeyboardButton" />
+                    id="openKeyboardButton"
+                    width="180"
+                    height="44" 
+                    text="Open Keyboard" />
             </LayoutGroup>
 
             <MarkupGrid

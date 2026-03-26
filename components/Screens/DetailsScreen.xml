@@ -8,6 +8,7 @@
         <CustomButton
             id="playVideoButton"
             translation="[15, 480]"
+            height="44"
             visible="false"/>
 
         <Rectangle 

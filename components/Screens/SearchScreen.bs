@@ -1,12 +1,9 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
-import "pkg:/components/Helpers/CustomButtonHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
     initComponents()
     attachFieldsObservers()
-
-    m.openKeyboardButton.getChild(1).text = "Open Keyboard"
 end sub
 
 sub initComponents()
@@ -94,18 +91,19 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.up
             m.miniKeyboard.setFocus(true)
-            removeCustomButtonFocus(m.openKeyboardButton)
+            m.openKeyboardButton.isCustomButtonFocused = false
             handled = true
         end if
 
         if key = RemoteButton.down
-            setCustomButtonFocus(m.openKeyboardButton)
+            m.openKeyboardButton.setFocus(true)
+            m.openKeyboardButton.isCustomButtonFocused = true
             handled = true
         end if
 
         if key = RemoteButton.right
             m.pokemonsGrid.setFocus(true)
-            removeCustomButtonFocus(m.openKeyboardButton)
+            m.openKeyboardButton.isCustomButtonFocused = false
             handled = true
         end if
 

@@ -20,10 +20,16 @@
             translation="[200,400]">
 
             <CustomButton
-                id="playVideoButton" />
+                id="playVideoButton" 
+                width="180"
+                height="44"
+                text="Play Video" />
                 
             <CustomButton
                 id="searchButton"
+                width="180"
+                height="44"
+                text="Search Pokemon"
                 visible="false" />
         </LayoutGroup>
 

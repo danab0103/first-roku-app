@@ -1,7 +1,7 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Helpers/VideoHelper.bs"
-import "pkg:/components/Helpers/CustomButtonHelper.bs"
 import "pkg:/components/Enums.bs"
+import "pkg:/components/Constants.bs"
 
 sub init()
     initComponents()
@@ -9,8 +9,7 @@ sub init()
 
     displayApplicationInfo()
 
-    setButtonsText()
-    setCustomButtonFocus(m.playVideoButton)
+    setFocusOnButton(m.playVideoButton)
 
     loadPhotosData()
 end sub
@@ -27,11 +26,6 @@ sub attachFieldsObservers()
     m.pokemonList.observeField("rowItemSelected", "onItemSelected")
     m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
     m.searchButton.observeField("isCustomButtonSelected", "onSearchButtonSelected")
-end sub
-
-sub setButtonsText()
-    m.playVideoButton.getChild(1).text = PLAY_VIDEO_BUTTON_TEXT
-    m.searchButton.getChild(1).text = SEARCH_BUTTON_TEXT
 end sub
 
 sub displayApplicationInfo()
@@ -91,31 +85,36 @@ function clonePokemonsContentRow() as object
     return clonedPokemonsRow
 end function
 
+sub setFocusOnButton(button as object)
+    button.setFocus(true)
+    button.isCustomButtonFocused = true
+end sub
+
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true
         if key = RemoteButton.right and m.playVideoButton.hasFocus()
-            setCustomButtonFocus(m.searchButton)
-            removeCustomButtonFocus(m.playVideoButton)
+            setFocusOnButton(m.searchButton)
+            m.playVideoButton.isCustomButtonFocused = false
             handled = true
         end if
 
         if key = RemoteButton.left and m.searchButton.hasFocus()
-            setCustomButtonFocus(m.playVideoButton)
-            removeCustomButtonFocus(m.searchButton)
+            m.searchButton.isCustomButtonFocused = false
+            setFocusOnButton(m.playVideoButton)
             handled = true
         end if
 
         if key = RemoteButton.up and m.pokemonList.hasFocus()
-            setCustomButtonFocus(m.playVideoButton)
+            setFocusOnButton(m.playVideoButton)
             handled = true
         end if
 
         if key = RemoteButton.down
             m.pokemonList.setFocus(true)
-            removeCustomButtonFocus(m.playVideoButton)
-            removeCustomButtonFocus(m.searchButton)
+            m.searchButton.isCustomButtonFocused = false
+            m.playVideoButton.isCustomButtonFocused = false
             handled = true
         end if
 

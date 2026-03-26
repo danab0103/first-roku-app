@@ -1,6 +1,5 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Helpers/VideoHelper.bs"
-import "pkg:/components/Helpers/CustomButtonHelper.bs"
 import "pkg:/components/Constants.bs"
 import "pkg:/components/Enums.bs"
 
@@ -9,8 +8,8 @@ sub init()
     attachFieldsObservers()
 
     m.countdownInSeconds = COUNTDOWN_IN_SECONDS
-    m.playVideoButton.getChild(1).text = getCountdownText()
-    updateCustomButtonWidth(m.playVideoButton, COUNTDOWN_LABEL_WIDTH)
+    m.playVideoButton.text = getCountdownText()
+    m.playVideoButton.width = COUNTDOWN_LABEL_WIDTH
 end sub
 
 sub initComponents()
@@ -63,9 +62,10 @@ sub changeButtonText()
         m.playVideoButton.getChild(1).text = getCountdownText()
     else
         m.timer.control = "stop"
-        m.playVideoButton.getChild(1).text = "Play Video"
-        updateCustomButtonWidth(m.playVideoButton, BUTTON_LABEL_WIDTH)
-        setCustomButtonFocus(m.playVideoButton)
+        m.playVideoButton.text = "Play Video"
+        m.playVideoButton.width = BUTTON_LABEL_WIDTH
+        
+        setFocusOnPlayVideoButton()
     end if
 end sub
 
@@ -75,6 +75,11 @@ end function
 
 sub onPlayVideoButtonSelected()
     loadVideoData()
+end sub
+
+sub setFocusOnPlayVideoButton()
+    m.playVideoButton.setFocus(true)
+    m.playVideoButton.isCustomButtonFocused = true
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -88,7 +93,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.left or key = RemoteButton.right or key = RemoteButton.down or key = RemoteButton.up
             if m.countdownInSeconds = 0
-                setCustomButtonFocus(m.playVideoButton)
+                setFocusOnPlayVideoButton()
             else
                 m.top.setFocus(true)
             end if

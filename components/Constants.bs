@@ -13,7 +13,5 @@ const BUTTON_FOCUSED_FONT = "font:SmallerBoldSystemFont"
 const BUTTON_UNFOCUSED_FONT = "font:SmallerSystemFont"
 const BUTTON_FOCUSED_TEXT_COLOR = "0x000000"
 const BUTTON_UNFOCUSED_TEXT_COLOR = "0xFFFFFF"
-const SEARCH_BUTTON_TEXT = "Search Pokemon"
-const PLAY_VIDEO_BUTTON_TEXT = "Play Video"
 const COUNTDOWN_LABEL_WIDTH = 250
 const BUTTON_LABEL_WIDTH = 180
