@@ -1,0 +1,34 @@
+import "pkg:/components/Constants.bs"
+
+sub init()
+    m.poster = m.top.findNode("poster")
+    m.label = m.top.findNode("label")
+end sub
+
+sub onCustomButtonFocusChanged()
+    if m.top.isCustomButtonFocused
+        m.poster.blendColor = BUTTON_FOCUSED_COLOR
+        m.poster.opacity = BUTTON_FOCUSED_OPACITY
+        m.label.font = BUTTON_FOCUSED_FONT
+        m.label.color = BUTTON_FOCUSED_TEXT_COLOR
+    else
+        m.poster.blendColor = BUTTON_UNFOCUSED_COLOR
+        m.poster.opacity = BUTTON_UNFOCUSED_OPACITY
+        m.label.font = BUTTON_UNFOCUSED_FONT
+        m.label.color = BUTTON_UNFOCUSED_TEXT_COLOR
+    end if
+end sub
+
+sub onWidthChanged()
+    m.poster.width = m.top.width
+    m.label.width = m.top.width
+end sub
+
+sub onHeightChanged()
+    m.poster.height = m.top.height
+    m.label.height = m.top.height
+end sub
+
+sub onTextChanged()
+    m.label.text = m.top.text
+end sub
