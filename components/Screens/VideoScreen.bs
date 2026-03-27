@@ -19,14 +19,22 @@ function createVideoContent(videoItem as object) as object
     return videoContent
 end function
 
+sub handleBackKey()
+    m.video.control = "stop"
+    playVideoButton = m.top.getParent().findNode("playVideoButton")
+    playVideoButton.isCustomButtonFocused = true
+    closeComponent(m.top, playVideoButton)
+end sub
+
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true
         if key = RemoteButton.back
-            m.video.control = "stop"
-            closeComponent(m.top, m.top.getParent().findNode("playVideoButton"))
-            handled = true
+            if key = RemoteButton.back
+                handleBackKey()
+                handled = true
+            end if
         else if key = RemoteButton.left or key = RemoteButton.right or key = RemoteButton.down or key = RemoteButton.up
             m.top.setFocus(true)
             handled = true

@@ -96,6 +96,8 @@ sub onArgsContentChanged()
     if argsContent.doesExist("mediaType")
         mediaType = argsContent.mediaType
 
+        clearButtonsFocusStyles()
+
         if mediaType = "movie"
             loadVideoData()
         else if mediaType = "episode" and argsContent.doesExist("contentId")
@@ -114,6 +116,11 @@ end sub
 sub setFocusOnButton(button as object)
     button.setFocus(true)
     button.isCustomButtonFocused = true
+end sub
+
+sub clearButtonsFocusStyles()
+    m.playVideoButton.isCustomButtonFocused = false
+    m.searchButton.isCustomButtonFocused = false
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -139,8 +146,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.down
             m.pokemonList.setFocus(true)
-            m.searchButton.isCustomButtonFocused = false
-            m.playVideoButton.isCustomButtonFocused = false
+            clearButtonsFocusStyles()
             handled = true
         end if
 
