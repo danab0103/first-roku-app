@@ -1,4 +1,8 @@
 <component name="HelloWorld" extends="Scene"> 
+    <interface>
+        <field id="argsContent" type="assocArray" onChange="onArgsContentChanged" />
+    </interface>
+
     <children>
         <Poster 
             id="background" 
