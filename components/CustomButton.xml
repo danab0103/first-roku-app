@@ -16,7 +16,7 @@
         <Label
             id="label" 
             font="font:SmallerSystemFont"
-            horizAlign = "center"
-            vertAlign = "center" />
+            horizAlign="center"
+            vertAlign="center" />
     </children>
 </component>
