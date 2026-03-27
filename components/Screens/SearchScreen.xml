@@ -1,4 +1,4 @@
-<component name="SearchScreen" initialFocus="openKeyboardButton" extends="BaseScreen">
+<component name="SearchScreen" initialFocus="miniKeyboard" extends="BaseScreen">
     <children>
         <Rectangle
             id="background"
@@ -7,30 +7,38 @@
             height="720" />
 
         <LayoutGroup
-            id="keyboardGroup"
-            layoutDirection="vert"
-            itemSpacings="[20]"
-            translation="[40, 100]">
+                id="screenGroup"
+                layoutDirection="horiz"
+                horizAlignment="center"
+                itemSpacings="[20]"
+                translation="[650, 100]" >
 
-            <DynamicMiniKeyboard
-                id="miniKeyboard" />
-            
-            <Button
-                id="openKeyboardButton"
-                text="Open Keyboard"
-                maxWidth="280"
-                height="60" />
+            <LayoutGroup
+                id="keyboardGroup"
+                layoutDirection="vert"
+                horizAlignment="center"
+                itemSpacings="[20]" >
+
+                <DynamicMiniKeyboard
+                    id="miniKeyboard" />
+                
+                <CustomButton
+                    id="openKeyboardButton"
+                    width="180"
+                    height="44" 
+                    text="Open Keyboard" />
+            </LayoutGroup>
+
+            <MarkupGrid
+                id="pokemonsGrid"
+                translation="[550, 100]"
+                itemSize="[200,225]"
+                itemSpacing="[10, 10]"
+                numColumns="3"
+                numRows="2"
+                wrapDividerBitmapUri=""
+                wrapDividerHeight="0"
+                itemComponentName="PokemonItem" />
         </LayoutGroup>
-            
-        <MarkupGrid
-            id="pokemonsGrid"
-            translation="[550, 100]"
-            itemSize="[200,225]"
-            itemSpacing="[10, 10]"
-            numColumns="3"
-            numRows="2"
-            wrapDividerBitmapUri=""
-            wrapDividerHeight="0"
-            itemComponentName="PokemonItem" />
     </children>
 </component>

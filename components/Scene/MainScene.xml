@@ -11,33 +11,37 @@
             id="titleLabel"
             text=""
             color="#ffffff" 
-            translation="[0,300]" />
+            translation="[600,20]" />
 
         <LayoutGroup
             id="buttonGroup"
             layoutDirection="horiz"
             itemSpacings="[20]"
-            translation="[400,5]">
+            translation="[200,400]">
 
-            <Button
-                id="playVideoButton"
+            <CustomButton
+                id="playVideoButton" 
+                width="180"
+                height="44"
                 text="Play Video" />
                 
-            <Button
+            <CustomButton
                 id="searchButton"
-                text="Search"
+                width="180"
+                height="44"
+                text="Search Pokemon"
                 visible="false" />
         </LayoutGroup>
 
         <RowList
             id="imageList"
-            translation="[200,300]"
+            translation="[200,500]"
             numRows="1"
             itemComponentName="BaseItem"
-            itemSize="[880,0]"
+            itemSize="[920,0]"
             rowHeights="[200]"
             rowItemSize="[[200, 200]]"
-            rowItemSpacing="[[20, 0]]"
+            rowItemSpacing="[[30, 0]]"
             rowFocusAnimationStyle="fixedFocusWrap" />
     </children>
 </component>

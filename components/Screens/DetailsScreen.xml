@@ -5,21 +5,32 @@
             width="1280"
             height="720" />
 
+        <CustomButton
+            id="playVideoButton"
+            translation="[15, 480]"
+            height="44"
+            visible="false"/>
+
+        <Rectangle 
+            id="descriptionBackground"
+            width="1280"
+            translation="[0,550]"
+            visible="false"
+            color="0xFFFFFFFF" />
+
         <Label 
             id="descriptionLabel"
             width="1200"
+            visible="false"
+            color="0x000000FF"
             horizAlign="center"
-            translation="[40,500]"
+            translation="[40,550]"
             wrap="true"/>
-
-        <Button
-            id="playVideoButton"
-            translation="[490, 10]" />
 
         <Timer
             id="timer"
             repeat="true"
-            control="start"
+            control="stop"
             duration="1"/>
     </children>
 </component>

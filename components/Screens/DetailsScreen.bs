@@ -6,13 +6,16 @@ import "pkg:/components/Enums.bs"
 sub init()
     initComponents()
     attachFieldsObservers()
+
     m.countdownInSeconds = COUNTDOWN_IN_SECONDS
     m.playVideoButton.text = getCountdownText()
+    m.playVideoButton.width = COUNTDOWN_LABEL_WIDTH
 end sub
 
 sub initComponents()
     m.backgroundPoster = m.top.findNode("backgroundPoster")
     m.descriptionLabel = m.top.findNode("descriptionLabel")
+    m.descriptionBackground = m.top.findNode("descriptionBackground")
     m.playVideoButton = m.top.FindNode("playVideoButton")
     m.timer = m.top.findNode("timer")
 end sub
@@ -20,12 +23,13 @@ end sub
 sub attachFieldsObservers()
     m.backgroundPoster.observeField("loadStatus", "onImageLoadStatus")
     m.timer.observeField("fire", "changeButtonText")
-    m.playVideoButton.observeField("buttonSelected", "onPlayVideoButtonSelected")
+    m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
 end sub
 
 sub onItemContentChanged()
     pokemonItem = m.top.itemContent
     setPokemonItemFields(pokemonItem)
+    setDescriptionBackgroundHeight()
 end sub
 
 sub setPokemonItemFields(pokemonItem as object)
@@ -33,19 +37,35 @@ sub setPokemonItemFields(pokemonItem as object)
     m.descriptionLabel.text = pokemonItem.description
 end sub
 
+sub setDescriptionBackgroundHeight()
+    labelHeight = m.descriptionLabel.boundingRect().height
+    m.descriptionBackground.height = labelHeight
+end sub
+
 sub onImageLoadStatus()
     if m.backgroundPoster.loadStatus = "failed" then m.backgroundPoster.uri = DEFAULT_BACKGROUND_POSTER_URL
+
+    if m.backgroundPoster.loadStatus = "ready" then handleBackgroundReady()
+end sub
+
+sub handleBackgroundReady()
+    m.descriptionBackground.visible = true
+    m.descriptionLabel.visible = true
+    m.playVideoButton.visible = true
+    m.timer.control = "start"
 end sub
 
 sub changeButtonText()
     m.countdownInSeconds--
 
     if m.countdownInSeconds > 0
-        m.playVideoButton.text = getCountdownText()
+        m.playVideoButton.getChild(1).text = getCountdownText()
     else
         m.timer.control = "stop"
         m.playVideoButton.text = "Play Video"
-        m.playVideoButton.setFocus(true)
+        m.playVideoButton.width = BUTTON_LABEL_WIDTH
+
+        setFocusOnPlayVideoButton()
     end if
 end sub
 
@@ -55,6 +75,11 @@ end function
 
 sub onPlayVideoButtonSelected()
     loadVideoData()
+end sub
+
+sub setFocusOnPlayVideoButton()
+    m.playVideoButton.setFocus(true)
+    m.playVideoButton.isCustomButtonFocused = true
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -68,10 +93,15 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.left or key = RemoteButton.right or key = RemoteButton.down or key = RemoteButton.up
             if m.countdownInSeconds = 0
-                m.playVideoButton.setFocus(true)
+                setFocusOnPlayVideoButton()
             else
                 m.top.setFocus(true)
             end if
+            handled = true
+        end if
+
+        if key = RemoteButton.ok and m.playVideoButton.hasFocus()
+            m.playVideoButton.isCustomButtonSelected = true
             handled = true
         end if
     end if

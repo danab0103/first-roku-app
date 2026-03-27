@@ -1,0 +1,22 @@
+<component name="CustomButton" extends="Group">
+    <interface>
+        <field id="isCustomButtonSelected" type="bool" alwaysNotify="true" />
+        <field id="isCustomButtonFocused" type="bool" value="false" onChange="onCustomButtonFocusChanged" />
+        <field id="width" type="float" onChange="onWidthChanged" />
+        <field id="height" type="float" onChange="onHeightChanged" />
+        <field id="text" type="string" onChange="onTextChanged" />
+    </interface>
+
+    <children>
+        <Poster
+            id="poster" 
+            uri="pkg:/images/white.png" 
+            blendColor="#A0724A"
+            opacity="0.7" />
+        <Label
+            id="label" 
+            font="font:SmallerSystemFont"
+            horizAlign="center"
+            vertAlign="center" />
+    </children>
+</component>
