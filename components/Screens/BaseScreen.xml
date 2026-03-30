@@ -1,5 +1,6 @@
 <component name="BaseScreen" extends="Group">
     <interface>
         <field id="itemContent" type="node" onChange="onItemContentChanged" />
+        <field id="lastFocusedChild" type="node" />
     </interface>
 </component>

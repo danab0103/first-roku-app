@@ -26,6 +26,7 @@ sub attachFieldsObservers()
     m.pokemonList.observeField("rowItemSelected", "onItemSelected")
     m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
     m.searchButton.observeField("isCustomButtonSelected", "onSearchButtonSelected")
+    m.top.observeField("focusedChild", "onFocusedChildChanged")
 end sub
 
 sub displayApplicationInfo()
@@ -96,6 +97,9 @@ sub onArgsContentChanged()
     if argsContent.doesExist("mediaType")
         mediaType = argsContent.mediaType
 
+        clearButtonsFocusStyles()
+        closeActiveScreen()
+
         if mediaType = "movie"
             loadVideoData()
         else if mediaType = "episode" and argsContent.doesExist("contentId")
@@ -111,9 +115,30 @@ sub onArgsContentChanged()
     end if
 end sub
 
+sub closeActiveScreen()
+    lastChild = m.top.getChild(m.top.getChildCount() - 1)
+
+    if lastChild.isSubtype("BaseScreen") then m.top.removeChild(lastChild)
+end sub
+
 sub setFocusOnButton(button as object)
     button.setFocus(true)
     button.isCustomButtonFocused = true
+end sub
+
+sub clearButtonsFocusStyles()
+    m.playVideoButton.isCustomButtonFocused = false
+    m.searchButton.isCustomButtonFocused = false
+end sub
+
+sub onFocusedChildChanged()
+    if m.playVideoButton.hasFocus()
+        m.top.lastFocusedChild = m.playVideoButton
+    else if m.searchButton.hasFocus()
+        m.top.lastFocusedChild = m.searchButton
+    else if m.pokemonList.hasFocus()
+        m.top.lastFocusedChild = m.pokemonList
+    end if
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -139,8 +164,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.down
             m.pokemonList.setFocus(true)
-            m.searchButton.isCustomButtonFocused = false
-            m.playVideoButton.isCustomButtonFocused = false
+            clearButtonsFocusStyles()
             handled = true
         end if
 
