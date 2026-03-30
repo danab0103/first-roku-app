@@ -35,7 +35,7 @@ end sub
 
 sub onKeyboardDialogClosed()
     m.miniKeyboard.text = m.keyboardDialog.text
-    closeComponent(m.keyboardDialog, m.openKeyboardButton)
+    closeComponent(m.keyboardDialog)
     m.keyboardDialog = invalid
 end sub
 
@@ -85,7 +85,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
     if press = true
         if key = RemoteButton.back
-            closeComponent(m.top, m.top.getParent().findNode("searchButton"))
+            closeComponent(m.top)
             handled = true
         end if
 
@@ -98,6 +98,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         if key = RemoteButton.down
             m.openKeyboardButton.setFocus(true)
             m.openKeyboardButton.isCustomButtonFocused = true
+            m.top.lastFocusedChild = m.openKeyboardButton
             handled = true
         end if
 

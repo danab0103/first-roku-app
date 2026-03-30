@@ -3,6 +3,7 @@ import "pkg:/components/Enums.bs"
 
 sub init()
     m.video = m.top.findNode("video")
+    m.top.lastFocusedChild = m.video
 end sub
 
 sub onItemContentChanged()
@@ -21,9 +22,7 @@ end function
 
 sub handleBackKey()
     m.video.control = "stop"
-    playVideoButton = m.top.getParent().findNode("playVideoButton")
-    playVideoButton.isCustomButtonFocused = true
-    closeComponent(m.top, playVideoButton)
+    closeComponent(m.top)
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean

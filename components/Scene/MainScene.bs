@@ -26,6 +26,7 @@ sub attachFieldsObservers()
     m.pokemonList.observeField("rowItemSelected", "onItemSelected")
     m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
     m.searchButton.observeField("isCustomButtonSelected", "onSearchButtonSelected")
+    m.top.observeField("focusedChild", "onFocusedChildChanged")
 end sub
 
 sub displayApplicationInfo()
@@ -97,6 +98,7 @@ sub onArgsContentChanged()
         mediaType = argsContent.mediaType
 
         clearButtonsFocusStyles()
+        closeActiveScreen()
 
         if mediaType = "movie"
             loadVideoData()
@@ -105,7 +107,7 @@ sub onArgsContentChanged()
 
             if m.pokemonList.content <> invalid
                 pokemonPosition = [0, contentId.toInt()]
-                navigateToNewScreen(getActiveScreen(), "DetailsScreen", getPokemon(pokemonPosition))
+                navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
             else
                 m.shouldHandleDeeplink = true
             end if
@@ -113,17 +115,10 @@ sub onArgsContentChanged()
     end if
 end sub
 
-function getActiveScreen() as object
-    activeScreen = m.top.getChild(m.top.getChildCount() - 1)
+sub closeActiveScreen()
+    lastChild = m.top.getChild(m.top.getChildCount() - 1)
 
-    if not activeScreen.isSubtype("BaseScreen") then activeScreen = m.top
-
-    return activeScreen
-end function
-
-sub onFocusedChildChanged()
-    m.lastFocusedChild = m.top.focusedChild
-    print "Focus changed to: "; m.lastFocusedChild.id
+    if lastChild.isSubtype("BaseScreen") then m.top.removeChild(lastChild)
 end sub
 
 sub setFocusOnButton(button as object)
@@ -134,6 +129,16 @@ end sub
 sub clearButtonsFocusStyles()
     m.playVideoButton.isCustomButtonFocused = false
     m.searchButton.isCustomButtonFocused = false
+end sub
+
+sub onFocusedChildChanged()
+    if m.playVideoButton.hasFocus()
+        m.top.lastFocusedChild = m.playVideoButton
+    else if m.searchButton.hasFocus()
+        m.top.lastFocusedChild = m.searchButton
+    else if m.pokemonList.hasFocus()
+        m.top.lastFocusedChild = m.pokemonList
+    end if
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
