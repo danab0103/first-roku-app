@@ -105,12 +105,25 @@ sub onArgsContentChanged()
 
             if m.pokemonList.content <> invalid
                 pokemonPosition = [0, contentId.toInt()]
-                navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
+                navigateToNewScreen(getActiveScreen(), "DetailsScreen", getPokemon(pokemonPosition))
             else
                 m.shouldHandleDeeplink = true
             end if
         end if
     end if
+end sub
+
+function getActiveScreen() as object
+    activeScreen = m.top.getChild(m.top.getChildCount() - 1)
+
+    if not activeScreen.isSubtype("BaseScreen") then activeScreen = m.top
+
+    return activeScreen
+end function
+
+sub onFocusedChildChanged()
+    m.lastFocusedChild = m.top.focusedChild
+    print "Focus changed to: "; m.lastFocusedChild.id
 end sub
 
 sub setFocusOnButton(button as object)
