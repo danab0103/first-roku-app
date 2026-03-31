@@ -80,6 +80,7 @@ end sub
 sub setFocusOnPlayVideoButton()
     m.playVideoButton.setFocus(true)
     m.playVideoButton.isCustomButtonFocused = true
+    m.top.lastFocusedChild = m.playVideoButton
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -87,7 +88,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
     if press = true
         if key = RemoteButton.back
-            closeComponent(m.top, m.top.getParent().findNode("imageList"))
+            closeComponent(m.top)
             handled = true
         end if
 

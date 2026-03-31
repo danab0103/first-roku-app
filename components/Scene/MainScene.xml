@@ -1,6 +1,7 @@
 <component name="HelloWorld" extends="Scene"> 
     <interface>
         <field id="argsContent" type="assocArray" onChange="onArgsContentChanged" />
+        <field id="lastFocusedChild" type="node" />
     </interface>
 
     <children>
