@@ -13,15 +13,15 @@ build_version=00002
 ##   Channel Assets
 ###  Main Menu Icons / Channel Poster Artwork 
 #### Image sizes are FHD: 540x405px | HD: 290x218px | SD: 214x144px
-mm_icon_focus_fhd=pkg:/images/cat-bg.jpg
-mm_icon_focus_hd=pkg:/images/cat-bg.jpg
-mm_icon_focus_sd=pkg:/images/cat-bg.jpg
+mm_icon_focus_fhd=pkg:/images/pokemon_icon_fhd.png
+mm_icon_focus_hd=pkg:/images/pokemon_icon_hd.png
+mm_icon_focus_sd=pkg:/images/pokemon_icon_sd.png
 
 ###  Splash Screen + Loading Screen Artwork 
 #### Image sizes are FHD: 1920x1080px | HD: 1280x720px | SD: 720x480px
-splash_screen_fhd=pkg:/images/splash-screen_fhd.jpg
-splash_screen_hd=pkg:/images/cat-hd.jpeg
-splash_screen_sd=pkg:/images/splash-screen_sd.jpg
+splash_screen_fhd=pkg:/images/pokemon_splash_fhd.jpg
+splash_screen_hd=pkg:/images/pokemon_splash_hd.jpg
+splash_screen_sd=pkg:/images/pokemon_splash_sd.jpg
 
 splash_color=#000000
 splash_min_time=1
