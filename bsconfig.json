@@ -3,8 +3,10 @@
     "host": "192.168.30.210",
     "username": "rokudev",
     "password": "rokudev",
-    "deploy": true,
     "stagingDir": "dist",
+    "retainStagingDir": true,
     "autoImportComponentScript": true,
-    "plugins": [ "@rokucommunity/bslint" ]
+    "plugins": [
+        "@rokucommunity/bslint"
+    ]
 }
