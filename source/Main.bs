@@ -14,6 +14,7 @@ sub Main(args as dynamic)
     m.screen = screen.CreateScene("HelloWorld")
     m.screen.argsContent = args
     screen.show()
+    m.screen.signalBeacon("AppLaunchComplete")
 
     while true
         msg = wait(0, m.port)
