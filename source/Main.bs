@@ -9,7 +9,7 @@ sub Main(args as dynamic)
     input = CreateObject("roInput")
     input.setMessagePort(m.port)
 
-    m.screen = screen.CreateScene("HelloWorld")
+    m.screen = screen.CreateScene("MainScreen")
     m.screen.argsContent = args
     screen.show()
 
