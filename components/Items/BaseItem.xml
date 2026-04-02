@@ -4,9 +4,14 @@
     </interface>
 
     <children>
-        <Poster
-            id="poster"
-            width="200"
-            height="200" />
+        <MaskGroup 
+            id="maskGroup" 
+            maskUri="pkg:/images/rounded_mask.png" >
+            <Poster
+                id="poster"
+                width="200"
+                height="200"
+                loadDisplayMode="scaleToFill" />
+        </MaskGroup>
     </children>
 </component>
