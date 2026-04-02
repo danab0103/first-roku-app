@@ -38,7 +38,8 @@
                 numRows="2"
                 wrapDividerBitmapUri=""
                 wrapDividerHeight="0"
-                itemComponentName="PokemonItem" />
+                itemComponentName="PokemonItem" 
+                drawFocusFeedback="false" />
         </LayoutGroup>
     </children>
 </component>

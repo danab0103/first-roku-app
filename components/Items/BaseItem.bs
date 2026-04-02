@@ -1,8 +1,13 @@
 sub init()
     m.poster = m.top.findNode("poster")
+    m.focusPoster = m.top.findNode("focus")
 end sub
 
 sub onItemContentChanged()
     baseItemContent = m.top.itemContent
     m.poster.uri = baseItemContent.url
+end sub
+
+sub onItemHasFocusChanged()
+    m.focusPoster.visible = m.top.itemHasFocus
 end sub

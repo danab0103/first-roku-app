@@ -43,10 +43,11 @@
             translation="[200,500]"
             numRows="1"
             itemComponentName="BaseItem"
-            itemSize="[920,0]"
-            rowHeights="[200]"
-            rowItemSize="[[200, 200]]"
+            itemSize="[952,0]"
+            rowHeights="[208]"
+            rowItemSize="[[208, 208]]"
             rowItemSpacing="[[30, 0]]"
-            rowFocusAnimationStyle="fixedFocusWrap" />
+            rowFocusAnimationStyle="fixedFocusWrap" 
+            drawFocusFeedback="false" />
     </children>
 </component>
