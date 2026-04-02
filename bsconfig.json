@@ -5,6 +5,7 @@
     "password": "rokudev",
     "stagingDir": "dist",
     "retainStagingDir": true,
+    "deploy": true,
     "autoImportComponentScript": true,
     "plugins": [
         "@rokucommunity/bslint"

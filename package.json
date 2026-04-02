@@ -8,7 +8,6 @@
   },
   "scripts": {
     "build": "bsc",
-    "package": "node package-app.js",
-    "build-package": "bsc && node package-app.js"
+    "package": "node package-app.js"
   }
 }
