@@ -43,6 +43,7 @@ end sub
 sub onPhotosLoaded()
     m.pokemonList.content = m.photosTask.photosContent
     m.searchButton.visible = true
+    m.top.signalBeacon("AppLaunchComplete")
 
     if m.shouldHandleDeeplink = true
         pokemonPosition = [0, m.top.argsContent.contentId.toInt()]

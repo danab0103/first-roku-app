@@ -1,4 +1,4 @@
-<component name="HelloWorld" extends="Scene"> 
+<component name="MainScreen" extends="Scene"> 
     <interface>
         <field id="argsContent" type="assocArray" onChange="onArgsContentChanged" />
         <field id="lastFocusedChild" type="node" />

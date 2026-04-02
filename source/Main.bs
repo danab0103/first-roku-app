@@ -2,8 +2,6 @@ import "pkg:/components/Helpers/VideoHelper.bs"
 import "pkg:/components/Helpers/NavigationHelper.bs"
 
 sub Main(args as dynamic)
-    print "in showChannelSGScreen"
-
     screen = CreateObject("roSGScreen")
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)
@@ -11,7 +9,7 @@ sub Main(args as dynamic)
     input = CreateObject("roInput")
     input.setMessagePort(m.port)
 
-    m.screen = screen.CreateScene("HelloWorld")
+    m.screen = screen.CreateScene("MainScreen")
     m.screen.argsContent = args
     screen.show()
 
