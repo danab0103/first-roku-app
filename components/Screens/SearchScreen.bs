@@ -102,7 +102,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
             handled = true
         end if
 
-        if key = RemoteButton.right
+        if key = RemoteButton.right and m.pokemonsGrid.content.getChildCount() > 0
             m.pokemonsGrid.setFocus(true)
             m.openKeyboardButton.isCustomButtonFocused = false
             handled = true

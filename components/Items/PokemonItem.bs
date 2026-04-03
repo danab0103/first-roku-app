@@ -1,6 +1,7 @@
 sub init()
     m.pokemonPoster = m.top.findNode("poster")
     m.pokemonLabel = m.top.findNode("pokemonLabel")
+    m.top.findNode("focusPoster").blendColor = "#A0724A"
 end sub
 
 sub onItemContentChanged()

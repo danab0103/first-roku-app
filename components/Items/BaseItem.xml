@@ -1,12 +1,28 @@
 <component name="BaseItem" extends="Group">
     <interface>
         <field id="itemContent" type="node" onChange="onItemContentChanged"/>
+        <field id="itemHasFocus" type="bool" onChange="onItemHasFocusChanged"/>
     </interface>
 
     <children>
         <Poster
-            id="poster"
-            width="200"
-            height="200" />
+            id="focusPoster"
+            uri="pkg:/images/rounded_mask.png"
+            blendColor="#301e01"
+            width="208"
+            height="208"
+            visible="false" />
+
+        <MaskGroup 
+            id="maskGroup" 
+            translation="[4, 4]"
+            maskUri="pkg:/images/rounded_mask.png" >
+
+            <Poster
+                id="poster"
+                width="200"
+                height="200"
+                loadDisplayMode="scaleToFill" />
+        </MaskGroup>
     </children>
 </component>

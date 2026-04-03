@@ -2,10 +2,10 @@
     <children>
         <Label
             id="pokemonLabel"
-            width="150"
+            width="200"
             horizAlign="center"
             color="0xFFFFFFFF" 
             height="20"
-            translation="[0, 205]" />
+            translation="[0, 212]" />
     </children>
 </component>
