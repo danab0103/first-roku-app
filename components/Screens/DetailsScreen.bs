@@ -1,5 +1,6 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Helpers/VideoHelper.bs"
+import "pkg:/components/Helpers/FocusHelper.bs"
 import "pkg:/components/Constants.bs"
 import "pkg:/components/Enums.bs"
 
@@ -78,8 +79,7 @@ sub onPlayVideoButtonSelected()
 end sub
 
 sub setFocusOnPlayVideoButton()
-    m.playVideoButton.setFocus(true)
-    m.playVideoButton.isCustomButtonFocused = true
+    setFocusOnButton(m.playVideoButton)
     m.top.lastFocusedChild = m.playVideoButton
 end sub
 

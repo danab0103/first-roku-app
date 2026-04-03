@@ -1,0 +1,35 @@
+import "pkg:/components/Helpers/FocusHelper.bs"
+import "pkg:/components/Helpers/PokemonHelper.bs"
+
+sub onArgsContentChanged()
+    argsContent = m.top.argsContent
+
+    if argsContent.doesExist("mediaType")
+        mediaType = argsContent.mediaType
+
+        clearButtonsFocusStyles()
+        closeActiveScreen()
+
+        if mediaType = "movie"
+            loadVideoData()
+        else if mediaType = "episode" and argsContent.doesExist("contentId")
+            contentIdInt = argsContent.contentId.toInt()
+            handleEpisodeMediaType(contentIdInt)
+        end if
+    end if
+end sub
+
+sub closeActiveScreen()
+    lastChild = m.top.getChild(m.top.getChildCount() - 1)
+
+    if lastChild.isSubtype("BaseScreen") then m.top.removeChild(lastChild)
+end sub
+
+sub handleEpisodeMediaType(contentId as integer)
+    if m.pokemonList.content <> invalid
+        pokemonPosition = [0, contentId]
+        navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
+    else
+        m.shouldHandleDeeplink = true
+    end if
+end sub

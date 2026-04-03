@@ -57,11 +57,11 @@
         </LayoutGroup>
 
         <Animation
-            id="animation"
+            id="mainGroupAnimation"
             duration="1"
             easeFunction="linear">
 
-            <Vector2DFieldInterpolator id="animationVector2D"
+            <Vector2DFieldInterpolator id="mainGroupAnimationVector"
                 key="[0, 1]"
                 fieldToInterp="mainGroup.translation" />
         </Animation>

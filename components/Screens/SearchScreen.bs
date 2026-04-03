@@ -1,4 +1,6 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/FocusHelper.bs"
+import "pkg:/components/Helpers/PokemonHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
@@ -61,25 +63,6 @@ sub onSearchTextChanged()
     m.pokemonsGrid.content = filterPokemons(searchText)
 end sub
 
-function filterPokemons(searchText as string) as object
-    filteredPokemons = CreateObject("roSGNode", "ContentNode")
-
-    if searchText = ""
-        filteredPokemons = m.allPokemons
-    else
-        for childIndex = 0 to m.allPokemons.getChildCount() - 1
-            pokemon = m.allPokemons.getChild(childIndex)
-
-            if Instr(LCase(pokemon.title), searchText) > 0
-                clonedPokemon = pokemon.clone(false)
-                filteredPokemons.appendChild(clonedPokemon)
-            end if
-        end for
-    end if
-
-    return filteredPokemons
-end function
-
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
@@ -96,8 +79,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         end if
 
         if key = RemoteButton.down
-            m.openKeyboardButton.setFocus(true)
-            m.openKeyboardButton.isCustomButtonFocused = true
+            setFocusOnButton(m.openKeyboardButton)
             m.top.lastFocusedChild = m.openKeyboardButton
             handled = true
         end if

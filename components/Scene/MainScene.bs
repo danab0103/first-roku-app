@@ -1,5 +1,6 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Helpers/VideoHelper.bs"
+import "pkg:/components/Helpers/DeeplinkHelper.bs"
 import "pkg:/components/Enums.bs"
 import "pkg:/components/Constants.bs"
 
@@ -19,8 +20,8 @@ sub initComponents()
     m.playVideoButton = m.top.findNode("playVideoButton")
     m.searchButton = m.top.findNode("searchButton")
     m.pokemonList = m.top.findNode("imageList")
-    m.animation = m.top.findNode("animation")
-    m.animationVector2d = m.top.findNode("animationVector2D")
+    m.animation = m.top.findNode("mainGroupAnimation")
+    m.animationVector2d = m.top.findNode("mainGroupAnimationVector")
 end sub
 
 sub attachFieldsObservers()
@@ -48,8 +49,7 @@ sub onPhotosLoaded()
     m.top.signalBeacon("AppLaunchComplete")
 
     if m.shouldHandleDeeplink = true
-        pokemonPosition = [0, m.top.argsContent.contentId.toInt()]
-        navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
+        handleEpisodeMediaType(m.top.argsContent.contentId.toInt())
     end if
 end sub
 
@@ -58,12 +58,6 @@ sub onItemSelected()
     selectedPokemon = getPokemon(selectedPokemonPosition)
     navigateToNewScreen(m.top, "DetailsScreen", selectedPokemon)
 end sub
-
-function getPokemon(pokemonPosition as object) as object
-    selectedPokemon = m.pokemonList.content.getChild(pokemonPosition[0]).getChild(pokemonPosition[1])
-
-    return selectedPokemon
-end function
 
 sub onItemFocused()
     focusedPokemonPosition = m.pokemonList.rowItemFocused
@@ -81,72 +75,17 @@ sub onSearchButtonSelected()
     navigateToNewScreen(m.top, "SearchScreen", clonePokemonsContentRow())
 end sub
 
-function clonePokemonsContentRow() as object
-    clonedPokemonsRow = CreateObject("roSGNode", "ContentNode")
-    pokemonsFirstRow = m.pokemonList.content.getChild(0)
-
-    for pokemonIndex = 0 to pokemonsFirstRow.getChildCount() - 1
-        pokemon = pokemonsFirstRow.getChild(pokemonIndex)
-        clonedPokemon = pokemon.clone(false)
-        clonedPokemonsRow.appendChild(clonedPokemon)
-    end for
-
-    return clonedPokemonsRow
-end function
-
-sub onArgsContentChanged()
-    argsContent = m.top.argsContent
-
-    if argsContent.doesExist("mediaType")
-        mediaType = argsContent.mediaType
-
-        clearButtonsFocusStyles()
-        closeActiveScreen()
-
-        if mediaType = "movie"
-            loadVideoData()
-        else if mediaType = "episode" and argsContent.doesExist("contentId")
-            contentId = argsContent.contentId
-
-            if m.pokemonList.content <> invalid
-                pokemonPosition = [0, contentId.toInt()]
-                navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
-            else
-                m.shouldHandleDeeplink = true
-            end if
-        end if
-    end if
-end sub
-
-sub closeActiveScreen()
-    lastChild = m.top.getChild(m.top.getChildCount() - 1)
-
-    if lastChild.isSubtype("BaseScreen") then m.top.removeChild(lastChild)
-end sub
-
-sub setFocusOnButton(button as object)
-    button.setFocus(true)
-    button.isCustomButtonFocused = true
-end sub
-
-sub clearButtonsFocusStyles()
-    m.playVideoButton.isCustomButtonFocused = false
-    m.searchButton.isCustomButtonFocused = false
-end sub
-
-sub onFocusedChildChanged()
-    if m.playVideoButton.hasFocus()
-        m.top.lastFocusedChild = m.playVideoButton
-    else if m.searchButton.hasFocus()
-        m.top.lastFocusedChild = m.searchButton
-    else if m.pokemonList.hasFocus()
-        m.top.lastFocusedChild = m.pokemonList
-    end if
-end sub
-
 sub translateMainGroup(sourcePosition as object, destinationPosition as object)
     m.animationVector2d.keyValue = [sourcePosition, destinationPosition]
     m.animation.control = "start"
+end sub
+
+sub handleOkKey()
+    if m.playVideoButton.hasFocus()
+        m.playVideoButton.isCustomButtonSelected = true
+    else if m.searchButton.hasFocus()
+        m.searchButton.isCustomButtonSelected = true
+    end if
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -179,12 +118,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         end if
 
         if key = RemoteButton.ok
-            if m.playVideoButton.hasFocus()
-                m.playVideoButton.isCustomButtonSelected = true
-            else if m.searchButton.hasFocus()
-                m.searchButton.isCustomButtonSelected = true
-            end if
-
+            handleOkKey()
             handled = true
         end if
     end if
