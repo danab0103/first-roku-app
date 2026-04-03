@@ -31,9 +31,8 @@
 
             <MarkupGrid
                 id="pokemonsGrid"
-                translation="[550, 100]"
-                itemSize="[200,225]"
-                itemSpacing="[10, 10]"
+                itemSize="[200,220]"
+                itemSpacing="[30, 30]"
                 numColumns="3"
                 numRows="2"
                 wrapDividerBitmapUri=""

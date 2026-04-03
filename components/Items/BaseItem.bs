@@ -1,6 +1,6 @@
 sub init()
     m.poster = m.top.findNode("poster")
-    m.focusPoster = m.top.findNode("focus")
+    m.focusPoster = m.top.findNode("focusPoster")
 end sub
 
 sub onItemContentChanged()

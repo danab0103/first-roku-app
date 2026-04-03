@@ -6,7 +6,7 @@
 
     <children>
         <Poster
-            id="focus"
+            id="focusPoster"
             uri="pkg:/images/rounded_mask.png"
             blendColor="#301e01"
             width="208"
