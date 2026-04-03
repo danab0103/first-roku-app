@@ -13,16 +13,16 @@
             height="208"
             visible="false" />
 
-            <MaskGroup 
-                id="maskGroup" 
-                translation="[4, 4]"
-                maskUri="pkg:/images/rounded_mask.png" >
+        <MaskGroup 
+            id="maskGroup" 
+            translation="[4, 4]"
+            maskUri="pkg:/images/rounded_mask.png" >
 
-                <Poster
-                    id="poster"
-                    width="200"
-                    height="200"
-                    loadDisplayMode="scaleToFill" />
-            </MaskGroup>
+            <Poster
+                id="poster"
+                width="200"
+                height="200"
+                loadDisplayMode="scaleToFill" />
+        </MaskGroup>
     </children>
 </component>
