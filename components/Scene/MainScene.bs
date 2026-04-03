@@ -19,6 +19,8 @@ sub initComponents()
     m.playVideoButton = m.top.findNode("playVideoButton")
     m.searchButton = m.top.findNode("searchButton")
     m.pokemonList = m.top.findNode("imageList")
+    m.animation = m.top.findNode("animation")
+    m.animationVector2d = m.top.findNode("animationVector2D")
 end sub
 
 sub attachFieldsObservers()
@@ -142,6 +144,11 @@ sub onFocusedChildChanged()
     end if
 end sub
 
+sub translateMainGroup(sourcePosition as object, destinationPosition as object)
+    m.animationVector2d.keyValue = [sourcePosition, destinationPosition]
+    m.animation.control = "start"
+end sub
+
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
@@ -160,11 +167,13 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.up and m.pokemonList.hasFocus()
             setFocusOnButton(m.playVideoButton)
+            translateMainGroup(MAIN_GROUP_ROWLIST_POSITION, MAIN_GROUP_BUTTONS_POSITION)
             handled = true
         end if
 
-        if key = RemoteButton.down
+        if key = RemoteButton.down and not m.pokemonList.hasFocus()
             m.pokemonList.setFocus(true)
+            translateMainGroup(MAIN_GROUP_BUTTONS_POSITION, MAIN_GROUP_ROWLIST_POSITION)
             clearButtonsFocusStyles()
             handled = true
         end if
