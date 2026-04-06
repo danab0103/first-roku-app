@@ -22,6 +22,7 @@ sub initComponents()
     m.pokemonList = m.top.findNode("imageList")
     m.animation = m.top.findNode("mainGroupAnimation")
     m.animationVector2d = m.top.findNode("mainGroupAnimationVector")
+    m.animationVector2dFloat = m.top.findNode("mainGroupAnimationFloat")
 end sub
 
 sub attachFieldsObservers()
@@ -106,13 +107,19 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.up and m.pokemonList.hasFocus()
             setFocusOnButton(m.playVideoButton)
-            translateMainGroup(MAIN_GROUP_ROWLIST_POSITION, MAIN_GROUP_BUTTONS_POSITION)
+            'translateMainGroup(MAIN_GROUP_ROWLIST_POSITION, MAIN_GROUP_BUTTONS_POSITION)
+            m.animationVector2dFloat.reverse = true
+            m.animationVector2d.reverse = true
+            m.animation.control = "start"
             handled = true
         end if
 
         if key = RemoteButton.down and not m.pokemonList.hasFocus()
             m.pokemonList.setFocus(true)
-            translateMainGroup(MAIN_GROUP_BUTTONS_POSITION, MAIN_GROUP_ROWLIST_POSITION)
+            'translateMainGroup(MAIN_GROUP_BUTTONS_POSITION, MAIN_GROUP_ROWLIST_POSITION)
+            m.animationVector2dFloat.reverse = false
+            m.animationVector2d.reverse = false
+            m.animation.control = "start"
             clearButtonsFocusStyles()
             handled = true
         end if

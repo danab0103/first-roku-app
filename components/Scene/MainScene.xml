@@ -47,6 +47,7 @@
             <RowList
                 id="imageList"
                 numRows="1"
+                opacity="0.2"
                 itemComponentName="BaseItem"
                 itemSize="[952,0]"
                 rowHeights="[208]"
@@ -59,11 +60,17 @@
         <Animation
             id="mainGroupAnimation"
             duration="1"
-            easeFunction="linear">
+            easeFunction="inOutQuad">
 
             <Vector2DFieldInterpolator id="mainGroupAnimationVector"
                 key="[0, 1]"
+                keyValue="[[200, 450], [200, 350]]"
                 fieldToInterp="mainGroup.translation" />
+
+            <FloatFieldInterpolator id="mainGroupAnimationFloat"
+                key="[0, 1]"
+                keyValue="[0.2, 1]"
+                fieldToInterp="imageList.opacity" />
         </Animation>
     </children>
 </component>
