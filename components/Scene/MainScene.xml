@@ -58,16 +58,16 @@
         </LayoutGroup>
 
         <Animation
-            id="mainGroupAnimation"
+            id="mainAnimation"
             duration="1"
             easeFunction="inOutQuad">
 
-            <Vector2DFieldInterpolator id="mainGroupAnimationVector"
+            <Vector2DFieldInterpolator id="mainAnimationVector"
                 key="[0, 1]"
                 keyValue="[[200, 450], [200, 350]]"
                 fieldToInterp="mainGroup.translation" />
 
-            <FloatFieldInterpolator id="mainGroupAnimationFloat"
+            <FloatFieldInterpolator id="mainAnimationFloat"
                 key="[0, 1]"
                 keyValue="[0.2, 1]"
                 fieldToInterp="imageList.opacity" />

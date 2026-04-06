@@ -17,20 +17,20 @@ end sub
 
 sub initComponents()
     m.titleLabel = m.top.findNode("titleLabel")
-    m.playVideoButton = m.top.findNode("playVideoButton")
-    m.searchButton = m.top.findNode("searchButton")
     m.pokemonList = m.top.findNode("imageList")
-    m.animation = m.top.findNode("mainGroupAnimation")
-    m.animationVector2d = m.top.findNode("mainGroupAnimationVector")
-    m.animationVector2dFloat = m.top.findNode("mainGroupAnimationFloat")
+    m.searchButton = m.top.findNode("searchButton")
+    m.mainAnimation = m.top.findNode("mainAnimation")
+    m.playVideoButton = m.top.findNode("playVideoButton")
+    m.mainAnimationFloat = m.top.findNode("mainAnimationFloat")
+    m.mainAnimationVector = m.top.findNode("mainAnimationVector")
 end sub
 
 sub attachFieldsObservers()
+    m.top.observeField("focusedChild", "onFocusedChildChanged")
     m.pokemonList.observeField("rowItemFocused", "onItemFocused")
     m.pokemonList.observeField("rowItemSelected", "onItemSelected")
-    m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
     m.searchButton.observeField("isCustomButtonSelected", "onSearchButtonSelected")
-    m.top.observeField("focusedChild", "onFocusedChildChanged")
+    m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
 end sub
 
 sub displayApplicationInfo()
@@ -84,6 +84,13 @@ sub handleOkKey()
     end if
 end sub
 
+sub reverseMainAnimation(reverse as boolean)
+    m.mainAnimationFloat.reverse = reverse
+    m.mainAnimationVector.reverse = reverse
+
+    m.mainAnimation.control = "start"
+end sub
+
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
@@ -102,17 +109,13 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.up and m.pokemonList.hasFocus()
             setFocusOnButton(m.playVideoButton)
-            m.animationVector2dFloat.reverse = true
-            m.animationVector2d.reverse = true
-            m.animation.control = "start"
+            reverseMainAnimation(true)
             handled = true
         end if
 
         if key = RemoteButton.down and not m.pokemonList.hasFocus() and m.pokemonList.content <> invalid
             m.pokemonList.setFocus(true)
-            m.animationVector2dFloat.reverse = false
-            m.animationVector2d.reverse = false
-            m.animation.control = "start"
+            reverseMainAnimation(false)
             clearButtonsFocusStyles()
             handled = true
         end if
