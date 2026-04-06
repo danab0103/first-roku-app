@@ -60,7 +60,7 @@ end sub
 
 sub onSearchTextChanged()
     searchText = LCase(m.miniKeyboard.text)
-    m.pokemonsGrid.content = filterPokemons(searchText)
+    m.pokemonsGrid.content = filterPokemons(searchText, m.allPokemons)
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean

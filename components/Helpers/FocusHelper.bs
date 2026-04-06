@@ -2,18 +2,3 @@ sub setFocusOnButton(button as object)
     button.setFocus(true)
     button.isCustomButtonFocused = true
 end sub
-
-sub clearButtonsFocusStyles()
-    m.playVideoButton.isCustomButtonFocused = false
-    m.searchButton.isCustomButtonFocused = false
-end sub
-
-sub onFocusedChildChanged()
-    if m.playVideoButton.hasFocus()
-        m.top.lastFocusedChild = m.playVideoButton
-    else if m.searchButton.hasFocus()
-        m.top.lastFocusedChild = m.searchButton
-    else if m.pokemonList.hasFocus()
-        m.top.lastFocusedChild = m.pokemonList
-    end if
-end sub
