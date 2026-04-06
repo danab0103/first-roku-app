@@ -114,7 +114,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
             handled = true
         end if
 
-        if key = RemoteButton.down and not m.pokemonList.hasFocus()
+        if key = RemoteButton.down and not m.pokemonList.hasFocus() and m.pokemonList.content <> invalid
             m.pokemonList.setFocus(true)
             'translateMainGroup(MAIN_GROUP_BUTTONS_POSITION, MAIN_GROUP_ROWLIST_POSITION)
             m.animationVector2dFloat.reverse = false
