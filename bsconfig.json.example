@@ -1,0 +1,13 @@
+{
+    "rootDir": "",
+    "host": "YOUR_ROKU_DEVICE_IP",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD",
+    "stagingDir": "dist",
+    "retainStagingDir": true,
+    "deploy": true,
+    "autoImportComponentScript": true,
+    "plugins": [
+        "@rokucommunity/bslint"
+    ]
+}
