@@ -6,3 +6,9 @@ enum RemoteButton
     down = "down"
     ok = "OK"
 end enum
+
+enum InterpolatorType
+    float = "FloatFieldInterpolator"
+    vector = "Vector2DFieldInterpolator"
+    color = "ColorFieldInterpolator"
+end enum

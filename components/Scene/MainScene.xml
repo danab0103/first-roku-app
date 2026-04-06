@@ -56,21 +56,5 @@
                 rowFocusAnimationStyle="fixedFocusWrap" 
                 drawFocusFeedback="false"/>
         </LayoutGroup>
-
-        <Animation
-            id="mainAnimation"
-            duration="1"
-            easeFunction="inOutQuad">
-
-            <Vector2DFieldInterpolator id="mainAnimationVector"
-                key="[0, 1]"
-                keyValue="[[200, 450], [200, 350]]"
-                fieldToInterp="mainGroup.translation" />
-
-            <FloatFieldInterpolator id="mainAnimationFloat"
-                key="[0, 1]"
-                keyValue="[0.2, 1]"
-                fieldToInterp="imageList.opacity" />
-        </Animation>
     </children>
 </component>

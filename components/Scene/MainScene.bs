@@ -2,6 +2,7 @@ import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Helpers/VideoHelper.bs"
 import "pkg:/components/Helpers/FocusHelper.bs"
 import "pkg:/components/Helpers/PokemonHelper.bs"
+import "pkg:/components/Helpers/AnimationHelper.bs"
 import "pkg:/components/Enums.bs"
 import "pkg:/components/Constants.bs"
 
@@ -14,16 +15,16 @@ sub init()
     setFocusOnButton(m.playVideoButton)
 
     loadPhotosData()
+
+    addAnimation()
 end sub
 
 sub initComponents()
+    m.mainGroup = m.top.findNode("mainGroup")
     m.titleLabel = m.top.findNode("titleLabel")
     m.pokemonList = m.top.findNode("imageList")
     m.searchButton = m.top.findNode("searchButton")
-    m.mainAnimation = m.top.findNode("mainAnimation")
     m.playVideoButton = m.top.findNode("playVideoButton")
-    m.mainAnimationFloat = m.top.findNode("mainAnimationFloat")
-    m.mainAnimationVector = m.top.findNode("mainAnimationVector")
 end sub
 
 sub attachFieldsObservers()
@@ -37,6 +38,12 @@ end sub
 sub displayApplicationInfo()
     appInfo = CreateObject("roAppInfo")
     m.titleLabel.text = appInfo.GetTitle() + " v" + appInfo.GetVersion()
+end sub
+
+sub addAnimation()
+    m.mainAnimation = createAnimation(1, "inOutQuad")
+    m.mainAnimation.appendChild(createInterpolator(InterpolatorType.vector, { key: [0, 1], keyValue: [INITIAL_POSITION, FINAL_POSITION], fieldToInterp: `${m.mainGroup.id}.translation` }))
+    m.mainAnimation.appendChild(createInterpolator(InterpolatorType.float, { key: [0, 1], keyValue: [UNFOCUSED_OPACITY, FOCUSED_OPACITY], fieldToInterp: `${m.pokemonList.id}.opacity` }))
 end sub
 
 sub onArgsContentChanged()
@@ -123,13 +130,6 @@ sub onSearchButtonSelected()
     navigateToNewScreen(m.top, "SearchScreen", clonePokemonsContentRow(m.pokemonList))
 end sub
 
-sub reverseMainAnimation(reverse as boolean)
-    m.mainAnimationFloat.reverse = reverse
-    m.mainAnimationVector.reverse = reverse
-
-    m.mainAnimation.control = "start"
-end sub
-
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
@@ -148,13 +148,13 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.up and m.pokemonList.hasFocus()
             setFocusOnButton(m.playVideoButton)
-            reverseMainAnimation(true)
+            playAnimation(m.mainAnimation, true)
             handled = true
         end if
 
         if key = RemoteButton.down and not m.pokemonList.hasFocus() and m.pokemonList.content <> invalid
             m.pokemonList.setFocus(true)
-            reverseMainAnimation(false)
+            playAnimation(m.mainAnimation, false)
             clearButtonsFocusStyles()
             handled = true
         end if

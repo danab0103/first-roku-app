@@ -1,0 +1,30 @@
+function createAnimation(duration as integer, easeFunction as string) as object
+    animation = CreateObject("roSGNode", "Animation")
+
+    animation.duration = duration
+    animation.easeFunction = easeFunction
+
+    return animation
+end function
+
+function createInterpolator(interpolatorType as InterpolatorType, interpolatorConfiguration as object) as object
+    interpolator = CreateObject("roSGNode", interpolatorType)
+
+    interpolator.key = interpolatorConfiguration.key
+    interpolator.keyValue = interpolatorConfiguration.keyValue
+    interpolator.fieldToInterp = interpolatorConfiguration.fieldToInterp
+
+    return interpolator
+end function
+
+sub playAnimation(animation as object, reverse as boolean)
+    reverseAnimation(animation, reverse)
+    
+    animation.control = "start"
+end sub
+
+sub reverseAnimation(animation as object, reverse as boolean)
+    for interpolatorIndex = 0 to animation.getChildCount() - 1
+        animation.getChild(interpolatorIndex).reverse = reverse
+    end for
+end sub
