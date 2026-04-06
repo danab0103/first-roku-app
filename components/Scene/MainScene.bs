@@ -76,11 +76,6 @@ sub onSearchButtonSelected()
     navigateToNewScreen(m.top, "SearchScreen", clonePokemonsContentRow())
 end sub
 
-sub translateMainGroup(sourcePosition as object, destinationPosition as object)
-    m.animationVector2d.keyValue = [sourcePosition, destinationPosition]
-    m.animation.control = "start"
-end sub
-
 sub handleOkKey()
     if m.playVideoButton.hasFocus()
         m.playVideoButton.isCustomButtonSelected = true
@@ -107,7 +102,6 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.up and m.pokemonList.hasFocus()
             setFocusOnButton(m.playVideoButton)
-            'translateMainGroup(MAIN_GROUP_ROWLIST_POSITION, MAIN_GROUP_BUTTONS_POSITION)
             m.animationVector2dFloat.reverse = true
             m.animationVector2d.reverse = true
             m.animation.control = "start"
@@ -116,7 +110,6 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.down and not m.pokemonList.hasFocus() and m.pokemonList.content <> invalid
             m.pokemonList.setFocus(true)
-            'translateMainGroup(MAIN_GROUP_BUTTONS_POSITION, MAIN_GROUP_ROWLIST_POSITION)
             m.animationVector2dFloat.reverse = false
             m.animationVector2d.reverse = false
             m.animation.control = "start"
