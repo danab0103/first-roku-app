@@ -186,14 +186,12 @@ end function
 sub onCustomSuspend(args as object)
     mainScreenLastChild = m.top.getChild(m.top.getChildCount() - 1)
 
-    if mainScreenLastChild.subtype() = "VideoScreen"
+    if mainScreenLastChild.isSubtype(VIDEO_SCREEN_SUBTYPE)
         handleSuspendingVideoScreen(mainScreenLastChild)
-    else if mainScreenLastChild.subtype() = "DetailsScreen"
+    else if mainScreenLastChild.isSubtype(DETAILS_SCREEN_SUBTYPE)
         detailsScreenLastChild = mainScreenLastChild.getChild(mainScreenLastChild.getChildCount() - 1)
 
-        if detailsScreenLastChild.subtype() = "VideoScreen"
-            handleSuspendingVideoScreen(detailsScreenLastChild)
-        end if
+        if detailsScreenLastChild.isSubtype(VIDEO_SCREEN_SUBTYPE) then handleSuspendingVideoScreen(detailsScreenLastChild)
     end if
 end sub
 
