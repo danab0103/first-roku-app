@@ -16,6 +16,7 @@ end sub
 
 sub attachFieldsObservers()
     m.miniKeyboard.observeField("text", "onSearchTextChanged")
+    m.top.observeField("focusedChild", "onFocusedChildChanged")
     m.pokemonsGrid.observeField("itemSelected", "onItemSelected")
     m.openKeyboardButton.observeField("isCustomButtonSelected", "onOpenKeyboardButtonSelected")
 end sub
@@ -69,6 +70,14 @@ sub onSearchTextChanged()
     m.pokemonsGrid.content = filterPokemons(searchText, m.allPokemons)
 end sub
 
+sub onFocusedChildChanged()
+    if m.openKeyboardButton.hasFocus()
+        m.top.lastFocusedChild = m.openKeyboardButton
+    else if m.pokemonsGrid.hasFocus()
+        m.top.lastFocusedChild = m.pokemonsGrid
+    end if
+end sub
+
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
@@ -86,7 +95,6 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.down
             setFocusOnButton(m.openKeyboardButton)
-            m.top.lastFocusedChild = m.openKeyboardButton
             handled = true
         end if
 
