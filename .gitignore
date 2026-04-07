@@ -4,3 +4,4 @@ out/
 node_modules
 dist
 bsconfig.json
+rokudeploy.json
