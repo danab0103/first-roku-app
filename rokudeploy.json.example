@@ -1,0 +1,7 @@
+{
+    "host": "YOUR_ROKU_DEVICE_IP",
+    "password": "YOUR_PASSWORD",
+    "rootDir": "dist",
+    "signingPassword": "YOUR_SIGNING_PASSWORD",
+    "devId": "YOUR_DEV_ID"
+}

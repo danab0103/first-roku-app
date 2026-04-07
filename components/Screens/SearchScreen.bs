@@ -1,4 +1,6 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/FocusHelper.bs"
+import "pkg:/components/Helpers/PokemonHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
@@ -7,14 +9,21 @@ sub init()
 end sub
 
 sub initComponents()
+    m.pokemonsGrid = m.top.findNode("pokemonsGrid")
     m.miniKeyboard = m.top.findNode("miniKeyboard")
     m.openKeyboardButton = m.top.findNode("openKeyboardButton")
-    m.pokemonsGrid = m.top.findNode("pokemonsGrid")
 end sub
 
 sub attachFieldsObservers()
-    m.openKeyboardButton.observeField("isCustomButtonSelected", "onOpenKeyboardButtonSelected")
     m.miniKeyboard.observeField("text", "onSearchTextChanged")
+    m.top.observeField("focusedChild", "onFocusedChildChanged")
+    m.pokemonsGrid.observeField("itemSelected", "onItemSelected")
+    m.openKeyboardButton.observeField("isCustomButtonSelected", "onOpenKeyboardButtonSelected")
+end sub
+
+sub onItemSelected()
+    selectedPokemon = m.pokemonsGrid.content.getChild(m.pokemonsGrid.itemSelected)
+    navigateToNewScreen(m.top, "DetailsScreen", selectedPokemon)
 end sub
 
 sub onOpenKeyboardButtonSelected()
@@ -58,27 +67,16 @@ end sub
 
 sub onSearchTextChanged()
     searchText = LCase(m.miniKeyboard.text)
-    m.pokemonsGrid.content = filterPokemons(searchText)
+    m.pokemonsGrid.content = filterPokemons(searchText, m.allPokemons)
 end sub
 
-function filterPokemons(searchText as string) as object
-    filteredPokemons = CreateObject("roSGNode", "ContentNode")
-
-    if searchText = ""
-        filteredPokemons = m.allPokemons
-    else
-        for childIndex = 0 to m.allPokemons.getChildCount() - 1
-            pokemon = m.allPokemons.getChild(childIndex)
-
-            if Instr(LCase(pokemon.title), searchText) > 0
-                clonedPokemon = pokemon.clone(false)
-                filteredPokemons.appendChild(clonedPokemon)
-            end if
-        end for
+sub onFocusedChildChanged()
+    if m.openKeyboardButton.hasFocus()
+        m.top.lastFocusedChild = m.openKeyboardButton
+    else if m.pokemonsGrid.hasFocus()
+        m.top.lastFocusedChild = m.pokemonsGrid
     end if
-
-    return filteredPokemons
-end function
+end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
@@ -96,9 +94,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         end if
 
         if key = RemoteButton.down
-            m.openKeyboardButton.setFocus(true)
-            m.openKeyboardButton.isCustomButtonFocused = true
-            m.top.lastFocusedChild = m.openKeyboardButton
+            setFocusOnButton(m.openKeyboardButton)
             handled = true
         end if
 

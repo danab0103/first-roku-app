@@ -1,8 +1,8 @@
 {
     "rootDir": "",
-    "host": "192.168.30.210",
-    "username": "rokudev",
-    "password": "rokudev",
+    "host": "YOUR_ROKU_DEVICE_IP",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD",
     "stagingDir": "dist",
     "retainStagingDir": true,
     "deploy": true,

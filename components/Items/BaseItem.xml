@@ -1,7 +1,8 @@
 <component name="BaseItem" extends="Group">
     <interface>
         <field id="itemContent" type="node" onChange="onItemContentChanged"/>
-        <field id="itemHasFocus" type="bool" onChange="onItemHasFocusChanged"/>
+        <field id="focusPercent" type="float" onChange="onFocusStateChanged"/>
+        <field id="rowListHasFocus" type="boolean" onChange="onFocusStateChanged"/>
     </interface>
 
     <children>

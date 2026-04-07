@@ -1,0 +1,37 @@
+function getPokemon(pokemonPosition as object, pokemonList as object) as object
+    selectedPokemon = pokemonList.content.getChild(pokemonPosition[0]).getChild(pokemonPosition[1])
+
+    return selectedPokemon
+end function
+
+function clonePokemonsContentRow(pokemonList as object) as object
+    clonedPokemonsRow = CreateObject("roSGNode", "ContentNode")
+    pokemonsFirstRow = pokemonList.content.getChild(0)
+
+    for pokemonIndex = 0 to pokemonsFirstRow.getChildCount() - 1
+        pokemon = pokemonsFirstRow.getChild(pokemonIndex)
+        clonedPokemon = pokemon.clone(false)
+        clonedPokemonsRow.appendChild(clonedPokemon)
+    end for
+
+    return clonedPokemonsRow
+end function
+
+function filterPokemons(searchText as string, pokemons as object) as object
+    filteredPokemons = CreateObject("roSGNode", "ContentNode")
+
+    if searchText = ""
+        filteredPokemons = pokemons
+    else
+        for childIndex = 0 to pokemons.getChildCount() - 1
+            pokemon = pokemons.getChild(childIndex)
+
+            if Instr(LCase(pokemon.title), searchText) > 0
+                clonedPokemon = pokemon.clone(false)
+                filteredPokemons.appendChild(clonedPokemon)
+            end if
+        end for
+    end if
+
+    return filteredPokemons
+end function
