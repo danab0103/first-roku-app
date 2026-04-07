@@ -5,6 +5,7 @@
     </interface>
 
     <customization suspendhandler="onCustomSuspend" />
+    <customization resumehandler="onCustomResume" />
 
     <children>
         <Poster 

@@ -202,3 +202,7 @@ sub handleSuspendingVideoScreen(videoScreen as object)
     video.control = "stop"
     closeComponent(videoScreen)
 end sub
+
+sub onCustomResume(args as object)
+    m.top.signalBeacon("AppResumeComplete")
+end sub
