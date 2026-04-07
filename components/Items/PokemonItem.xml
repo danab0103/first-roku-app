@@ -1,4 +1,7 @@
 <component name="PokemonItem" extends="BaseItem">
+    <interface>
+        <field id="gridHasFocus" type="boolean" onChange="onFocusStateChanged"/>
+    </interface>
     <children>
         <Label
             id="pokemonLabel"

@@ -13,3 +13,7 @@ sub setPokemonItemFields(pokemonContent as object)
     m.pokemonPoster.uri = pokemonContent.url
     m.pokemonLabel.text = pokemonContent.title
 end sub
+
+sub onFocusStateChanged()
+    m.focusPoster.visible = m.top.focusPercent > 0.5 and m.top.gridHasFocus = true
+end sub
