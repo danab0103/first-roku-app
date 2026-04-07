@@ -4,6 +4,8 @@
         <field id="lastFocusedChild" type="node" />
     </interface>
 
+    <customization suspendhandler="onCustomSuspend" />
+
     <children>
         <Poster 
             id="background" 

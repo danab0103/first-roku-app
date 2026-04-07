@@ -17,3 +17,6 @@ splash_color=#000000
 splash_min_time=1
 
 supports_input_launch=1
+
+sdk_instant_resume=1
+run_as_process=1

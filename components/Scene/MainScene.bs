@@ -182,3 +182,23 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
     return handled
 end function
+
+sub onCustomSuspend(args as object)
+    mainScreenLastChild = m.top.getChild(m.top.getChildCount() - 1)
+
+    if mainScreenLastChild.subtype() = "VideoScreen"
+        handleSuspendingVideoScreen(mainScreenLastChild)
+    else if mainScreenLastChild.subtype() = "DetailsScreen"
+        detailsScreenLastChild = mainScreenLastChild.getChild(mainScreenLastChild.getChildCount() - 1)
+
+        if detailsScreenLastChild.subtype() = "VideoScreen"
+            handleSuspendingVideoScreen(detailsScreenLastChild)
+        end if
+    end if
+end sub
+
+sub handleSuspendingVideoScreen(videoScreen as object)
+    video = videoScreen.findNode("video")
+    video.control = "stop"
+    closeComponent(videoScreen)
+end sub
