@@ -9,14 +9,20 @@ sub init()
 end sub
 
 sub initComponents()
+    m.pokemonsGrid = m.top.findNode("pokemonsGrid")
     m.miniKeyboard = m.top.findNode("miniKeyboard")
     m.openKeyboardButton = m.top.findNode("openKeyboardButton")
-    m.pokemonsGrid = m.top.findNode("pokemonsGrid")
 end sub
 
 sub attachFieldsObservers()
-    m.openKeyboardButton.observeField("isCustomButtonSelected", "onOpenKeyboardButtonSelected")
     m.miniKeyboard.observeField("text", "onSearchTextChanged")
+    m.pokemonsGrid.observeField("itemSelected", "onItemSelected")
+    m.openKeyboardButton.observeField("isCustomButtonSelected", "onOpenKeyboardButtonSelected")
+end sub
+
+sub onItemSelected()
+    selectedPokemon = m.pokemonsGrid.content.getChild(m.pokemonsGrid.itemSelected)
+    navigateToNewScreen(m.top, "DetailsScreen", selectedPokemon)
 end sub
 
 sub onOpenKeyboardButtonSelected()
