@@ -1,5 +1,8 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Helpers/VideoHelper.bs"
+import "pkg:/components/Helpers/FocusHelper.bs"
+import "pkg:/components/Helpers/PokemonHelper.bs"
+import "pkg:/components/Helpers/AnimationHelper.bs"
 import "pkg:/components/Enums.bs"
 import "pkg:/components/Constants.bs"
 
@@ -12,21 +15,24 @@ sub init()
     setFocusOnButton(m.playVideoButton)
 
     loadPhotosData()
+
+    addAnimation()
 end sub
 
 sub initComponents()
+    m.mainGroup = m.top.findNode("mainGroup")
     m.titleLabel = m.top.findNode("titleLabel")
-    m.playVideoButton = m.top.findNode("playVideoButton")
-    m.searchButton = m.top.findNode("searchButton")
     m.pokemonList = m.top.findNode("imageList")
+    m.searchButton = m.top.findNode("searchButton")
+    m.playVideoButton = m.top.findNode("playVideoButton")
 end sub
 
 sub attachFieldsObservers()
+    m.top.observeField("focusedChild", "onFocusedChildChanged")
     m.pokemonList.observeField("rowItemFocused", "onItemFocused")
     m.pokemonList.observeField("rowItemSelected", "onItemSelected")
-    m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
     m.searchButton.observeField("isCustomButtonSelected", "onSearchButtonSelected")
-    m.top.observeField("focusedChild", "onFocusedChildChanged")
+    m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
 end sub
 
 sub displayApplicationInfo()
@@ -34,63 +40,11 @@ sub displayApplicationInfo()
     m.titleLabel.text = appInfo.GetTitle() + " v" + appInfo.GetVersion()
 end sub
 
-sub loadPhotosData()
-    m.photosTask = CreateObject("roSGNode", "GetPhotosDataTask")
-    m.photosTask.observeField("photosContent", "onPhotosLoaded")
-    m.photosTask.control = "RUN"
+sub addAnimation()
+    m.mainAnimation = createAnimation(1, "inOutQuad")
+    m.mainAnimation.appendChild(createInterpolator(InterpolatorType.vector, { key: [0, 1], keyValue: [INITIAL_POSITION, FINAL_POSITION], fieldToInterp: `${m.mainGroup.id}.translation` }))
+    m.mainAnimation.appendChild(createInterpolator(InterpolatorType.float, { key: [0, 1], keyValue: [UNFOCUSED_OPACITY, FOCUSED_OPACITY], fieldToInterp: `${m.pokemonList.id}.opacity` }))
 end sub
-
-sub onPhotosLoaded()
-    m.pokemonList.content = m.photosTask.photosContent
-    m.searchButton.visible = true
-    m.top.signalBeacon("AppLaunchComplete")
-
-    if m.shouldHandleDeeplink = true
-        pokemonPosition = [0, m.top.argsContent.contentId.toInt()]
-        navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
-    end if
-end sub
-
-sub onItemSelected()
-    selectedPokemonPosition = m.pokemonList.rowItemSelected
-    selectedPokemon = getPokemon(selectedPokemonPosition)
-    navigateToNewScreen(m.top, "DetailsScreen", selectedPokemon)
-end sub
-
-function getPokemon(pokemonPosition as object) as object
-    selectedPokemon = m.pokemonList.content.getChild(pokemonPosition[0]).getChild(pokemonPosition[1])
-
-    return selectedPokemon
-end function
-
-sub onItemFocused()
-    focusedPokemonPosition = m.pokemonList.rowItemFocused
-    focusedPokemon = getPokemon(focusedPokemonPosition)
-    print `Pokemon title = ${focusedPokemon.title}`
-end sub
-
-sub onPlayVideoButtonSelected()
-    print "Play video button pressed."
-    loadVideoData()
-end sub
-
-sub onSearchButtonSelected()
-    print "Search button pressed."
-    navigateToNewScreen(m.top, "SearchScreen", clonePokemonsContentRow())
-end sub
-
-function clonePokemonsContentRow() as object
-    clonedPokemonsRow = CreateObject("roSGNode", "ContentNode")
-    pokemonsFirstRow = m.pokemonList.content.getChild(0)
-
-    for pokemonIndex = 0 to pokemonsFirstRow.getChildCount() - 1
-        pokemon = pokemonsFirstRow.getChild(pokemonIndex)
-        clonedPokemon = pokemon.clone(false)
-        clonedPokemonsRow.appendChild(clonedPokemon)
-    end for
-
-    return clonedPokemonsRow
-end function
 
 sub onArgsContentChanged()
     argsContent = m.top.argsContent
@@ -104,27 +58,10 @@ sub onArgsContentChanged()
         if mediaType = "movie"
             loadVideoData()
         else if mediaType = "episode" and argsContent.doesExist("contentId")
-            contentId = argsContent.contentId
-
-            if m.pokemonList.content <> invalid
-                pokemonPosition = [0, contentId.toInt()]
-                navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition))
-            else
-                m.shouldHandleDeeplink = true
-            end if
+            contentIdInt = argsContent.contentId.toInt()
+            handleEpisodeMediaType(contentIdInt)
         end if
     end if
-end sub
-
-sub closeActiveScreen()
-    lastChild = m.top.getChild(m.top.getChildCount() - 1)
-
-    if lastChild.isSubtype("BaseScreen") then m.top.removeChild(lastChild)
-end sub
-
-sub setFocusOnButton(button as object)
-    button.setFocus(true)
-    button.isCustomButtonFocused = true
 end sub
 
 sub clearButtonsFocusStyles()
@@ -140,6 +77,57 @@ sub onFocusedChildChanged()
     else if m.pokemonList.hasFocus()
         m.top.lastFocusedChild = m.pokemonList
     end if
+end sub
+
+sub closeActiveScreen()
+    lastChild = m.top.getChild(m.top.getChildCount() - 1)
+
+    if lastChild.isSubtype("BaseScreen") then m.top.removeChild(lastChild)
+end sub
+
+sub handleEpisodeMediaType(contentId as integer)
+    if m.pokemonList.content <> invalid
+        pokemonPosition = [0, contentId]
+        navigateToNewScreen(m.top, "DetailsScreen", getPokemon(pokemonPosition, m.pokemonList))
+    else
+        m.shouldHandleDeeplink = true
+    end if
+end sub
+
+sub loadPhotosData()
+    m.photosTask = CreateObject("roSGNode", "GetPhotosDataTask")
+    m.photosTask.observeField("photosContent", "onPhotosLoaded")
+    m.photosTask.control = "RUN"
+end sub
+
+sub onPhotosLoaded()
+    m.pokemonList.content = m.photosTask.photosContent
+    m.searchButton.visible = true
+    m.top.signalBeacon("AppLaunchComplete")
+
+    if m.shouldHandleDeeplink = true then handleEpisodeMediaType(m.top.argsContent.contentId.toInt())
+end sub
+
+sub onItemSelected()
+    selectedPokemonPosition = m.pokemonList.rowItemSelected
+    selectedPokemon = getPokemon(selectedPokemonPosition, m.pokemonList)
+    navigateToNewScreen(m.top, "DetailsScreen", selectedPokemon)
+end sub
+
+sub onItemFocused()
+    focusedPokemonPosition = m.pokemonList.rowItemFocused
+    focusedPokemon = getPokemon(focusedPokemonPosition, m.pokemonList)
+    print `Pokemon title = ${focusedPokemon.title}`
+end sub
+
+sub onPlayVideoButtonSelected()
+    print "Play video button pressed."
+    loadVideoData()
+end sub
+
+sub onSearchButtonSelected()
+    print "Search button pressed."
+    navigateToNewScreen(m.top, "SearchScreen", clonePokemonsContentRow(m.pokemonList))
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
@@ -160,11 +148,13 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
         if key = RemoteButton.up and m.pokemonList.hasFocus()
             setFocusOnButton(m.playVideoButton)
+            playAnimation(m.mainAnimation, true)
             handled = true
         end if
 
-        if key = RemoteButton.down
+        if key = RemoteButton.down and not m.pokemonList.hasFocus() and m.pokemonList.content <> invalid
             m.pokemonList.setFocus(true)
+            playAnimation(m.mainAnimation, false)
             clearButtonsFocusStyles()
             handled = true
         end if
@@ -175,7 +165,6 @@ function onKeyEvent(key as string, press as boolean) as boolean
             else if m.searchButton.hasFocus()
                 m.searchButton.isCustomButtonSelected = true
             end if
-
             handled = true
         end if
     end if
