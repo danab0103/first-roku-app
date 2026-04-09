@@ -14,11 +14,36 @@ end sub
 
 function createVideoContent(videoItem as object) as object
     videoContent = CreateObject("roSGNode", "ContentNode")
-    videoContent.url = videoItem.streamUrl
-    videoContent.streamFormat = videoItem.streamFormat
+
+    populateVideoContentWithPlayReadyProtectedVideoData(videoContent)
+    ' populateVideoContentWithWidevineProtectedVideoData(videoContent)
+    ' populateVideoContentWithEndpointData(videoContent, videoItem)
 
     return videoContent
 end function
+
+sub populateVideoContentWithPlayReadyProtectedVideoData(videoContent as object)
+    videoContent.encodingType = "PlayReadyLicenseAcquisitionUrl"
+    videoContent.encodingKey = "http://test.playready.microsoft.com/service/rightsmanager.asmx?cfg=(persist:false,sl:150)"
+    videoContent.url = "https://test.playready.microsoft.com/media/profficialsite/tearsofsteel_4k.ism/manifest.mpd"
+    videoContent.streamFormat = "dash"
+end sub
+
+sub populateVideoContentWithWidevineProtectedVideoData(videoContent as object)
+    drmParams = {
+        keySystem: "Widevine",
+        licenseServerURL: "https://cwip-shaka-proxy.appspot.com/no_auth"
+    }
+
+    videoContent.url = "https://storage.googleapis.com/shaka-demo-assets/angel-one-widevine/dash.mpd"
+    videoContent.streamformat = "dash"
+    videoContent.drmParams = drmParams
+end sub
+
+sub populateVideoContentWithEndpointData(videoContent as object, videoItem as object)
+    videoContent.url = videoItem.streamUrl
+    videoContent.streamFormat = videoItem.streamFormat
+end sub
 
 sub handleBackKey()
     m.video.control = "stop"
