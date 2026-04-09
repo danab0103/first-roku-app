@@ -174,7 +174,7 @@ end function
 
 sub onCustomSuspend(args as object)
     videoScreen = findVideoScreen()
-    
+
     if videoScreen <> invalid then handleSuspendingVideoScreen(videoScreen)
 end sub
 
@@ -185,7 +185,7 @@ function findVideoScreen() as object
         if lastChild.isSubtype(VIDEO_SCREEN_SUBTYPE) then return lastChild
         lastChild = getLastChild(lastChild)
     end while
-    
+
     return invalid
 end function
 
