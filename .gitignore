@@ -5,3 +5,4 @@ node_modules
 dist
 bsconfig.json
 rokudeploy.json
+roku_modules
