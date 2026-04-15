@@ -136,9 +136,7 @@ sub onSearchButtonSelected()
 end sub
 
 sub onToPokeballsButtonSelected()
-    screen = CreateObject("roSGNode", "pokeballsdk_PokeballsScreen")
-    m.top.appendChild(screen)
-    screen.setFocus(true)
+    navigateToNewScreen(m.top, "pokeballsdk_PokeballsScreen")
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
