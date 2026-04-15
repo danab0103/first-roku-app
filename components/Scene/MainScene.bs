@@ -25,6 +25,7 @@ sub initComponents()
     m.pokemonList = m.top.findNode("imageList")
     m.searchButton = m.top.findNode("searchButton")
     m.playVideoButton = m.top.findNode("playVideoButton")
+    m.toPokeballsButton = m.top.findNode("toPokeballsButton")
 end sub
 
 sub attachFieldsObservers()
@@ -33,6 +34,7 @@ sub attachFieldsObservers()
     m.pokemonList.observeField("rowItemSelected", "onItemSelected")
     m.searchButton.observeField("isCustomButtonSelected", "onSearchButtonSelected")
     m.playVideoButton.observeField("isCustomButtonSelected", "onPlayVideoButtonSelected")
+    m.toPokeballsButton.observeField("isCustomButtonSelected", "onToPokeballsButtonSelected")
 end sub
 
 sub displayApplicationInfo()
@@ -67,6 +69,7 @@ end sub
 sub clearButtonsFocusStyles()
     m.playVideoButton.isCustomButtonFocused = false
     m.searchButton.isCustomButtonFocused = false
+    m.toPokeballsButton.isCustomButtonFocused = false
 end sub
 
 sub onFocusedChildChanged()
@@ -74,6 +77,8 @@ sub onFocusedChildChanged()
         m.top.lastFocusedChild = m.playVideoButton
     else if m.searchButton.hasFocus()
         m.top.lastFocusedChild = m.searchButton
+    else if m.toPokeballsButton.hasFocus()
+        m.top.lastFocusedChild = m.toPokeballsButton
     else if m.pokemonList.hasFocus()
         m.top.lastFocusedChild = m.pokemonList
     end if
@@ -130,19 +135,35 @@ sub onSearchButtonSelected()
     navigateToNewScreen(m.top, "SearchScreen", clonePokemonsContentRow(m.pokemonList))
 end sub
 
+sub onToPokeballsButtonSelected()
+    screen = CreateObject("roSGNode", "pokeballsdk_PokeballsScreen")
+    m.top.appendChild(screen)
+    screen.setFocus(true)
+end sub
+
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
 
     if press = true
-        if key = RemoteButton.right and m.playVideoButton.hasFocus()
-            setFocusOnButton(m.searchButton)
-            m.playVideoButton.isCustomButtonFocused = false
+        if key = RemoteButton.right
+            if m.playVideoButton.hasFocus()
+                setFocusOnButton(m.toPokeballsButton)
+                m.playVideoButton.isCustomButtonFocused = false
+            else if m.toPokeballsButton.hasFocus()
+                setFocusOnButton(m.searchButton)
+                m.toPokeballsButton.isCustomButtonFocused = false
+            end if
             handled = true
         end if
 
-        if key = RemoteButton.left and m.searchButton.hasFocus()
-            m.searchButton.isCustomButtonFocused = false
-            setFocusOnButton(m.playVideoButton)
+        if key = RemoteButton.left
+            if m.searchButton.hasFocus()
+                setFocusOnButton(m.toPokeballsButton)
+                m.searchButton.isCustomButtonFocused = false
+            else if m.toPokeballsButton.hasFocus()
+                setFocusOnButton(m.playVideoButton)
+                m.toPokeballsButton.isCustomButtonFocused = false
+            end if
             handled = true
         end if
 
@@ -164,6 +185,8 @@ function onKeyEvent(key as string, press as boolean) as boolean
                 m.playVideoButton.isCustomButtonSelected = true
             else if m.searchButton.hasFocus()
                 m.searchButton.isCustomButtonSelected = true
+            else if m.toPokeballsButton.hasFocus()
+                m.toPokeballsButton.isCustomButtonSelected = true
             end if
             handled = true
         end if

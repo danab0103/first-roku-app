@@ -30,6 +30,7 @@
 
             <LayoutGroup
                 id="buttonGroup"
+                translation="[-100, 0]"
                 layoutDirection="horiz"
                 itemSpacings="[20]">
 
@@ -38,6 +39,12 @@
                     width="180"
                     height="44"
                     text="Play Video" />
+
+                <CustomButton
+                    id="toPokeballsButton"
+                    width="180"
+                    height="44"
+                    text="To Pokeballs" />
                     
                 <CustomButton
                     id="searchButton"
