@@ -45,6 +45,12 @@
                     width="180"
                     height="44"
                     text="To Pokeballs" />
+
+                <CustomButton
+                    id="getRandomDogButton"
+                    width="180"
+                    height="44"
+                    text="Get Random Dog" />
                     
                 <CustomButton
                     id="searchButton"

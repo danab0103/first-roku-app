@@ -4,7 +4,7 @@
   },
   "dependencies": {
     "@rokucommunity/bslint": "^0.8.38",
-    "pokeball-sdk": "^1.0.5",
+    "pokeball-sdk": "^1.0.7",
     "roku-deploy": "^3.16.3"
   },
   "scripts": {
