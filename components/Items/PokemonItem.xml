@@ -5,10 +5,10 @@
     <children>
         <Label
             id="pokemonLabel"
-            width="200"
+            width="300"
             horizAlign="center"
             color="0xFFFFFFFF" 
-            height="20"
-            translation="[0, 212]" />
+            height="30"
+            translation="[0, 318]" />
     </children>
 </component>

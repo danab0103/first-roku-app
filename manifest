@@ -23,3 +23,6 @@ run_as_process=1
 
 requires_widevine_drm=1
 requires_widevine_version=1.0
+
+ui_resolutions=fhd
+uri_resolution_autosub=$$RES$$,sd,hd,fhd

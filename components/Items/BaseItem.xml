@@ -8,21 +8,21 @@
     <children>
         <Poster
             id="focusPoster"
-            uri="pkg:/images/rounded_mask.png"
+            uri="pkg:/images/rounded_mask_$$RES$$.png"
             blendColor="#301e01"
-            width="208"
-            height="208"
+            width="312"
+            height="312"
             visible="false" />
 
         <MaskGroup 
             id="maskGroup" 
-            translation="[4, 4]"
-            maskUri="pkg:/images/rounded_mask.png" >
+            translation="[6, 6]"
+            maskUri="pkg:/images/rounded_mask_$$RES$$.png" >
 
             <Poster
                 id="poster"
-                width="200"
-                height="200"
+                width="300"
+                height="300"
                 loadDisplayMode="scaleToFill" />
         </MaskGroup>
     </children>
