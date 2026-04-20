@@ -6,9 +6,11 @@ sub closeComponent(component as object)
     setFocusOnParentLastFocusedChild(parent)
 end sub
 
-sub navigateToNewScreen(screenParent as object, screenName as string, itemContent as object)
+sub navigateToNewScreen(screenParent as object, screenName as string, itemContent = invalid as object)
     screen = CreateObject("roSGNode", screenName)
-    screen.itemContent = itemContent
+    
+    if itemContent <> invalid then screen.itemContent = itemContent
+
     screenParent.appendChild(screen)
     screen.setFocus(true)
 end sub

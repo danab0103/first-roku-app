@@ -15,9 +15,9 @@ end sub
 function createVideoContent(videoItem as object) as object
     videoContent = CreateObject("roSGNode", "ContentNode")
 
-    populateVideoContentWithPlayReadyProtectedVideoData(videoContent)
-    ' populateVideoContentWithWidevineProtectedVideoData(videoContent)
-    ' populateVideoContentWithEndpointData(videoContent, videoItem)
+    'populateVideoContentWithPlayReadyProtectedVideoData(videoContent)
+    'populateVideoContentWithWidevineProtectedVideoData(videoContent)
+    populateVideoContentWithEndpointData(videoContent, videoItem)
 
     return videoContent
 end function

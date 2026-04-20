@@ -26,7 +26,7 @@ function filterPokemons(searchText as string, pokemons as object) as object
         for childIndex = 0 to pokemons.getChildCount() - 1
             pokemon = pokemons.getChild(childIndex)
 
-            if Instr(LCase(pokemon.title), searchText) > 0
+            if Instr(0, LCase(pokemon.title), searchText) > 0
                 clonedPokemon = pokemon.clone(false)
                 filteredPokemons.appendChild(clonedPokemon)
             end if

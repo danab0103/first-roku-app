@@ -3,36 +3,36 @@
         <Rectangle
             id="background"
             color="0x1E1E2F"
-            width="1280"
-            height="720" />
+            width="1920"
+            height="1080" />
 
         <LayoutGroup
                 id="screenGroup"
                 layoutDirection="horiz"
                 horizAlignment="center"
-                itemSpacings="[20]"
-                translation="[650, 100]" >
+                itemSpacings="[30]"
+                translation="[975, 150]" >
 
             <LayoutGroup
                 id="keyboardGroup"
                 layoutDirection="vert"
                 horizAlignment="center"
-                itemSpacings="[20]" >
+                itemSpacings="[30]" >
 
                 <DynamicMiniKeyboard
                     id="miniKeyboard" />
                 
                 <CustomButton
                     id="openKeyboardButton"
-                    width="180"
-                    height="44" 
+                    width="270"
+                    height="66" 
                     text="Open Keyboard" />
             </LayoutGroup>
 
             <MarkupGrid
                 id="pokemonsGrid"
-                itemSize="[200,220]"
-                itemSpacing="[30, 30]"
+                itemSize="[300,330]"
+                itemSpacing="[45, 45]"
                 numColumns="3"
                 numRows="2"
                 wrapDividerBitmapUri=""

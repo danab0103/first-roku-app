@@ -2,29 +2,29 @@
     <children>
         <Poster
             id="backgroundPoster"
-            width="1280"
-            height="720" />
+            width="1920"
+            height="1080" />
 
         <CustomButton
             id="playVideoButton"
-            translation="[15, 480]"
-            height="44"
+            translation="[21, 720]"
+            height="66"
             visible="false"/>
 
         <Rectangle 
             id="descriptionBackground"
-            width="1280"
-            translation="[0,550]"
+            width="1920"
+            translation="[0,825]"
             visible="false"
             color="0xFFFFFFFF" />
 
         <Label 
             id="descriptionLabel"
-            width="1200"
+            width="1800"
             visible="false"
             color="0x000000FF"
             horizAlign="center"
-            translation="[40,550]"
+            translation="[60,825]"
             wrap="true"/>
 
         <Timer

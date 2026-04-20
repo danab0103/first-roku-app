@@ -1,3 +1,8 @@
+sub moveFocus(fromButton as object, toButton as object)
+    fromButton.isCustomButtonFocused = false
+    setFocusOnButton(toButton)
+end sub
+
 sub setFocusOnButton(button as object)
     button.setFocus(true)
     button.isCustomButtonFocused = true

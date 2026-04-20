@@ -11,38 +11,50 @@
         <Poster 
             id="background" 
             uri="pkg:/images/cat-bg.jpg" 
-            width="1280" 
-            height="720" 
-            opacity="1.0" />
+            width="1920" 
+            height="1080" />
           
         <Label
             id="titleLabel"
             text=""
             color="#ffffff" 
-            translation="[600,20]" />
+            translation="[900,30]" />
 
         <LayoutGroup
             id="mainGroup"
             layoutDirection="vert"
             horizAlignment="custom"
-            itemSpacings="[60]"
-            translation="[200,450]">
+            itemSpacings="[90]"
+            translation="[300,675]">
 
             <LayoutGroup
                 id="buttonGroup"
+                translation="[-150, 0]"
                 layoutDirection="horiz"
-                itemSpacings="[20]">
+                itemSpacings="[30]">
 
                 <CustomButton
                     id="playVideoButton" 
-                    width="180"
-                    height="44"
+                    width="270"
+                    height="66"
                     text="Play Video" />
+
+                <CustomButton
+                    id="toPokeballsButton"
+                    width="270"
+                    height="66"
+                    text="To Pokeballs" />
+
+                <CustomButton
+                    id="getRandomDogButton"
+                    width="270"
+                    height="66"
+                    text="Get Random Dog" />
                     
                 <CustomButton
                     id="searchButton"
-                    width="180"
-                    height="44"
+                    width="270"
+                    height="66"
                     text="Search Pokemon"
                     visible="false" />
             </LayoutGroup>
@@ -52,10 +64,10 @@
                 numRows="1"
                 opacity="0.2"
                 itemComponentName="BaseItem"
-                itemSize="[952,0]"
-                rowHeights="[208]"
-                rowItemSize="[[208, 208]]"
-                rowItemSpacing="[[30, 0]]"
+                itemSize="[1428,0]"
+                rowHeights="[312]"
+                rowItemSize="[[312, 312]]"
+                rowItemSpacing="[[45, 0]]"
                 rowFocusAnimationStyle="fixedFocusWrap" 
                 drawFocusFeedback="false"/>
         </LayoutGroup>

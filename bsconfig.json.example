@@ -9,5 +9,16 @@
     "autoImportComponentScript": true,
     "plugins": [
         "@rokucommunity/bslint"
+    ],
+    "ignores": [
+        "**/roku_modules/**"
+    ],
+    "diagnosticFilters": [
+        {
+            "src": "components/roku_modules/pokeballsdk/*.xml",
+            "codes": [
+                1107
+            ]
+        }
     ]
 }
