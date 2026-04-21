@@ -1,5 +1,6 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
 import "pkg:/components/Helpers/FocusHelper.bs"
+import "pkg:/components/Constants.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
@@ -62,8 +63,8 @@ end sub
 
 sub onVideoPositionChanged()
     position = m.video.position
-    shouldSkipIntroBeVisible = (position >= 20 and position < 40)
-    shouldSkipOutroBeVisible = (position >= 560 and position < 580)
+    shouldSkipIntroBeVisible = (position >= SKIP_INTRO_APPEAR_AT_SEC and position < SKIP_INTRO_DISAPPEAR_AT_SEC)
+    shouldSkipOutroBeVisible = (position >= SKIP_OUTRO_APPEAR_AT_SEC and position < SKIP_OUTRO_DISAPPEAR_AT_SEC)
 
     updateSkipButtonState(m.skipIntroButton, shouldSkipIntroBeVisible)
     updateSkipButtonState(m.skipOutroButton, shouldSkipOutroBeVisible)
