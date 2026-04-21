@@ -4,5 +4,22 @@
             id="video"
             width="1920"
             height="1080" />
+
+        <CustomButton
+            id="skipIntroButton"
+            visible="false"
+            translation="[1600, 850]"
+            width="270"
+            height="60"
+            text="Skip Intro" />
+
+        <CustomButton
+            id="skipOutroButton"
+            visible="false"
+            translation="[1600, 850]"
+            width="270"
+            height="60"
+            text="Skip Outro" />
+
     </children>
 </component>

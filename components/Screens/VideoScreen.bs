@@ -1,9 +1,24 @@
 import "pkg:/components/Helpers/NavigationHelper.bs"
+import "pkg:/components/Helpers/FocusHelper.bs"
 import "pkg:/components/Enums.bs"
 
 sub init()
-    m.video = m.top.findNode("video")
+    initComponents()
+    attachFieldsObservers()
+
     m.top.lastFocusedChild = m.video
+end sub
+
+sub initComponents()
+    m.video = m.top.findNode("video")
+    m.skipIntroButton = m.top.findNode("skipIntroButton")
+    m.skipOutroButton = m.top.findNode("skipOutroButton")
+end sub
+
+sub attachFieldsObservers()
+    m.video.observeField("position", "onVideoPositionChanged")
+    m.skipIntroButton.observeField("isCustomButtonSelected", "onSkipIntroButtonSelected")
+    m.skipOutroButton.observeField("isCustomButtonSelected", "onSkipOutroButtonSelected")
 end sub
 
 sub onItemContentChanged()
@@ -45,7 +60,35 @@ sub populateVideoContentWithEndpointData(videoContent as object, videoItem as ob
     videoContent.streamFormat = videoItem.streamFormat
 end sub
 
-sub handleBackKey()
+sub onVideoPositionChanged()
+    position = m.video.position
+    shouldSkipIntroBeVisible = (position >= 20 and position < 40)
+    shouldSkipOutroBeVisible = (position >= 560 and position < 580)
+
+    updateSkipButtonState(m.skipIntroButton, shouldSkipIntroBeVisible)
+    updateSkipButtonState(m.skipOutroButton, shouldSkipOutroBeVisible)
+end sub
+
+sub updateSkipButtonState(skipButton as object, shouldBeVisible as boolean)
+    if shouldBeVisible and not skipButton.visible then setFocusOnButton(skipButton)
+
+    if not shouldBeVisible and skipButton.visible
+        m.video.setFocus(true)
+        skipButton.isCustomButtonFocused = false
+    end if
+
+    skipButton.visible = shouldBeVisible
+end sub
+
+sub onSkipIntroButtonSelected()
+    m.video.seek = 60
+end sub
+
+sub onSkipOutroButtonSelected()
+    stopVideoPLayer()
+end sub
+
+sub stopVideoPLayer()
     m.video.control = "stop"
     closeComponent(m.top)
 end sub
@@ -55,12 +98,36 @@ function onKeyEvent(key as string, press as boolean) as boolean
 
     if press = true
         if key = RemoteButton.back
-            if key = RemoteButton.back
-                handleBackKey()
-                handled = true
+            stopVideoPLayer()
+
+            handled = true
+        else if key = RemoteButton.up
+            if m.skipIntroButton.visible = true
+                setFocusOnButton(m.skipIntroButton)
+            else if m.skipOutroButton.visible = true
+                setFocusOnButton(m.skipOutroButton)
+            else
+                m.video.setFocus(true)
             end if
-        else if key = RemoteButton.left or key = RemoteButton.right or key = RemoteButton.down or key = RemoteButton.up
+
+            handled = true
+        else if key = RemoteButton.down
+            m.skipIntroButton.isCustomButtonFocused = false
+            m.skipOutroButton.isCustomButtonFocused = false
+            m.video.setFocus(true)
+
+            handled = true
+        else if key = RemoteButton.ok
+            if m.skipIntroButton.isCustomButtonFocused
+                m.skipIntroButton.isCustomButtonSelected = true
+            else if m.skipOutroButton.isCustomButtonFocused
+                m.skipOutroButton.isCustomButtonSelected = true
+            end if
+
+            handled = true
+        else if key = RemoteButton.left or key = RemoteButton.right
             m.top.setFocus(true)
+            
             handled = true
         end if
     end if
