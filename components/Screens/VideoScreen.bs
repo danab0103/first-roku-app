@@ -82,7 +82,7 @@ sub updateSkipButtonState(skipButton as object, shouldBeVisible as boolean)
 end sub
 
 sub onSkipIntroButtonSelected()
-    m.video.seek = 60
+    m.video.seek = SKIP_INTRO_SEEK_TO_SEC
 end sub
 
 sub onSkipOutroButtonSelected()
