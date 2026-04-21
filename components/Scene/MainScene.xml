@@ -16,7 +16,6 @@
           
         <Label
             id="titleLabel"
-            text=""
             color="#ffffff" 
             translation="[900,30]" />
 

@@ -17,6 +17,8 @@ sub init()
     loadPhotosData()
 
     addAnimation()
+
+    m.global.addFields({ customFontPath: "pkg:/components/fonts/FogtwoNo5.otf" })
 end sub
 
 sub initComponents()
