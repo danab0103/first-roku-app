@@ -1,0 +1,50 @@
+import "pkg:/components/Helpers/PokemonHelper.bs"
+
+function TestSuite__PokemonHelper() as object
+    this = BaseTestSuite()
+    this.name = "PokemonHelperTest"
+    this.setUp = PokemonHelperTest__CreatePokemonList
+
+    this.addTest("EmptySearchText_ReturnsAllPokemons", filterPokemons_EmptySearchText_ReturnsAllPokemons)
+    this.addTest("SubstringMatchesMultiplePokemons_ReturnsMatchingCount", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount)
+    this.addTest("SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles)
+    this.addTest("SubstringMatchesNoPokemons_ReturnsEmpty", filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty)
+    return this
+end function
+
+sub PokemonHelperTest__CreatePokemonList()
+    m.pokemons = CreateObject("roSGNode", "ContentNode")
+    titles = ["Pikachu", "Charmander", "Bulbasaur"]
+    for each title in titles
+        node = m.pokemons.createChild("ContentNode")
+        node.title = title
+    end for
+end sub
+
+function filterPokemons_EmptySearchText_ReturnsAllPokemons() as string
+    filteredPokemons = filterPokemons("", m.pokemons)
+
+    return m.assertEqual(filteredPokemons.getChildCount(), 3)
+end function
+
+function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount() as string
+    filteredPokemons = filterPokemons("ch", m.pokemons)
+
+    return m.assertEqual(filteredPokemons.getChildCount(), 2)
+end function
+
+function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles() as string
+    filteredPokemons = filterPokemons("ch", m.pokemons)
+
+    titles = []
+    for i = 0 to filteredPokemons.getChildCount() - 1
+        titles.push(filteredPokemons.getChild(i).title)
+    end for
+
+    return m.assertEqual(titles, ["Pikachu", "Charmander"])
+end function
+
+function filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty() as string
+    result = filterPokemons("xyz", m.pokemons)
+    return m.assertEqual(result.getChildCount(), 0)
+end function
