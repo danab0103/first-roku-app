@@ -9,6 +9,10 @@ function TestSuite__PokemonHelper() as object
     this.addTest("SubstringMatchesMultiplePokemons_ReturnsMatchingCount", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount)
     this.addTest("SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles)
     this.addTest("SubstringMatchesNoPokemons_ReturnsEmpty", filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty)
+    this.addTest("ValidPokemonList_HasSameChildCount", clonePokemonsContentRow_ValidPokemonList_HasSameChildCount)
+    this.addTest("ValidPokemonList_ClonedChildrenHaveSameTitles", clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles)
+    this.addTest("ModifyClonedPokemon_OriginalPokemonUnchanged", clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged)
+
     return this
 end function
 
@@ -23,6 +27,7 @@ sub PokemonHelperTest__CreatePokemonList()
     end for
 
     m.pokemonList.appendChild(pokemonRow)
+    m.wrapperPokemonList = { content: m.pokemonList }
 end sub
 
 function filterPokemons_EmptySearchText_ReturnsAllPokemons() as string
@@ -39,16 +44,44 @@ end function
 
 function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles() as string
     filteredPokemons = filterPokemons("ch", m.pokemonList.getChild(0))
-
-    titles = []
-    for i = 0 to filteredPokemons.getChildCount() - 1
-        titles.push(filteredPokemons.getChild(i).title)
-    end for
+    titles = getPokemonTitles(filteredPokemons)
 
     return m.assertEqual(titles, ["Pikachu", "Charmander"])
 end function
 
 function filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty() as string
     result = filterPokemons("xyz", m.pokemonList.getChild(0))
+
     return m.assertEqual(result.getChildCount(), 0)
+end function
+
+function clonePokemonsContentRow_ValidPokemonList_HasSameChildCount() as string
+    clonedPokemonList = clonePokemonsContentRow(m.wrapperPokemonList)
+
+    return m.assertEqual(clonedPokemonList.getChildCount(), 3)
+end function
+
+function clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles() as string
+    clonedPokemonList = clonePokemonsContentRow(m.wrapperPokemonList)
+    titles = getPokemonTitles(clonedPokemonList)
+
+    return m.assertEqual(titles, ["Pikachu", "Charmander", "Bulbasaur"])
+end function
+
+function clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged() as string
+    clonedPokemonList = clonePokemonsContentRow(m.wrapperPokemonList)
+    clonedPokemonList.getChild(0).title = "ModifiedTitle"
+    firstPokemonTitle = m.wrapperPokemonList.content.getChild(0).getChild(0).title
+
+    return m.assertNotEqual(clonedPokemonList.getChild(0).title, firstPokemonTitle)
+end function
+
+function getPokemonTitles(pokemons as object) as object
+    titles = []
+
+    for each pokemon in pokemons.getChildren(-1, 0)
+        titles.push(pokemon.title)
+    end for
+
+    return titles
 end function
