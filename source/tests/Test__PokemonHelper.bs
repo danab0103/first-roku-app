@@ -13,28 +13,32 @@ function TestSuite__PokemonHelper() as object
 end function
 
 sub PokemonHelperTest__CreatePokemonList()
-    m.pokemons = CreateObject("roSGNode", "ContentNode")
+    m.pokemonList = CreateObject("roSGNode", "ContentNode")
+    pokemonRow = CreateObject("roSGNode", "ContentNode")
     titles = ["Pikachu", "Charmander", "Bulbasaur"]
+
     for each title in titles
-        node = m.pokemons.createChild("ContentNode")
-        node.title = title
+        pokemonNode = pokemonRow.createChild("ContentNode")
+        pokemonNode.title = title
     end for
+
+    m.pokemonList.appendChild(pokemonRow)
 end sub
 
 function filterPokemons_EmptySearchText_ReturnsAllPokemons() as string
-    filteredPokemons = filterPokemons("", m.pokemons)
+    filteredPokemons = filterPokemons("", m.pokemonList.getChild(0))
 
     return m.assertEqual(filteredPokemons.getChildCount(), 3)
 end function
 
 function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount() as string
-    filteredPokemons = filterPokemons("ch", m.pokemons)
+    filteredPokemons = filterPokemons("ch", m.pokemonList.getChild(0))
 
     return m.assertEqual(filteredPokemons.getChildCount(), 2)
 end function
 
 function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles() as string
-    filteredPokemons = filterPokemons("ch", m.pokemons)
+    filteredPokemons = filterPokemons("ch", m.pokemonList.getChild(0))
 
     titles = []
     for i = 0 to filteredPokemons.getChildCount() - 1
@@ -45,6 +49,6 @@ function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTi
 end function
 
 function filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty() as string
-    result = filterPokemons("xyz", m.pokemons)
+    result = filterPokemons("xyz", m.pokemonList.getChild(0))
     return m.assertEqual(result.getChildCount(), 0)
 end function
