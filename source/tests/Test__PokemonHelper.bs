@@ -5,13 +5,14 @@ function TestSuite__PokemonHelper() as object
     this.name = "PokemonHelperTest"
     this.setUp = PokemonHelperTest__CreatePokemonList
 
-    this.addTest("EmptySearchText_ReturnsAllPokemons", filterPokemons_EmptySearchText_ReturnsAllPokemons)
-    this.addTest("SubstringMatchesMultiplePokemons_ReturnsMatchingCount", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount)
-    this.addTest("SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles)
-    this.addTest("SubstringMatchesNoPokemons_ReturnsEmpty", filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty)
-    this.addTest("ValidPokemonList_HasSameChildCount", clonePokemonsContentRow_ValidPokemonList_HasSameChildCount)
-    this.addTest("ValidPokemonList_ClonedChildrenHaveSameTitles", clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles)
-    this.addTest("ModifyClonedPokemon_OriginalPokemonUnchanged", clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged)
+    this.addTest("filterPokemons_EmptySearchText_ReturnsAllPokemons", filterPokemons_EmptySearchText_ReturnsAllPokemons)
+    this.addTest("filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount)
+    this.addTest("filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles)
+    this.addTest("filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty", filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty)
+    this.addTest("clonePokemonsContentRow_ValidPokemonList_HasSameChildCount", clonePokemonsContentRow_ValidPokemonList_HasSameChildCount)
+    this.addTest("clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles", clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles)
+    this.addTest("clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged", clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged)
+    this.addTest("getPokemon_ValidFirstPokemonPosition_ReturnsFirstPokemon", getPokemon_ValidFirstPokemonPosition_ReturnsFirstPokemon)
 
     return this
 end function
@@ -84,4 +85,10 @@ function getPokemonTitles(pokemons as object) as object
     end for
 
     return titles
+end function
+
+function getPokemon_ValidFirstPokemonPosition_ReturnsFirstPokemon() as string
+    pokemon = getPokemon([0, 0], m.wrapperPokemonList)
+
+    return m.assertEqual(pokemon.title, "Pikachu")
 end function
