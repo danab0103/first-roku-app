@@ -5,7 +5,10 @@ sub Main(args as dynamic)
     appInfo = CreateObject("roAppInfo")
     if appInfo.IsDev() and args.RunTests = "true" and TF_Utils__IsFunction(TestRunner)
         Runner = TestRunner()
-        Runner.SetFunctions([TestSuite__PokemonHelper])
+        Runner.SetFunctions([
+            TestSuite__PokemonHelper
+            TestSuite__FocusHelper
+        ])
         Runner.Logger.SetVerbosity(3)
         Runner.Logger.SetEcho(true)
         Runner.Run()
