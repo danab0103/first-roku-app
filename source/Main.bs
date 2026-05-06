@@ -3,17 +3,18 @@ import "pkg:/components/Helpers/NavigationHelper.bs"
 
 sub Main(args as dynamic)
     appInfo = CreateObject("roAppInfo")
-    if appInfo.IsDev() and args.RunTests = "true" and TF_Utils__IsFunction(TestRunner)
-        Runner = TestRunner()
-        Runner.SetFunctions([
+    
+    if appInfo.isDev() and args.RunTests = "true" and TF_Utils__IsFunction(TestRunner)
+        runner = TestRunner()
+        runner.setFunctions([
             TestSuite__PokemonHelper
             TestSuite__FocusHelper
             TestSuite__AnimationHelper
             TestSuite__NavigationHelper
         ])
-        Runner.Logger.SetVerbosity(3)
-        Runner.Logger.SetEcho(true)
-        Runner.Run()
+        runner.logger.setVerbosity(3)
+        runner.logger.setEcho(true)
+        runner.Run()
     end if
 
     screen = CreateObject("roSGScreen")
