@@ -8,6 +8,7 @@ function TestSuite__NavigationHelper() as object
 
     this.addTest("closeComponent_ValidComponent_RemovedFromParent", closeComponent_ValidComponent_RemovedFromParent)
     this.addTest("setFocusOnParentLastFocusedChild_NonButtonAsLastFocusedChild_FlagNotSet", setFocusOnParentLastFocusedChild_NonButtonAsLastFocusedChild_FlagNotSet)
+    this.addTest("navigateToNewScreen_ValidScreen_AppendsChildToParent", navigateToNewScreen_ValidScreen_AppendsChildToParent)
 
     return this
 end function
@@ -29,8 +30,16 @@ function setFocusOnParentLastFocusedChild_NonButtonAsLastFocusedChild_FlagNotSet
     nonButton = CreateObject("roSGNode", "ContentNode")
     nonButton.addField("isCustomButtonFocused", "boolean", false)
     m.parent.lastFocusedChild = nonButton
-    
+
     setFocusOnParentLastFocusedChild(m.parent)
 
     return m.assertFalse(m.parent.lastFocusedChild.isCustomButtonFocused)
+end function
+
+function navigateToNewScreen_ValidScreen_AppendsChildToParent() as string
+    itemContent = CreateObject("roSGNode", "ContentNode")
+
+    navigateToNewScreen(m.parent, "ContentNode", itemContent)
+
+    return m.assertEqual(m.parent.getChildCount(), 1)
 end function
