@@ -9,6 +9,7 @@ sub Main(args as dynamic)
             TestSuite__PokemonHelper
             TestSuite__FocusHelper
             TestSuite__AnimationHelper
+            TestSuite__NavigationHelper
         ])
         Runner.Logger.SetVerbosity(3)
         Runner.Logger.SetEcho(true)

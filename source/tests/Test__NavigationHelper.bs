@@ -1,0 +1,36 @@
+import "pkg:/components/Constants.bs"
+import "pkg:/components/Helpers/NavigationHelper.bs"
+
+function TestSuite__NavigationHelper() as object
+    this = BaseTestSuite()
+    this.name = "NavigationHelperTest"
+    this.SetUp = NavigationHelperTest_CreateParentComponent
+
+    this.addTest("closeComponent_ValidComponent_RemovedFromParent", closeComponent_ValidComponent_RemovedFromParent)
+    this.addTest("setFocusOnParentLastFocusedChild_NonButtonAsLastFocusedChild_FlagNotSet", setFocusOnParentLastFocusedChild_NonButtonAsLastFocusedChild_FlagNotSet)
+
+    return this
+end function
+
+sub NavigationHelperTest_CreateParentComponent()
+    m.parent = CreateObject("roSGNode", "ContentNode")
+end sub
+
+function closeComponent_ValidComponent_RemovedFromParent() as string
+    component = m.parent.createChild("ContentNode")
+
+    closeComponent(component)
+
+    return m.assertEqual(m.parent.getChildCount(), 0)
+end function
+
+function setFocusOnParentLastFocusedChild_NonButtonAsLastFocusedChild_FlagNotSet() as string
+    m.parent.addField("lastFocusedChild", "node", false)
+    nonButton = CreateObject("roSGNode", "ContentNode")
+    nonButton.addField("isCustomButtonFocused", "boolean", false)
+    m.parent.lastFocusedChild = nonButton
+    
+    setFocusOnParentLastFocusedChild(m.parent)
+
+    return m.assertFalse(m.parent.lastFocusedChild.isCustomButtonFocused)
+end function
