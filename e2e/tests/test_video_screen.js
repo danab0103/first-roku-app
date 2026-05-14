@@ -44,6 +44,24 @@ describe('Test video screen', () => {
         expect(res).to.equal(true);
     });
 
+    it('should return to the details screen when pressing back during playback', async function () {
+        this.timeout(20000);
+        await library.sendKey('back');
+        const res = await library.verifyIsScreenLoaded({
+            'elementData': [{ 'using': 'tag', 'value': 'CustomButton' }]
+        });
+        expect(res).to.equal(true);
+    });
+
+    it('should return to the home screen when pressing back from details screen', async function () {
+        this.timeout(20000);
+        await library.sendKey('back');
+        const res = await library.verifyIsScreenLoaded({
+            'elementData': [{ 'using': 'tag', 'value': 'RowList' }]
+        });
+        expect(res).to.equal(true);
+    });
+
     after(async () => {
         await library.close();
         childProcess.kill();
