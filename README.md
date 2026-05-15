@@ -44,3 +44,61 @@ npm run package
   * **Zip** the main files of the project
   * Click **Upload** and select the `.zip`
   * The app will launch on your Roku device
+
+## End-to-End Tests
+
+The `e2e/` folder contains a Mocha suite that drives the channel on a real Roku device via the [Roku WebDriver](https://github.com/rokudev/automated-channel-testing).
+
+### Prerequisites
+
+* The `RokuWebDriver_linux` binary at `e2e/bin/RokuWebDriver_linux`. On macOS or Windows, download the matching binary from the [automated-channel-testing](https://github.com/rokudev/automated-channel-testing) and update the `spawn(...)` call at the top of each test file.
+
+### Setup
+
+To install and run the test suite, follow these steps:
+
+1. Download and install the [Node.js](https://nodejs.org/).
+
+2. Download and install the [Yarn](https://yarnpkg.com/).
+
+3. Build the channel `.zip` once. The tests sideload from `out/hello-world.zip`:
+   ```
+   npm run build
+   ```
+
+4. Install the dependencies listed in `e2e/package.json`:
+   ```
+   cd e2e
+   yarn install
+   ```
+
+5. To use the [Mocha](https://mochajs.org/) JavaScript test framework and the [Mochawesome](https://github.com/adamgruber/mochawesome) reporter, globally install them:
+   ```
+   yarn global add mocha
+   yarn global add mochawesome
+   ```
+
+6. Update each test file under `e2e/tests/` with your device-specific values:
+
+   a. Update the IP address in the `Library` constructor:
+   ```js
+   library = new rokuLibrary.Library("<your-roku-ip>");
+   ```
+
+   b. Update the Roku dev-mode username and password in the `sideLoad` call:
+   ```js
+   await library.sideLoad(path.resolve(__dirname, "../../out/hello-world.zip"), "<user>", "<password>");
+   ```
+
+### Running tests
+
+Each test file is self-contained (its own WebDriver process and sideload). From the `e2e/` folder, run them individually with `npx mocha`:
+
+```
+npx mocha tests/test_home_screen.js --reporter mochawesome
+npx mocha tests/test_details_screen.js --reporter mochawesome
+npx mocha tests/test_video_screen.js --reporter mochawesome
+npx mocha tests/test_search_screen.js --reporter mochawesome
+npx mocha tests/test_deeplinking.js --reporter mochawesome
+npx mocha tests/test_suspend_resume.js --reporter mochawesome
+```
