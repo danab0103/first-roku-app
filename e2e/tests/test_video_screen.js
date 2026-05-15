@@ -22,17 +22,17 @@ describe('Test video screen', () => {
     it('should start playback from the home screen when pressing Play Video button', async function () {
         this.timeout(30000);
         await library.sendKey('select');
-        const res = await library.verifyIsPlaybackStarted();
-        expect(res).to.equal(true);
+        const isPlaybackStarted = await library.verifyIsPlaybackStarted();
+        expect(isPlaybackStarted).to.equal(true);
     });
 
     it('should return to the home screen when pressing back during playback', async function () {
         this.timeout(20000);
         await library.sendKey('back');
-        const res = await library.verifyIsScreenLoaded({
+        const isHomeScreenLoaded = await library.verifyIsScreenLoaded({
             'elementData': [{ 'using': 'tag', 'value': 'RowList' }]
         });
-        expect(res).to.equal(true);
+        expect(isHomeScreenLoaded).to.equal(true);
     });
 
     it('should start playback from the details screen when pressing Play Video button', async function () {
@@ -40,26 +40,26 @@ describe('Test video screen', () => {
         await library.sendKey('down');
         await library.sendKey('select');
         await library.sendKey('select', 6);
-        const res = await library.verifyIsPlaybackStarted();
-        expect(res).to.equal(true);
+        const isPlaybackStarted = await library.verifyIsPlaybackStarted();
+        expect(isPlaybackStarted).to.equal(true);
     });
 
     it('should return to the details screen when pressing back during playback', async function () {
         this.timeout(20000);
         await library.sendKey('back');
-        const res = await library.verifyIsScreenLoaded({
+        const isDetailsScreenLoaded = await library.verifyIsScreenLoaded({
             'elementData': [{ 'using': 'tag', 'value': 'CustomButton' }]
         });
-        expect(res).to.equal(true);
+        expect(isDetailsScreenLoaded).to.equal(true);
     });
 
     it('should return to the home screen when pressing back from details screen', async function () {
         this.timeout(20000);
         await library.sendKey('back');
-        const res = await library.verifyIsScreenLoaded({
+        const isHomeScreenLoaded = await library.verifyIsScreenLoaded({
             'elementData': [{ 'using': 'tag', 'value': 'RowList' }]
         });
-        expect(res).to.equal(true);
+        expect(isHomeScreenLoaded).to.equal(true);
     });
 
     after(async () => {

@@ -23,44 +23,44 @@ describe('Test details screen', () => {
         this.timeout(30000);
         await library.sendKey('down');
         await library.sendKey('select');
-        const res = await library.verifyIsScreenLoaded({
+        const isDetailsScreenLoaded = await library.verifyIsScreenLoaded({
             'elementData': [
                 { 'using': 'tag', 'value': 'Label' },
                 { 'using': 'text', 'value': 'Bulbasaur made its video game debut on February 27' }
             ]
         });
-        expect(res).to.equal(true);
+        expect(isDetailsScreenLoaded).to.equal(true);
     });
 
     it('should display the "Available in" button on the details screen', async function () {
         this.timeout(20000);
-        const res = await library.verifyIsScreenLoaded({
+        const isAvailableButtonDisplayed = await library.verifyIsScreenLoaded({
             'elementData': [
                 { 'using': 'text', 'value': 'Available in' },
             ]
         });
-        expect(res).to.equal(true);
+        expect(isAvailableButtonDisplayed).to.equal(true);
     });
 
     it('should focus the button with "Play Video" text after countdown', async function () {
         this.timeout(20000);
         
-        const focused = await library.getFocusedElement(5);
-        expect(focused.XMLName.Local).to.equal('CustomButton');
+        const focusedElement = await library.getFocusedElement(5);
+        expect(focusedElement.XMLName.Local).to.equal('CustomButton');
         
-        const labels = library.getChildNodes(focused, [
+        const focusedElementLabels = library.getChildNodes(focusedElement, [
             { 'using': 'text', 'value': 'Play Video' }
         ]);
-        expect(labels.length).to.be.greaterThan(0);
+        expect(focusedElementLabels.length).to.equal(1);
     });
 
     it('should return to the main screen when pressing back', async function () {
         this.timeout(20000);
         await library.sendKey('back');
-        const res = await library.verifyIsScreenLoaded({
+        const isHomeScreenLoaded = await library.verifyIsScreenLoaded({
             'elementData': [{ 'using': 'tag', 'value': 'RowList' }]
         });
-        expect(res).to.equal(true);
+        expect(isHomeScreenLoaded).to.equal(true);
     });
 
     it('should focus the row list component when returning to main screen', async function () {
