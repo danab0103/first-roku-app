@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "bsc",
+    "lint": "bsc --deploy=false",
     "package": "node package-app.js"
   }
 }
