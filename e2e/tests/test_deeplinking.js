@@ -59,4 +59,8 @@ describe('Test deep linking', () => {
         });
         expect(isHomeScreenLoaded).to.equal(true);
     });
+    after(async () => {
+        await library.close();
+        childProcess.kill();
+    });
 });
