@@ -1,0 +1,51 @@
+import "pkg:/components/Helpers/FocusHelper.bs"
+
+function TestSuite__FocusHelper() as object
+    this = BaseTestSuite()
+    this.name = "FocusHelperTest"
+    this.setUp = FocusHelperTest__CreateButtons
+
+    this.addTest("moveFocus_FromButtonToButton_ClearsFromButtonFocus", moveFocus_FromButtonToButton_ClearsFromButtonFocus)
+    this.addTest("moveFocus_FromButtonToButton_SetToButtonFocus", moveFocus_FromButtonToButton_SetToButtonFocus)
+    this.addTest("moveFocus_FromButtonToSameButton_KeepFromButtonFocus", moveFocus_FromButtonToSameButton_KeepFromButtonFocus)
+    this.addTest("setFocusOnButton_ValidButton_SetButtonFocus", setFocusOnButton_ValidButton_SetButtonFocus)
+
+    return this
+end function
+
+sub FocusHelperTest__CreateButtons()
+    m.fromButton = createFakeButton(true)
+    m.toButton = createFakeButton(false)
+end sub
+
+function createFakeButton(isFocused as boolean) as object
+    button = CreateObject("roSGNode", "ContentNode")
+    button.addField("isCustomButtonFocused", "boolean", false)
+    button.isCustomButtonFocused = isFocused
+    
+    return button
+end function
+
+function moveFocus_FromButtonToButton_ClearsFromButtonFocus() as string
+    moveFocus(m.fromButton, m.toButton)
+
+    return m.assertFalse(m.fromButton.isCustomButtonFocused)
+end function
+
+function moveFocus_FromButtonToButton_SetToButtonFocus() as string
+    moveFocus(m.fromButton, m.toButton)
+
+    return m.assertTrue(m.toButton.isCustomButtonFocused)
+end function
+
+function moveFocus_FromButtonToSameButton_KeepFromButtonFocus() as string
+    moveFocus(m.fromButton, m.fromButton)
+
+    return m.assertTrue(m.fromButton.isCustomButtonFocused)
+end function
+
+function setFocusOnButton_ValidButton_SetButtonFocus() as string
+    setFocusOnButton(m.toButton)
+
+    return m.assertTrue(m.toButton.isCustomButtonFocused)
+end function

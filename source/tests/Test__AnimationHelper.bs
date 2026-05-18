@@ -1,0 +1,65 @@
+import "pkg:/components/Helpers/AnimationHelper.bs"
+import "pkg:/components/Enums.bs"
+
+function TestSuite__AnimationHelper() as object
+    this = BaseTestSuite()
+    this.name = "AnimationHelperTest"
+    this.SetUp = AnimationHelperTest_CreateAnimation
+
+    this.addTest("reverseAnimation_MultipleInterpolators_FirstInterpolatorReversed", reverseAnimation_MultipleInterpolators_FirstInterpolatorReversed)
+    this.addTest("reverseAnimation_MultipleInterpolators_SecondReversed", reverseAnimation_MultipleInterpolators_SecondInterpolatorReversed)
+    this.addTest("reverseAnimation_FlipBackToFalse_ClearsReverse", reverseAnimation_FlipBackToFalse_ClearsReverse)
+    this.addTest("playAnimation_ValidAnimation_SetsControlToStart", playAnimation_ValidAnimation_SetsControlToStart)
+
+    return this
+end function
+
+sub AnimationHelperTest_CreateAnimation()
+    m.animation = createFakeAnimation()
+    m.interpolator = createFakeInterpolator()
+
+    m.animation.appendChild(m.interpolator)
+    m.animation.appendChild(createFakeInterpolator())
+end sub
+
+function createFakeAnimation() as object
+    animation = CreateObject("roSGNode", "ContentNode")
+    animation.addField("control", "string", false)
+    animation.control = "stop"
+
+    return animation
+end function
+
+function createFakeInterpolator() as object
+    interpolator = CreateObject("roSGNode", "ContentNode")
+    interpolator.addField("reverse", "boolean", false)
+    interpolator.reverse = false
+
+    return interpolator
+end function
+
+function reverseAnimation_MultipleInterpolators_FirstInterpolatorReversed() as string
+    reverseAnimation(m.animation, true)
+
+    return m.assertTrue(m.animation.getChild(0).reverse)
+end function
+
+function reverseAnimation_MultipleInterpolators_SecondInterpolatorReversed() as string
+    reverseAnimation(m.animation, true)
+
+    return m.assertTrue(m.animation.getChild(1).reverse)
+end function
+
+function reverseAnimation_FlipBackToFalse_ClearsReverse() as string
+    m.interpolator.reverse = true
+
+    reverseAnimation(m.animation, false)
+
+    return m.assertFalse(m.animation.getChild(0).reverse)
+end function
+
+function playAnimation_ValidAnimation_SetsControlToStart() as string
+    playAnimation(m.animation, false)
+
+    return m.assertEqual(m.animation.control, "start")
+end function

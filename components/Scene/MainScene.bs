@@ -19,6 +19,9 @@ sub init()
     addAnimation()
 
     m.global.addFields({ customFontPath: "pkg:/components/fonts/FogtwoNo5.otf" })
+
+    errorTask = CreateObject("roSGNode", "ErrorTask")
+    errorTask.control = "RUN"
 end sub
 
 sub initComponents()

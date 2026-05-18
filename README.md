@@ -102,3 +102,30 @@ npx mocha tests/test_search_screen.js --reporter mochawesome
 npx mocha tests/test_deeplinking.js --reporter mochawesome
 npx mocha tests/test_suspend_resume.js --reporter mochawesome
 ```
+## Running Unit Tests
+
+Tests use the [Roku Unit Testing Framework](https://github.com/rokudev/unit-testing-framework) and only execute in dev builds when explicitly triggered.
+
+### 1. Deploy the channel
+
+Deploy the app to your Roku device in dev mode.
+
+### 2. Trigger the test runner
+
+Send a deep link via ECP to launch the channel with `RunTests=true`:
+
+```
+curl -d '' "http://{ROKU_IP}:8060/launch/dev?RunTests=true"
+```
+
+Replace `{ROKU_IP}` with your Roku device's IP address.
+
+### 3. View results
+
+Open a telnet connection to stream the test output to your terminal:
+
+```
+telnet {ROKU_IP} 8085
+```
+
+Test results are printed to the debug console with pass/fail status for each test case.

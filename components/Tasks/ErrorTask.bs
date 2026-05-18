@@ -1,0 +1,20 @@
+import "pkg:/components/Helpers/HttpHelper.bs"
+import "pkg:/components/Constants.bs"
+
+sub init()
+    m.top.functionName = "runErrorCode"
+end sub
+
+sub runErrorCode()
+    try
+        endpoint = VIDEO_URL
+        requestResponse = fetchData(endpoint)
+        videoDataJson = ParseJson(requestResponse)
+        ? videoDataJson.url
+    catch ex
+        ? "Exception occurred: "; ex.message
+        ? "Exception number: "; ex.number
+    end try
+
+    ? "Thread is running after exception was caught"
+end sub
