@@ -2,6 +2,21 @@ import "pkg:/components/Helpers/VideoHelper.bs"
 import "pkg:/components/Helpers/NavigationHelper.bs"
 
 sub Main(args as dynamic)
+    appInfo = CreateObject("roAppInfo")
+    
+    if appInfo.isDev() and args.RunTests = "true" and TF_Utils__IsFunction(TestRunner)
+        runner = TestRunner()
+        runner.setFunctions([
+            TestSuite__PokemonHelper
+            TestSuite__FocusHelper
+            TestSuite__AnimationHelper
+            TestSuite__NavigationHelper
+        ])
+        runner.logger.setVerbosity(3)
+        runner.logger.setEcho(true)
+        runner.Run()
+    end if
+
     screen = CreateObject("roSGScreen")
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)

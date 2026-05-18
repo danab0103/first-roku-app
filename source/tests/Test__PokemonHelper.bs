@@ -1,0 +1,94 @@
+import "pkg:/components/Helpers/PokemonHelper.bs"
+
+function TestSuite__PokemonHelper() as object
+    this = BaseTestSuite()
+    this.name = "PokemonHelperTest"
+    this.setUp = PokemonHelperTest__CreatePokemonList
+
+    this.addTest("filterPokemons_EmptySearchText_ReturnsAllPokemons", filterPokemons_EmptySearchText_ReturnsAllPokemons)
+    this.addTest("filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount)
+    this.addTest("filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles", filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles)
+    this.addTest("filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty", filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty)
+    this.addTest("clonePokemonsContentRow_ValidPokemonList_HasSameChildCount", clonePokemonsContentRow_ValidPokemonList_HasSameChildCount)
+    this.addTest("clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles", clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles)
+    this.addTest("clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged", clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged)
+    this.addTest("getPokemon_ValidFirstPokemonPosition_ReturnsFirstPokemon", getPokemon_ValidFirstPokemonPosition_ReturnsFirstPokemon)
+
+    return this
+end function
+
+sub PokemonHelperTest__CreatePokemonList()
+    m.pokemonList = CreateObject("roSGNode", "ContentNode")
+    pokemonRow = CreateObject("roSGNode", "ContentNode")
+    titles = ["Pikachu", "Charmander", "Bulbasaur"]
+
+    for each title in titles
+        pokemonNode = pokemonRow.createChild("ContentNode")
+        pokemonNode.title = title
+    end for
+
+    m.pokemonList.appendChild(pokemonRow)
+    m.wrapperPokemonList = { content: m.pokemonList }
+end sub
+
+function filterPokemons_EmptySearchText_ReturnsAllPokemons() as string
+    filteredPokemons = filterPokemons("", m.pokemonList.getChild(0))
+
+    return m.assertEqual(filteredPokemons.getChildCount(), 3)
+end function
+
+function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchingCount() as string
+    filteredPokemons = filterPokemons("ch", m.pokemonList.getChild(0))
+
+    return m.assertEqual(filteredPokemons.getChildCount(), 2)
+end function
+
+function filterPokemons_SubstringMatchesMultiplePokemons_ReturnsMatchedPokemonTitles() as string
+    filteredPokemons = filterPokemons("ch", m.pokemonList.getChild(0))
+    titles = getPokemonTitles(filteredPokemons)
+
+    return m.assertEqual(titles, ["Pikachu", "Charmander"])
+end function
+
+function filterPokemons_SubstringMatchesNoPokemons_ReturnsEmpty() as string
+    result = filterPokemons("xyz", m.pokemonList.getChild(0))
+
+    return m.assertEqual(result.getChildCount(), 0)
+end function
+
+function clonePokemonsContentRow_ValidPokemonList_HasSameChildCount() as string
+    clonedPokemonList = clonePokemonsContentRow(m.wrapperPokemonList)
+
+    return m.assertEqual(clonedPokemonList.getChildCount(), 3)
+end function
+
+function clonePokemonsContentRow_ValidPokemonList_ClonedChildrenHaveSameTitles() as string
+    clonedPokemonList = clonePokemonsContentRow(m.wrapperPokemonList)
+    titles = getPokemonTitles(clonedPokemonList)
+
+    return m.assertEqual(titles, ["Pikachu", "Charmander", "Bulbasaur"])
+end function
+
+function clonePokemonsContentRow_ModifyClonedPokemon_OriginalPokemonUnchanged() as string
+    clonedPokemonList = clonePokemonsContentRow(m.wrapperPokemonList)
+    clonedPokemonList.getChild(0).title = "ModifiedTitle"
+    firstPokemonTitle = m.wrapperPokemonList.content.getChild(0).getChild(0).title
+
+    return m.assertNotEqual(clonedPokemonList.getChild(0).title, firstPokemonTitle)
+end function
+
+function getPokemonTitles(pokemons as object) as object
+    titles = []
+
+    for each pokemon in pokemons.getChildren(-1, 0)
+        titles.push(pokemon.title)
+    end for
+
+    return titles
+end function
+
+function getPokemon_ValidFirstPokemonPosition_ReturnsFirstPokemon() as string
+    pokemon = getPokemon([0, 0], m.wrapperPokemonList)
+
+    return m.assertEqual(pokemon.title, "Pikachu")
+end function
