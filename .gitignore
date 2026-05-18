@@ -6,3 +6,4 @@ dist
 bsconfig.json
 rokudeploy.json
 roku_modules
+e2e/mochawesome-report
