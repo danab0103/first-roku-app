@@ -1,0 +1,18 @@
+name: Lint
+on:
+  push:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Prepare bsconfig.json
+        run: cp bsconfig.json.example bsconfig.json
+      - name: Install dependencies
+        run: npm install
+      - name: Run lint
+        run: npm run lint
