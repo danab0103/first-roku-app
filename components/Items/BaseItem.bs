@@ -1,11 +1,31 @@
+import "pkg:/components/Constants.bs"
+
 sub init()
     m.poster = m.top.findNode("poster")
     m.focusPoster = m.top.findNode("focusPoster")
+
+    m.global.observeField("focusedPokemonIndex", "updateEdgeFadeOpacity")
 end sub
 
 sub onItemContentChanged()
     baseItemContent = m.top.itemContent
     m.poster.uri = baseItemContent.url
+
+    updateEdgeFadeOpacity()
+end sub
+
+sub updateEdgeFadeOpacity()
+    focusedIndex = m.global.focusedPokemonIndex <> invalid ? m.global.focusedPokemonIndex : 0
+    fullyVisibleItemsCount = m.global.fullyVisibleItemsCount <> invalid ? m.global.fullyVisibleItemsCount : 0
+
+    if fullyVisibleItemsCount <= 0 then return
+
+    visibleSlot = m.top.index - focusedIndex
+
+    isLeftPeek = visibleSlot = -1
+    isRightPeek = visibleSlot = fullyVisibleItemsCount
+
+    m.top.opacity = (isLeftPeek or isRightPeek) ? PARTIAL_OPACITY : FOCUSED_OPACITY
 end sub
 
 sub onFocusStateChanged()

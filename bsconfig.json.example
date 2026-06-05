@@ -19,6 +19,9 @@
             "codes": [
                 1107
             ]
+        },
+        {
+            "src": "source/testFramework/**"
         }
     ]
 }
