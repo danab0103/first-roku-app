@@ -18,7 +18,11 @@ sub init()
 
     addAnimation()
 
-    m.global.addFields({ customFontPath: "pkg:/components/fonts/FogtwoNo5.otf" })
+    m.global.addFields({
+        customFontPath: "pkg:/components/fonts/FogtwoNo5.otf",
+        focusedPokemonIndex: 0,
+        fullyVisibleItemsCount: 4
+    })
 
     errorTask = CreateObject("roSGNode", "ErrorTask")
     errorTask.control = "RUN"
@@ -131,6 +135,7 @@ end sub
 
 sub onItemFocused()
     focusedPokemonPosition = m.pokemonList.rowItemFocused
+    m.global.focusedPokemonIndex = focusedPokemonPosition[1]
     focusedPokemon = getPokemon(focusedPokemonPosition, m.pokemonList)
     print `Pokemon title = ${focusedPokemon.title}`
 end sub
